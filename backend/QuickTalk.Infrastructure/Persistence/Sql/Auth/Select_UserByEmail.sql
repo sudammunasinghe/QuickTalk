@@ -1,0 +1,17 @@
+﻿SELECT 
+	[Id],
+    [FirstName],
+    [LastName],
+    [Email],
+    [PasswordHash],
+    [DateOfBirth],
+    [IsOnline],
+    [PasswordResetTokenId],
+    [PasswordResetTokenHash],
+    [PasswordResetTokenExpiry],
+    [IsActive],
+    [CreatedDateTime],
+    [LastModifiedDateTime]
+FROM [dbo].[Users]
+WHERE [Email] = @Email AND
+	[IsActive] = 1;

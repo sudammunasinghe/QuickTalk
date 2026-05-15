@@ -1,0 +1,47 @@
+﻿using Dapper;
+using QuickTalk.Application.Interfaces.IRepositories;
+using QuickTalk.Domain.Entities;
+using QuickTalk.Infrastructure.Persistence;
+using QuickTalk.Infrastructure.Persistence.Sql.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuickTalk.Infrastructure.Repositories
+{
+    public class AuthRepository : IAuthRepository
+    {
+        private readonly IDbConnectionFactory _connectionFactory;
+        private readonly ISqlQueryLoader _queryLoader;
+
+        private readonly string _Select_UserByEmail;
+        private readonly string _Insert_User;
+        public AuthRepository(IDbConnectionFactory connectionFactory, ISqlQueryLoader queryLoader)
+        {
+            _connectionFactory = connectionFactory;
+            _queryLoader = queryLoader;
+            _Select_UserByEmail = _queryLoader.Load("Auth", "Select_UserByEmail.sql");
+            _Insert_User = _queryLoader.Load("Auth", "Insert_User.sql");
+        }
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            using var db = _connectionFactory.CreateConnection();
+            return await db.QueryFirstOrDefaultAsync<User>(
+                _Select_UserByEmail,
+                new { Email =  email }
+            );
+        }
+
+        public async Task RegisterUserAsync(User newUser)
+        {
+            using var db = _connectionFactory.CreateConnection();
+            await db.ExecuteAsync(
+                _Insert_User,
+                newUser
+            );
+        }
+    }
+}
