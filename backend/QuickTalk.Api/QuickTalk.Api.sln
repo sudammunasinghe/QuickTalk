@@ -5,6 +5,12 @@ VisualStudioVersion = 17.14.37216.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTalk.Api", "QuickTalk.Api.csproj", "{278AF4DC-6AAE-4EC2-9EFC-BAC1129AB7CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTalk.Application", "..\QuickTalk.Application\QuickTalk.Application.csproj", "{71122BFE-19DE-4437-8CF3-472B6FA59CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTalk.Domain", "..\QuickTalk.Domain\QuickTalk.Domain.csproj", "{4008BB98-91FA-4F3C-BDF6-A79ED414FBAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTalk.Infrastructure", "..\QuickTalk.Infrastructure\QuickTalk.Infrastructure.csproj", "{DC610FB6-9953-46AF-AB44-8E519D527380}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{278AF4DC-6AAE-4EC2-9EFC-BAC1129AB7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{278AF4DC-6AAE-4EC2-9EFC-BAC1129AB7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{278AF4DC-6AAE-4EC2-9EFC-BAC1129AB7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71122BFE-19DE-4437-8CF3-472B6FA59CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71122BFE-19DE-4437-8CF3-472B6FA59CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71122BFE-19DE-4437-8CF3-472B6FA59CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71122BFE-19DE-4437-8CF3-472B6FA59CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4008BB98-91FA-4F3C-BDF6-A79ED414FBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4008BB98-91FA-4F3C-BDF6-A79ED414FBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4008BB98-91FA-4F3C-BDF6-A79ED414FBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4008BB98-91FA-4F3C-BDF6-A79ED414FBAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC610FB6-9953-46AF-AB44-8E519D527380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC610FB6-9953-46AF-AB44-8E519D527380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC610FB6-9953-46AF-AB44-8E519D527380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC610FB6-9953-46AF-AB44-8E519D527380}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
