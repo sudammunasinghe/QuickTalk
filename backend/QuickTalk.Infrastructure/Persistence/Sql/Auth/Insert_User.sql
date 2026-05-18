@@ -15,4 +15,6 @@ VALUES
     @DateOfBirth
 );
 
+SELECT CAST(SCOPE_IDENTITY() AS INT);
+
 

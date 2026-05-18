@@ -10,6 +10,6 @@ namespace QuickTalk.Application.Interfaces.IRepositories
     public interface IAuthRepository
     {
         Task<User?> GetUserByEmailAsync(string email);
-        Task RegisterUserAsync(User newUser);
+        Task<int> RegisterUserAsync(User newUser);
     }
 }

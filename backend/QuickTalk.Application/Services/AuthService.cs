@@ -15,13 +15,15 @@ namespace QuickTalk.Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly IHashingService _hashingService;
-        public AuthService(IAuthRepository authRepository, IHashingService hashingService)
+        private readonly ITokenGenerateService _tokenGenerateService;
+        public AuthService(IAuthRepository authRepository, IHashingService hashingService, ITokenGenerateService tokenGenerateService)
         {
             _authRepository = authRepository;
             _hashingService = hashingService;
+            _tokenGenerateService = tokenGenerateService;
         }
 
-        public async Task RegisterUserAsync(RegisterDto dto)
+        public async Task<string> RegisterUserAsync(RegisterDto dto)
         {
             var existingUser =
                 await _authRepository.GetUserByEmailAsync(dto.Email);
@@ -37,7 +39,9 @@ namespace QuickTalk.Application.Services
                 passwordHash,
                 dto.DateOfBirth
             );
-            await _authRepository.RegisterUserAsync(newUser);
+            var newUserId = await _authRepository.RegisterUserAsync(newUser);
+            newUser.Id = newUserId;
+            return _tokenGenerateService.GenerateJwtToken(newUser);
         }
     }
 }

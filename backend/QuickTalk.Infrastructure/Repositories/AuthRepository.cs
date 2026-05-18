@@ -35,10 +35,10 @@ namespace QuickTalk.Infrastructure.Repositories
             );
         }
 
-        public async Task RegisterUserAsync(User newUser)
+        public async Task<int> RegisterUserAsync(User newUser)
         {
             using var db = _connectionFactory.CreateConnection();
-            await db.ExecuteAsync(
+            return await db.ExecuteScalarAsync<int>(
                 _Insert_User,
                 newUser
             );

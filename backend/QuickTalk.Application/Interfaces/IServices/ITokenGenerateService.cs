@@ -1,4 +1,4 @@
-﻿using QuickTalk.Application.DTOs.User;
+﻿using QuickTalk.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace QuickTalk.Application.Interfaces.IServices
 {
-    public interface IAuthService
+    public interface ITokenGenerateService
     {
-        Task<string> RegisterUserAsync(RegisterDto dto);
+        string GenerateJwtToken(User newUser);
     }
 }

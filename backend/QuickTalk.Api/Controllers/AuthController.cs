@@ -18,10 +18,11 @@ namespace QuickTalk.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiResponse<string>>> RegisterUserAsync([FromBody] RegisterDto dto)
         {
-            await _authService.RegisterUserAsync(dto);
+            var token = await _authService.RegisterUserAsync(dto);
             return Ok(new ApiResponse<string>
             {
                 IsSuccess =  true,
+                Data = token,
                 Message = "User registration successfull."
             });
         }
