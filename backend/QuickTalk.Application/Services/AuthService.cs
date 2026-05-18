@@ -43,5 +43,15 @@ namespace QuickTalk.Application.Services
             newUser.Id = newUserId;
             return _tokenGenerateService.GenerateJwtToken(newUser);
         }
+
+        public async Task<string> LoginAsync(LoginDto dto)
+        {
+            var user =
+                await _authRepository.GetUserByEmailAsync(dto.Email);
+
+            if (user == null || !_hashingService.VerifyPassword(dto.Password, user.PasswordHash))
+                throw new UnauthorizedAccessException("Invalid credentials");
+            return _tokenGenerateService.GenerateJwtToken(user);
+        }
     }
 }

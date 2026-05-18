@@ -15,7 +15,7 @@ namespace QuickTalk.Api.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult<ApiResponse<string>>> RegisterUserAsync([FromBody] RegisterDto dto)
         {
             var token = await _authService.RegisterUserAsync(dto);
@@ -25,6 +25,19 @@ namespace QuickTalk.Api.Controllers
                 Data = token,
                 Message = "User registration successfull."
             });
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<ApiResponse<string>>> Login([FromBody] LoginDto dto)
+        {
+            var token = await _authService.LoginAsync(dto);
+            return Ok(new ApiResponse<string>
+            {
+                IsSuccess = true,
+                Data = token,
+                Message = "Successfully logged."
+            });
+
         }
     }
 }
