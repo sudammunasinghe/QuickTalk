@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickTalk.Domain.Exceptions
+namespace QuickTalk.Application.Exceptions
 {
     public class ConflictException : ApplicationException
     {

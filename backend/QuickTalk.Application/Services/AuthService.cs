@@ -1,8 +1,8 @@
-﻿using QuickTalk.Application.DTOs.User;
+﻿using QuickTalk.Application.DTOs.Auth;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
 using QuickTalk.Domain.Entities;
-using QuickTalk.Domain.Exceptions;
+using QuickTalk.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

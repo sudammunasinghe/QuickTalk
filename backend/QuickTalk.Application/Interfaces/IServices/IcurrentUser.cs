@@ -8,6 +8,6 @@ namespace QuickTalk.Application.Interfaces.IServices
 {
     public interface IcurrentUser
     {
-        int? UserId { get; }
+        int UserId { get; }
     }
 }

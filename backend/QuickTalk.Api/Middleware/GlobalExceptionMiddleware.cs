@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using QuickTalk.Application.DTOs.ApiResponse;
-using QuickTalk.Domain.Exceptions;
+using QuickTalk.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace QuickTalk.Application.Exceptions
+namespace QuickTalk.Api.Middleware
 {
     public class GlobalExceptionMiddleware
     {

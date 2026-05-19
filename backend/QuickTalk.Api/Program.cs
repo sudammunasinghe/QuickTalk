@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
 using QuickTalk.Application.Services;
+using QuickTalk.Infrastructure.Identity;
 using QuickTalk.Infrastructure.Persistence;
 using QuickTalk.Infrastructure.Persistence.Sql.Helpers;
 using QuickTalk.Infrastructure.Repositories;
@@ -16,6 +17,7 @@ builder.Services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
 builder.Services.AddScoped<IHashingService, HashingService>();
 builder.Services.AddScoped<ISqlQueryLoader, SqlQueryLoader>();
 builder.Services.AddScoped<ITokenGenerateService, TokenGenerateService>();
+builder.Services.AddScoped<IcurrentUser, CurrentUser>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
@@ -28,6 +30,8 @@ builder.Services.AddScoped<IChatRepository, ChatRepository>();
 
 
 //===================================== Add services to the container. ==================================================
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 
@@ -96,6 +100,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//==================================Register Global Exception =============================================
+app.UseMiddleware<QuickTalk.Api.Middleware.GlobalExceptionMiddleware>();
 
 
 //==================================== Configure the HTTP request pipeline ==============================================

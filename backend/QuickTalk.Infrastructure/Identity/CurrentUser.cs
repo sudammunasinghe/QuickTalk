@@ -18,7 +18,7 @@ namespace QuickTalk.Infrastructure.Identity
             _httpContextAccessor = httpContextAccessor;
         }
         
-        public int? UserId
+        public int UserId
         {
             get
             {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickTalk.Application.DTOs.ApiResponse;
-using QuickTalk.Application.DTOs.User;
+using QuickTalk.Application.DTOs.Auth;
 using QuickTalk.Application.Interfaces.IServices;
 
 namespace QuickTalk.Api.Controllers

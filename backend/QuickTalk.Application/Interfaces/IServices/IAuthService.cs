@@ -1,4 +1,4 @@
-﻿using QuickTalk.Application.DTOs.User;
+﻿using QuickTalk.Application.DTOs.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;

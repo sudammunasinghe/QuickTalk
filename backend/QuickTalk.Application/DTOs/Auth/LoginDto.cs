@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickTalk.Application.DTOs.User
+namespace QuickTalk.Application.DTOs.Auth
 {
     public class LoginDto
     {

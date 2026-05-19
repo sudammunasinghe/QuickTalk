@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuickTalk.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace QuickTalk.Application.Interfaces.IRepositories
 {
     public interface IUserRepository
     {
+        Task<User?> GetCurrentUser(int userId);
     }
 }
