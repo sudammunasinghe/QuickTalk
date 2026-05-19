@@ -9,6 +9,6 @@ namespace QuickTalk.Application.Interfaces.IRepositories
 {
     public interface IUserRepository
     {
-        Task<User?> GetCurrentUser(int userId);
+        Task<User?> GetUserByUserIdAsync(int userId);
     }
 }

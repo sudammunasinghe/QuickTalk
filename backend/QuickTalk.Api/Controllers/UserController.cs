@@ -16,14 +16,26 @@ namespace QuickTalk.Api.Controllers
         }
 
         [HttpGet("me")]
-        public async Task<ActionResult<ApiResponse<UserDto>>> GetCurrentUser()
+        public async Task<ActionResult<ApiResponse<UserDto>>> GetCurrentUserAsync()
         {
-            var currentUser = await _userService.GetCurrentUser();
+            var currentUser = await _userService.GetCurrentUserAsync();
             return Ok(new ApiResponse<UserDto>
             {
                 IsSuccess = true,
                 Data = currentUser,
                 Message = "Current user details are retrived successfully."
+            });
+        }
+
+        [HttpGet("userId")]
+        public async Task<ActionResult<ApiResponse<UserDto>>> GetUserDetailsByUserIdAsync(int userId)
+        {
+            var user = await _userService.GetUserDetailsByUserIdAsync(userId);
+            return Ok(new ApiResponse<UserDto>
+            {
+                IsSuccess = true,
+                Data = user,
+                Message = "User details are retrived successfully."
             });
         }
     }

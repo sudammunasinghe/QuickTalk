@@ -20,12 +20,30 @@ namespace QuickTalk.Application.Services
             _currentUser = currentUser;
         }
 
-        public async Task<UserDto> GetCurrentUser()
+        public async Task<UserDto> GetCurrentUserAsync()
         {
             var loggedUser = _currentUser.UserId;
 
             var user =
-                await _userRepository.GetCurrentUser(loggedUser);
+                await _userRepository.GetUserByUserIdAsync(loggedUser);
+
+            if (user == null)
+                throw new NotFoundException("User not found.");
+
+            return new UserDto
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth
+            };
+        }
+
+        public async Task<UserDto> GetUserDetailsByUserIdAsync(int userId)
+        {
+            var user =
+                await _userRepository.GetUserByUserIdAsync(userId);
 
             if (user == null)
                 throw new NotFoundException("User not found.");

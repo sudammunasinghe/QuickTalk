@@ -25,7 +25,7 @@ namespace QuickTalk.Infrastructure.Repositories
             _Select_UserDetails = _queryLoader.Load("User", "Select_UserDetails.sql");
         }
 
-        public async Task<User?> GetCurrentUser(int userId)
+        public async Task<User?> GetUserByUserIdAsync(int userId)
         {
             using var db = _connectionFactory.CreateConnection();
             return await db.QueryFirstOrDefaultAsync<User>(
