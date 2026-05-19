@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuickTalk.Application.Interfaces.IServices
 {
-    public interface IcurrentUser
+    public interface ICurrentUser
     {
         int UserId { get; }
     }

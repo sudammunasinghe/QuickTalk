@@ -13,8 +13,8 @@ namespace QuickTalk.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IcurrentUser _currentUser;
-        public UserService(IUserRepository userRepository, IcurrentUser currentUser)
+        private readonly ICurrentUser _currentUser;
+        public UserService(IUserRepository userRepository, ICurrentUser currentUser)
         {
             _userRepository = userRepository;
             _currentUser = currentUser;

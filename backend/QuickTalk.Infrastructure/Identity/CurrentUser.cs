@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QuickTalk.Infrastructure.Identity
 {
-    public class CurrentUser : IcurrentUser
+    public class CurrentUser : ICurrentUser
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         public CurrentUser(IHttpContextAccessor httpContextAccessor)
