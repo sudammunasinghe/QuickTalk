@@ -19,6 +19,7 @@ namespace QuickTalk.Infrastructure.Repositories
 
         private readonly string _Insert_Message;
         private readonly string _Select_UserByUserId;
+        private readonly string _Select_ConversationHistory;
         
         public ConversationRepository(IDbConnectionFactory connectionFactory, ISqlQueryLoader queryLoader)
         {
@@ -26,6 +27,7 @@ namespace QuickTalk.Infrastructure.Repositories
             _queryLoader = queryLoader;
             _Insert_Message = _queryLoader.Load("Conversation", "Insert_Message.sql");
             _Select_UserByUserId = _queryLoader.Load("Conversation", "Select_UserByUserId.sql");
+            _Select_ConversationHistory = _queryLoader.Load("Conversation", "Select_ConversationHistory.sql");
         }
 
         public async Task SendMessageAsync(Message newMessage)
@@ -43,6 +45,19 @@ namespace QuickTalk.Infrastructure.Repositories
             return await db.QueryFirstOrDefaultAsync<User>(
                 _Select_UserByUserId,
                 new { UserId =  userId }
+            );
+        }
+
+        public async Task<IEnumerable<Message>> GetConversationHistory(int senderId, int receiverId)
+        {
+            using var db = _connectionFactory.CreateConnection();
+            return await db.QueryAsync<Message>(
+                _Select_ConversationHistory,
+                new
+                {
+                    SenderId = senderId,
+                    ReceiverId = receiverId
+                }
             );
         }
     }

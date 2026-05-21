@@ -44,5 +44,25 @@ namespace QuickTalk.Application.Services
             };
             await _conversationRepository.SendMessageAsync(message);
         }
+
+        public async Task<IEnumerable<CoversationHistoryDto>> GetConversationHistory(int receiverId)
+        {
+            var receiver =
+                await _conversationRepository.GetUserByUserIdAsync(receiverId);
+            if (receiver == null)
+                throw new NotFoundException("Receiver not found.");
+
+            var loggedUser = _currentUser.UserId;
+            var conversation =
+                await _conversationRepository.GetConversationHistory(loggedUser, receiverId);
+
+            return conversation
+                .Select(msg => new CoversationHistoryDto
+                {
+                    SenderId = msg.SenderId,
+                    Message = msg.MessageText,
+                    SendAt = msg.LastModifiedDateTime,
+                });
+        }
     }
 }

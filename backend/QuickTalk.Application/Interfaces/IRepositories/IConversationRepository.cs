@@ -11,5 +11,6 @@ namespace QuickTalk.Application.Interfaces.IRepositories
     {
         Task SendMessageAsync(Message newMessage);
         Task<User?> GetUserByUserIdAsync(int userId);
+        Task<IEnumerable<Message>> GetConversationHistory(int senderId, int receiverId);
     }
 }
