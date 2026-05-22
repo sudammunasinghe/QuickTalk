@@ -9,5 +9,7 @@ namespace QuickTalk.Application.Interfaces.IRepositories
         Task<User?> GetUserByUserIdAsync(int userId);
         Task<IEnumerable<Message>> GetConversationHistory(int senderId, int receiverId);
         Task<IEnumerable<ConversationDto>> GetConversationsAsync(int loggedUserId);
+        Task<List<Message>> GetUnreadMessagesAsync(int loggedUserId, int senderId);
+        Task MarkAsReadAsync(List<Message> unreadMessages);
     }
 }

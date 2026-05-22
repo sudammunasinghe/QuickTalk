@@ -49,5 +49,16 @@ namespace QuickTalk.Api.Controllers
                 Message = "Conversations retrieved successfully."
             });
         }
+
+        [HttpPut("conversations/read")]
+        public async Task<ActionResult<ApiResponse<string>>> MarkAsReadAsync(int senderId)
+        {
+            await _conversationService.MarkAsReadAsync(senderId);
+            return Ok(new ApiResponse<string>
+            {
+                IsSuccess = true,
+                Message = "Messages marked as read successfully."
+            });
+        }
     }
 }

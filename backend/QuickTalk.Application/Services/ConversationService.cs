@@ -65,5 +65,22 @@ namespace QuickTalk.Application.Services
             var loggedUser = _currentUser.UserId;
             return await _conversationRepository.GetConversationsAsync(loggedUser);
         }
+
+        public async Task MarkAsReadAsync(int senderId)
+        {
+            var loggedUser = _currentUser.UserId;
+            var UnreadMessages =
+                await _conversationRepository.GetUnreadMessagesAsync(loggedUser, senderId);
+
+            if (!UnreadMessages.Any())
+                throw new BadRequestException("No any unread messages.");
+
+            UnreadMessages.ForEach(msg =>
+            {
+                msg.IsRead = true;
+                msg.LastModifiedDateTime = DateTime.UtcNow;
+            });
+            await _conversationRepository.MarkAsReadAsync(UnreadMessages);
+        }
     }
 }

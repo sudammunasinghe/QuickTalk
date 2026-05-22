@@ -16,6 +16,8 @@ namespace QuickTalk.Infrastructure.Repositories
         private readonly string _Select_UserByUserId;
         private readonly string _Select_ConversationHistory;
         private readonly string _Select_Conversations;
+        private readonly string _Select_UnreadMessages;
+        private readonly string _Update_Message;
 
         public ConversationRepository(IDbConnectionFactory connectionFactory, ISqlQueryLoader queryLoader)
         {
@@ -25,6 +27,8 @@ namespace QuickTalk.Infrastructure.Repositories
             _Select_UserByUserId = _queryLoader.Load("Conversation", "Select_UserByUserId.sql");
             _Select_ConversationHistory = _queryLoader.Load("Conversation", "Select_ConversationHistory.sql");
             _Select_Conversations = _queryLoader.Load("Conversation", "Select_Conversations.sql");
+            _Select_UnreadMessages = _queryLoader.Load("Conversation", "Select_UnreadMessages.sql");
+            _Update_Message = _queryLoader.Load("Conversation", "Update_Message.sql");
         }
 
         public async Task SendMessageAsync(Message newMessage)
@@ -64,6 +68,29 @@ namespace QuickTalk.Infrastructure.Repositories
             return await db.QueryAsync<ConversationDto>(
                 _Select_Conversations,
                 new { LoggedUserId = loggedUserId }
+            );
+        }
+
+        public async Task<List<Message>> GetUnreadMessagesAsync(int loggedUserId, int senderId)
+        {
+            using var db = _connectionFactory.CreateConnection();
+            var unreadMessages = await db.QueryAsync<Message>(
+                _Select_UnreadMessages,
+                new
+                {
+                    LoggedUserId = loggedUserId,
+                    SenderId = senderId
+                }
+            );
+            return unreadMessages.ToList();
+        }
+
+        public async Task MarkAsReadAsync(List<Message> unreadMessages)
+        {
+            using var db = _connectionFactory.CreateConnection();
+            await db.ExecuteAsync(
+                _Update_Message,
+                unreadMessages
             );
         }
     }
