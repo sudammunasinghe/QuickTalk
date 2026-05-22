@@ -1,9 +1,5 @@
-﻿using QuickTalk.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuickTalk.Application.DTOs.Conversation;
+using QuickTalk.Domain.Entities;
 
 namespace QuickTalk.Application.Interfaces.IRepositories
 {
@@ -12,5 +8,6 @@ namespace QuickTalk.Application.Interfaces.IRepositories
         Task SendMessageAsync(Message newMessage);
         Task<User?> GetUserByUserIdAsync(int userId);
         Task<IEnumerable<Message>> GetConversationHistory(int senderId, int receiverId);
+        Task<IEnumerable<ConversationDto>> GetConversationsAsync(int loggedUserId);
     }
 }

@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using QuickTalk.Application.DTOs.ApiResponse;
+﻿using QuickTalk.Application.DTOs.ApiResponse;
 using QuickTalk.Application.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Api.Middleware
 {
@@ -25,7 +19,7 @@ namespace QuickTalk.Api.Middleware
             {
                 await _next(context);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await HandleExceptionAsync(ex, context);
             }
@@ -41,7 +35,7 @@ namespace QuickTalk.Api.Middleware
                 case NotFoundException:
                     status = HttpStatusCode.NotFound;
                     break;
-                
+
                 case UnauthorizedAccessException:
                     status = HttpStatusCode.Unauthorized;
                     break;

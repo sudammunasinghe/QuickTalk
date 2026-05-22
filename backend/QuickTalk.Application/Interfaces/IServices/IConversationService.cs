@@ -1,9 +1,4 @@
 ﻿using QuickTalk.Application.DTOs.Conversation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Application.Interfaces.IServices
 {
@@ -11,5 +6,6 @@ namespace QuickTalk.Application.Interfaces.IServices
     {
         Task SendMessageAsync(SendMessageDto dto);
         Task<IEnumerable<CoversationHistoryDto>> GetConversationHistory(int receiverId);
+        Task<IEnumerable<ConversationDto>> GetConversationsAsync();
     }
 }

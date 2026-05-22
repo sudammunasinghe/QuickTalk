@@ -3,11 +3,6 @@ using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Domain.Entities;
 using QuickTalk.Infrastructure.Persistence;
 using QuickTalk.Infrastructure.Persistence.Sql.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Infrastructure.Repositories
 {
@@ -31,7 +26,7 @@ namespace QuickTalk.Infrastructure.Repositories
             using var db = _connectionFactory.CreateConnection();
             return await db.QueryFirstOrDefaultAsync<User>(
                 _Select_UserByEmail,
-                new { Email =  email }
+                new { Email = email }
             );
         }
 

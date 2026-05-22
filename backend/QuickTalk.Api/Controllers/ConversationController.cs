@@ -37,5 +37,17 @@ namespace QuickTalk.Api.Controllers
                 Message = "Conversation history retrieved successfully."
             });
         }
+
+        [HttpGet("conversations")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ConversationDto>>>> GetConversationsAsync()
+        {
+            var conversations = await _conversationService.GetConversationsAsync();
+            return Ok(new ApiResponse<IEnumerable<ConversationDto>>
+            {
+                IsSuccess = true,
+                Data = conversations,
+                Message = "Conversations retrieved successfully."
+            });
+        }
     }
 }

@@ -1,14 +1,9 @@
 ﻿using Dapper;
+using QuickTalk.Application.DTOs.Conversation;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Domain.Entities;
 using QuickTalk.Infrastructure.Persistence;
 using QuickTalk.Infrastructure.Persistence.Sql.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Infrastructure.Repositories
 {
@@ -20,7 +15,8 @@ namespace QuickTalk.Infrastructure.Repositories
         private readonly string _Insert_Message;
         private readonly string _Select_UserByUserId;
         private readonly string _Select_ConversationHistory;
-        
+        private readonly string _Select_Conversations;
+
         public ConversationRepository(IDbConnectionFactory connectionFactory, ISqlQueryLoader queryLoader)
         {
             _connectionFactory = connectionFactory;
@@ -28,6 +24,7 @@ namespace QuickTalk.Infrastructure.Repositories
             _Insert_Message = _queryLoader.Load("Conversation", "Insert_Message.sql");
             _Select_UserByUserId = _queryLoader.Load("Conversation", "Select_UserByUserId.sql");
             _Select_ConversationHistory = _queryLoader.Load("Conversation", "Select_ConversationHistory.sql");
+            _Select_Conversations = _queryLoader.Load("Conversation", "Select_Conversations.sql");
         }
 
         public async Task SendMessageAsync(Message newMessage)
@@ -44,7 +41,7 @@ namespace QuickTalk.Infrastructure.Repositories
             using var db = _connectionFactory.CreateConnection();
             return await db.QueryFirstOrDefaultAsync<User>(
                 _Select_UserByUserId,
-                new { UserId =  userId }
+                new { UserId = userId }
             );
         }
 
@@ -58,6 +55,15 @@ namespace QuickTalk.Infrastructure.Repositories
                     SenderId = senderId,
                     ReceiverId = receiverId
                 }
+            );
+        }
+
+        public async Task<IEnumerable<ConversationDto>> GetConversationsAsync(int loggedUserId)
+        {
+            using var db = _connectionFactory.CreateConnection();
+            return await db.QueryAsync<ConversationDto>(
+                _Select_Conversations,
+                new { LoggedUserId = loggedUserId }
             );
         }
     }

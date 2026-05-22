@@ -21,7 +21,7 @@ namespace QuickTalk.Api.Controllers
             var token = await _authService.RegisterUserAsync(dto);
             return Ok(new ApiResponse<string>
             {
-                IsSuccess =  true,
+                IsSuccess = true,
                 Data = token,
                 Message = "User registration successfull."
             });

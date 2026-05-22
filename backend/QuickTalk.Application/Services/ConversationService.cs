@@ -1,13 +1,8 @@
 ﻿using QuickTalk.Application.DTOs.Conversation;
+using QuickTalk.Application.Exceptions;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
 using QuickTalk.Domain.Entities;
-using QuickTalk.Application.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Application.Services
 {
@@ -63,6 +58,12 @@ namespace QuickTalk.Application.Services
                     Message = msg.MessageText,
                     SendAt = msg.LastModifiedDateTime,
                 });
+        }
+
+        public async Task<IEnumerable<ConversationDto>> GetConversationsAsync()
+        {
+            var loggedUser = _currentUser.UserId;
+            return await _conversationRepository.GetConversationsAsync(loggedUser);
         }
     }
 }

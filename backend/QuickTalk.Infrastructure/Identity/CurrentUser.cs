@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using QuickTalk.Application.Interfaces.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Infrastructure.Identity
 {
@@ -17,7 +11,7 @@ namespace QuickTalk.Infrastructure.Identity
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        
+
         public int UserId
         {
             get
