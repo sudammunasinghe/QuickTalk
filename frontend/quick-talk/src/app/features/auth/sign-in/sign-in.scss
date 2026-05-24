@@ -1,0 +1,99 @@
+:host ::ng-deep .auth-card {
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px 20px;
+}
+
+:host ::ng-deep .auth-card p{
+    color: #989898;
+}
+
+:host ::ng-deep .auth-card label{
+    color: #525050;
+}
+
+:host ::ng-deep .auth-card .p-card-title {
+    font-weight: bold;
+    font-size: x-large;
+    color: #3a3a3a;
+}
+
+:host ::ng-deep .p-input-icon-left {
+    width: 100%;
+    position: relative;
+}
+
+:host ::ng-deep .p-input-icon-left i{
+    top: 0.85rem;
+    left: 0.75rem;
+    color: oklch(48.934% 0.00991 271.219);
+    position: absolute;
+}
+
+:host ::ng-deep .p-input-icon-left input {
+    width: 100%;
+    padding-left: 2.5rem;
+}
+:host ::ng-deep .p-button{
+    width: 100%;
+    height: 6vh;
+    background-color: #4F46E5;
+    border: none;
+    transition: background-color 0.3s ease;
+    color: #ffffff;
+}
+
+:host ::ng-deep .p-button:hover{
+    background-color: #4338CA; 
+    color: #ffffff;
+}
+
+.sign-in-container{
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.field-forgot-password {
+    text-align: right;
+    a{
+        color: #4F46E5;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    a:hover{
+        color: #4338CA;
+        text-decoration: underline;
+    }
+}
+
+:host ::ng-deep input{
+    width: 100%;
+    height: 6vh;
+    background-color: oklch(94.045% 0.00558 274.897);
+    border-color: oklch(74.754% 0.00756 268.564);
+}
+
+:host ::ng-deep input.p-inputtext:focus {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 0.15rem rgba(79, 70, 229, 0.25);
+    color: oklch(48.934% 0.00991 271.219);
+}
+
+:host ::ng-deep input.p-inputtext:hover {
+    border-color: #6366F1;
+    color: oklch(48.934% 0.00991 271.219);
+}

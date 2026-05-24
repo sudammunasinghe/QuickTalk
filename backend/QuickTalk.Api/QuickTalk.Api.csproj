@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuickTalk.Application\QuickTalk.Application.csproj" />
+    <ProjectReference Include="..\QuickTalk.Infrastructure\QuickTalk.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
