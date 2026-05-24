@@ -4,6 +4,7 @@ import { SignIn } from './features/auth/sign-in/sign-in';
 import { SignUp } from './features/auth/sign-up/sign-up';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { MainLayout } from './layouts/main-layout/main-layout';
+import { ChatLayout } from './features/chat/chat-layout/chat-layout';
 
 export const routes: Routes = [
     {
@@ -30,12 +31,13 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'app',
+        path: 'chat',
         component: MainLayout,
         children: [
-            //feature routes
-            //chat
-            //profile
+            {
+                path: '',
+                component: ChatLayout
+            }
         ]
     },
     //wildcard routes
