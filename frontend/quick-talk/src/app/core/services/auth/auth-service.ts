@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { LoginRequest } from '../../models/auth/login-request';
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
 import { environment } from './../../../../environments/environment';
 import { RegisterRequest } from '../../models/auth/register-request';
@@ -24,6 +24,13 @@ export class AuthService {
         return this.http.post<ApiResponse<string>>(
             `${this.apiUrl}/register`,
             request
+        );
+    }
+
+    forgotPassword(email: string): Observable<ApiResponse<string>>{
+        return this.http.post<ApiResponse<string>>(
+            `${this.apiUrl}/forgot-password`,
+            email
         );
     }
 

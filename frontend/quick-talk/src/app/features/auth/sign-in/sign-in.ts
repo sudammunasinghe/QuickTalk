@@ -11,7 +11,7 @@ import {
     FormBuilder,
     Validators,
     FormGroup
-} from '@angular/forms'
+} from '@angular/forms';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import { concatWith } from 'rxjs';
 
