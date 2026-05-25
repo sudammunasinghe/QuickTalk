@@ -5,6 +5,7 @@ import { SignUp } from './features/auth/sign-up/sign-up';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { ChatLayout } from './features/chat/chat-layout/chat-layout';
+import { ResetPassword } from './features/auth/reset-password/reset-password';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,10 @@ export const routes: Routes = [
             {
                 path: 'forgot-password',
                 component:  ForgotPassword
+            },
+            {
+                path: 'reset-password',
+                component: ResetPassword
             }
         ]
     },
