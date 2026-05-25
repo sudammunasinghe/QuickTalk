@@ -13,16 +13,16 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'sign-in',
+                redirectTo: 'sign-up',
                 pathMatch: 'full'
-            },
-            {
-                path: 'sign-in',
-                component: SignIn
             },
             {
                 path: 'sign-up',
                 component: SignUp
+            },
+            {
+                path: 'sign-in',
+                component: SignIn
             },
             {
                 path: 'forgot-password',
