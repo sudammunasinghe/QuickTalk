@@ -20,6 +20,9 @@ namespace QuickTalk.Application.Services
 
         public async Task<string> RegisterUserAsync(RegisterDto dto)
         {
+            if (dto.Password != dto.ConfirmPassword)
+                throw new BadRequestException("Passwords do not match.");
+
             var existingUser =
                 await _authRepository.GetUserByEmailAsync(dto.Email);
 
