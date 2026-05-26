@@ -36,7 +36,8 @@ export class ForgotPassword {
     constructor(
         private fb: FormBuilder,
         private messageService: MessageService,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {
         this.forgotPasswordForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]]
@@ -57,6 +58,7 @@ export class ForgotPassword {
                             summary: 'success',
                             detail: response.message
                         });
+                        this.router.navigate(['/reset-password']);
                     }
                 },
                 error: (response) => {
