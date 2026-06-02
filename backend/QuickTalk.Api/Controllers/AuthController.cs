@@ -49,5 +49,16 @@ namespace QuickTalk.Api.Controllers
                 Message = result
             });
         }
+
+        [HttpPost("reset-password")]
+        public async Task<ActionResult<ApiResponse<string>>> ResetPassword([FromBody] ResetPasswordDto dto)
+        {
+            await _authService.ResetPassword(dto);
+            return Ok(new ApiResponse<string>
+            {
+                IsSuccess = true,
+                Message = "Successfully updated password."
+            });
+        }
     }
 }

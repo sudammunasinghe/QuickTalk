@@ -22,14 +22,20 @@
             DateTime? dateOfBirth
             )
         {
-            return new User
+            var user =  new User
             {
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,
-                PasswordHash = passwordHash,
                 DateOfBirth = dateOfBirth
             };
+            user.ChangePassword(passwordHash);
+            return user;
+        }
+
+        public void ChangePassword(string passwordHash)
+        {
+            PasswordHash = passwordHash;
         }
 
     }

@@ -50,6 +50,7 @@ namespace QuickTalk.Infrastructure.Repositories
                 new
                 {
                     Id = updatedUser.Id,
+                    PasswordHash = updatedUser.PasswordHash,
                     Otp = updatedUser.Otp,
                     OtpExpiry = updatedUser.OtpExpiry,
                     IsUsed = updatedUser.IsUsed,

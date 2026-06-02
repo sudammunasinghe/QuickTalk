@@ -124,5 +124,36 @@ namespace QuickTalk.Application.Services
             );
             return "If the email exists, a OTP has been sent.";
         }
+
+        public async Task ResetPassword(ResetPasswordDto dto)
+        {
+            if (dto.NewPassword != dto.ConfirmNewPassword)
+                throw new BadRequestException("Passwords do not match.");
+
+            var user =
+                await _authRepository.GetUserByEmailAsync(dto.Email);
+
+            if (user == null)
+                throw new NotFoundException("User not found.");
+
+            if (user.Otp != dto.Otp)
+                throw new BadRequestException("Invalid OTP.");
+
+            if (user.OtpExpiry < DateTime.UtcNow)
+                throw new BadRequestException("OTP has expired.");
+
+            if (user.IsUsed == true)
+                throw new BadRequestException("OTP has already been used.");
+
+            var passwordHash = _hashingService.HashPassword(dto.NewPassword);
+
+            user.Otp = null;
+            user.OtpExpiry = null;
+            user.IsUsed = true;
+            user.LastModifiedDateTime = DateTime.UtcNow;
+            user.ChangePassword(passwordHash);
+
+            await _authRepository.UpdateUserAsync(user);
+        }
     }
 }
