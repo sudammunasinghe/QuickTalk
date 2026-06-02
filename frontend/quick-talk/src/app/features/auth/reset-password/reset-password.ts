@@ -6,7 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
 import { InputOtpModule } from 'primeng/inputotp';
 import { MessageService } from 'primeng/api';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import {
     ReactiveFormsModule,
@@ -35,11 +35,13 @@ import {
 export class ResetPassword {
     resetPasswordForm!: FormGroup;
     isLoading = false;
+    email: string = '';
 
     constructor(
         private fb: FormBuilder,
         private authservice: AuthService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private route: ActivatedRoute
     ) {
         this.resetPasswordForm = this.fb.group({
             newPassword: ['', Validators.required],
@@ -48,12 +50,25 @@ export class ResetPassword {
         });
     }
 
+    ngOnInit(){
+        this.route.queryParams.subscribe(params => {
+            this.email = params['email'] ?? '';
+        })
+    }
+
     resetPassword() {
         if (this.resetPasswordForm.invalid)
             return;
-        console.log(this.resetPasswordForm.value);
+        
+        const payload = {
+            email: this.email,
+            otp: this.resetPasswordForm.value.otpValue,
+            newPassword: this.resetPasswordForm.value.newPassword,
+            confirmNewPassword: this.resetPasswordForm.value.confirmNewPassword
+        };
+
         this.isLoading = true;
-        this.authservice.resetPassword(this.resetPasswordForm.value)
+        this.authservice.resetPassword(payload)
             .subscribe({
                 next: (response) => {
                     this.isLoading = false;

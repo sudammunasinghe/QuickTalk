@@ -6,6 +6,7 @@ import { ApiResponse } from '../../models/apiResponse/api-response';
 import { environment } from './../../../../environments/environment';
 import { RegisterRequest } from '../../models/auth/register-request';
 import { ResetPassword } from '../../../features/auth/reset-password/reset-password';
+import { ResetPasswordRequest } from '../../models/auth/reset-password';
 
 @Injectable({
     providedIn: 'root',
@@ -35,7 +36,7 @@ export class AuthService {
         );
     }
 
-    resetPassword(request: ResetPassword): Observable<ApiResponse<string>>{
+    resetPassword(request: ResetPasswordRequest): Observable<ApiResponse<string>>{
         return this.http.post<ApiResponse<string>>(
             `${this.apiUrl}/reset-password`,
             request

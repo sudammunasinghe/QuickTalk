@@ -58,7 +58,11 @@ export class ForgotPassword {
                             summary: 'success',
                             detail: response.message
                         });
-                        this.router.navigate(['/reset-password']);
+                        this.router.navigate(['/reset-password'],{
+                            queryParams: {
+                                email: this.forgotPasswordForm.value.email
+                            }
+                        });
                     }
                 },
                 error: (response) => {
