@@ -18,6 +18,8 @@ builder.Services.AddScoped<IHashingService, HashingService>();
 builder.Services.AddScoped<ISqlQueryLoader, SqlQueryLoader>();
 builder.Services.AddScoped<ITokenGenerateService, TokenGenerateService>();
 builder.Services.AddScoped<ICurrentUser, CurrentUser>();
+builder.Services.AddScoped<IOtpService, OtpService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();

@@ -6,9 +6,9 @@
     [PasswordHash],
     [DateOfBirth],
     [IsOnline],
-    [PasswordResetTokenId],
-    [PasswordResetTokenHash],
-    [PasswordResetTokenExpiry],
+    [Otp],
+    [OtpExpiry],
+    [IsUsed],
     [IsActive],
     [CreatedDateTime],
     [LastModifiedDateTime]

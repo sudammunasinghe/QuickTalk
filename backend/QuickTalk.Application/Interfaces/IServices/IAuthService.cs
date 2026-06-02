@@ -6,5 +6,6 @@ namespace QuickTalk.Application.Interfaces.IServices
     {
         Task<string> RegisterUserAsync(RegisterDto dto);
         Task<string> LoginAsync(LoginDto dto);
+        Task<string> ForgotPassword(ForgotPasswordDto dto);
     }
 }
