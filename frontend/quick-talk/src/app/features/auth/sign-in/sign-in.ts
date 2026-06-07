@@ -62,7 +62,7 @@ export class SignIn {
                             summary: 'success',
                             detail: response.message
                         });
-                        // this.router.navigate(['/chat']);
+                        this.router.navigate(['/chat']);
                     }
                 },
                 error: (response) => {

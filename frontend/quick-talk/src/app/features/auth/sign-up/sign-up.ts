@@ -63,7 +63,7 @@ export class SignUp {
                             summary: 'success',
                             detail: response.message
                         });
-                        //this.router.navigate(['/sign-in']);
+                        this.router.navigate(['/sign-in']);
                     }
                 },
                 error: (response) => {
