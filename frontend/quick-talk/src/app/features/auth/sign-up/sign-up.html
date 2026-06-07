@@ -1,1 +1,62 @@
-<p>sign-up works!</p>
+<div class="grid min-h-screen align-items-center justify-content-center">
+    <div class="col-12">
+        <p-card header="Create Account" styleClass="sign-up-card">
+            <div class="sign-up-container">
+                <p>Join thousands of users in seamless communication</p>
+                <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                    <div class="sign-up-field">
+                       <label>First Name</label>
+                       <span class="p-input-icon-left">
+                            <i class="pi pi-user"></i>
+                            <input type="name" pInputText formControlName="firstName" placeholder="Dhanushka">
+                       </span>
+                    </div>
+                    <div class="sign-up-field">
+                        <label>Last Name</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-user"></i>
+                            <input type="name" pInputText formControlName="lastName" placeholder="Rathnayake">
+                        </span>
+                    </div>
+                    <div class="sign-up-field">
+                        <label>Email Address</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-envelope"></i>
+                            <input type="email" pInputText formControlName="email" placeholder="you@example.com">
+                        </span>
+                    </div>
+                    <div class="sign-up-field">
+                        <label>Date of Birth</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-calendar"></i>
+                            <input type="date" pInputText formControlName="dateOfBirth">
+                        </span>
+                    </div>
+                    <div class="sign-up-field">
+                        <label>Password</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-lock"></i>
+                            <input type="password" pInputText formControlName="password" placeholder="........">
+                        </span>
+                    </div>
+                    <div class="sign-up-field">
+                        <label>Confirm Password</label>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-lock"></i>
+                            <input type="password" pInputText formControlName="confirmPassword" placeholder="........">
+                        </span>
+                    </div>
+                    <div class="sign-up-field">
+                        <p-button type="submit" label="Create Account"></p-button>
+                    </div>
+                    <div class="field-sign-in-navigation">
+                        <p>
+                            Already have an account?
+                            <a routerLink="sing-in">Sign In</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </p-card>
+    </div>
+</div>

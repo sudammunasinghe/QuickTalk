@@ -6,5 +6,6 @@ namespace QuickTalk.Application.Interfaces.IRepositories
     {
         Task<User?> GetUserByEmailAsync(string email);
         Task<int> RegisterUserAsync(User newUser);
+        Task UpdateUserAsync(User updatedUser);
     }
 }

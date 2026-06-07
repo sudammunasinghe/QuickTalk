@@ -2,7 +2,7 @@
     border-radius: 16px;
     background: #ffffff;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding: 40px 20px;
+    padding: 40px 20px 0px;
 }
 
 :host ::ng-deep .auth-card p{
@@ -67,8 +67,15 @@ form{
     gap: 4px;
 }
 
-.field-forgot-password {
+.field-forgot-password{
     text-align: right;
+}
+
+.field-sign-up-navigation{
+    text-align: center;
+}
+
+.field-forgot-password, .field-sign-up-navigation {
     a{
         color: #4F46E5;
         text-decoration: none;

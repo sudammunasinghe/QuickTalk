@@ -1,0 +1,327 @@
+.auth-layout {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+
+    background: linear-gradient(135deg,
+            #1e1b4b 0%,
+            #312e81 50%,
+            #4338ca 100%);
+}
+
+/* ====================================
+   GLOW EFFECTS
+==================================== */
+
+.auth-layout::before {
+    content: '';
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    top: -250px;
+    left: -250px;
+
+    border-radius: 50%;
+
+    background: rgba(99, 102, 241, 0.25);
+
+    filter: blur(100px);
+}
+
+.auth-layout::after {
+    content: '';
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    bottom: -250px;
+    right: -250px;
+
+    border-radius: 50%;
+
+    background: rgba(139, 92, 246, 0.25);
+
+    filter: blur(120px);
+}
+
+/* ====================================
+   LARGE HALF CIRCLES
+==================================== */
+
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bg-circle-1 {
+    width: 550px;
+    height: 550px;
+
+    top: -320px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.bg-circle-2 {
+    width: 700px;
+    height: 700px;
+
+    bottom: -500px;
+    left: -250px;
+
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.bg-circle-3 {
+    width: 600px;
+    height: 600px;
+
+    top: 120px;
+    right: -320px;
+
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ====================================
+   LEFT SECTION
+==================================== */
+
+.left-section {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 3rem;
+
+    position: relative;
+    z-index: 2;
+}
+
+.branding {
+    text-align: center;
+    color: white;
+    max-width: 550px;
+}
+
+.logo-wrapper {
+    width: 100px;
+    height: 100px;
+
+    margin: 0 auto 2rem;
+
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-icon {
+    font-size: 3.5rem;
+}
+
+.branding h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.branding h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.branding p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* ====================================
+   RIGHT SECTION
+==================================== */
+
+.right-section {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
+
+    position: relative;
+    z-index: 2;
+}
+
+.right-section>* {
+    max-width: 560px;
+}
+
+/* ====================================
+   FLOATING CHAT CARDS
+==================================== */
+
+.chat-card {
+    position: absolute;
+
+    display: flex;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    z-index: 1;
+}
+
+.chat-card-1 {
+    width: 280px;
+    height: 120px;
+
+    left: 80px;
+    bottom: 180px;
+
+    transform: rotate(-8deg);
+}
+
+.chat-card-2 {
+    width: 330px;
+    height: 140px;
+
+    left: 240px;
+    bottom: 70px;
+}
+
+.chat-card-3 {
+    width: 280px;
+    height: 120px;
+
+    left: 430px;
+    bottom: 20px;
+
+    transform: rotate(-10deg);
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    flex-shrink: 0;
+}
+
+.message-content {
+    flex: 1;
+}
+
+.line {
+    height: 10px;
+    margin-bottom: 12px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.w-90 {
+    width: 90%;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.w-70 {
+    width: 70%;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+/* ====================================
+   ANIMATIONS
+==================================== */
+
+.chat-card-1 {
+    animation: float1 6s ease-in-out infinite;
+}
+
+.chat-card-2 {
+    animation: float2 8s ease-in-out infinite;
+}
+
+.chat-card-3 {
+    animation: float3 7s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    50% {
+        transform: translateY(-12px) rotate(-8deg);
+    }
+}
+
+@keyframes float2 {
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes float3 {
+    50% {
+        transform: translateY(-10px) rotate(-10deg);
+    }
+}
+
+/* ====================================
+   RESPONSIVE
+==================================== */
+
+@media (max-width: 991px) {
+
+    .left-section {
+        display: none;
+    }
+
+    .chat-card {
+        display: none;
+    }
+
+    .right-section {
+        flex: 1;
+    }
+}

@@ -9,9 +9,9 @@
         public string PasswordHash { get; private set; }
         public DateTime? DateOfBirth { get; set; }
         public bool? IsOnline { get; set; }
-        public Guid? PasswordResetTokenId { get; set; }
-        public string? PasswordResetTokenHash { get; set; }
-        public DateTime? PasswordResetTokenExpiry { get; set; }
+        public string? Otp { get; set; }
+        public DateTime? OtpExpiry { get; set; }
+        public bool? IsUsed { get; set; }
         private User() { }
 
         public static User Create(
@@ -22,14 +22,20 @@
             DateTime? dateOfBirth
             )
         {
-            return new User
+            var user =  new User
             {
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,
-                PasswordHash = passwordHash,
                 DateOfBirth = dateOfBirth
             };
+            user.ChangePassword(passwordHash);
+            return user;
+        }
+
+        public void ChangePassword(string passwordHash)
+        {
+            PasswordHash = passwordHash;
         }
 
     }

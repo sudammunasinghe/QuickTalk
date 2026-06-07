@@ -37,7 +37,28 @@ namespace QuickTalk.Api.Controllers
                 Data = token,
                 Message = "Successfully logged."
             });
+        }
 
+        [HttpPost("forgot-password")]
+        public  async Task<ActionResult<ApiResponse<string>>> ForgotPassword([FromBody] ForgotPasswordDto dto)
+        {
+            var result = await _authService.ForgotPassword(dto);
+            return Ok(new ApiResponse<string>
+            {
+                IsSuccess = true,
+                Message = result
+            });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<ActionResult<ApiResponse<string>>> ResetPassword([FromBody] ResetPasswordDto dto)
+        {
+            await _authService.ResetPassword(dto);
+            return Ok(new ApiResponse<string>
+            {
+                IsSuccess = true,
+                Message = "Successfully updated password."
+            });
         }
     }
 }

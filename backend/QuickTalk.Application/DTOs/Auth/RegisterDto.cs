@@ -20,6 +20,7 @@ namespace QuickTalk.Application.DTOs.Auth
         [Required]
         [StringLength(100, MinimumLength = 8)]
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public DateTime? DateOfBirth { get; set; }
     }
 }

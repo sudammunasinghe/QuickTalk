@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
+import { InputOtpModule } from 'primeng/inputotp';
 import { MessageService } from 'primeng/api';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import {
     ReactiveFormsModule,
@@ -14,41 +15,60 @@ import {
     FormGroup
 } from '@angular/forms';
 
+
 @Component({
-    selector: 'app-forgot-password',
+    selector: 'app-reset-password',
     imports: [
-        RouterLink,
-        ReactiveFormsModule,
         ButtonModule,
-        InputTextModule,
         CardModule,
+        InputTextModule,
         PasswordModule,
-        ToastModule
+        ToastModule,
+        ReactiveFormsModule,
+        RouterLink,
+        InputOtpModule
     ],
     providers: [MessageService],
-    templateUrl: './forgot-password.html',
-    styleUrl: './forgot-password.scss',
+    templateUrl: './reset-password.html',
+    styleUrl: './reset-password.scss',
 })
-export class ForgotPassword {
-    forgotPasswordForm!: FormGroup;
+export class ResetPassword {
+    resetPasswordForm!: FormGroup;
     isLoading = false;
+    email: string = '';
 
     constructor(
         private fb: FormBuilder,
+        private authservice: AuthService,
         private messageService: MessageService,
-        private authService: AuthService,
-        private router: Router
+        private route: ActivatedRoute
     ) {
-        this.forgotPasswordForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email]]
+        this.resetPasswordForm = this.fb.group({
+            newPassword: ['', Validators.required],
+            confirmNewPassword: ['', Validators.required],
+            otpValue: ['']
         });
     }
 
-    sendResetLink() {
-        if (this.forgotPasswordForm.invalid)
+    ngOnInit(){
+        this.route.queryParams.subscribe(params => {
+            this.email = params['email'] ?? '';
+        })
+    }
+
+    resetPassword() {
+        if (this.resetPasswordForm.invalid)
             return;
+        
+        const payload = {
+            email: this.email,
+            otp: this.resetPasswordForm.value.otpValue,
+            newPassword: this.resetPasswordForm.value.newPassword,
+            confirmNewPassword: this.resetPasswordForm.value.confirmNewPassword
+        };
+
         this.isLoading = true;
-        this.authService.forgotPassword(this.forgotPasswordForm.value)
+        this.authservice.resetPassword(payload)
             .subscribe({
                 next: (response) => {
                     this.isLoading = false;
@@ -57,11 +77,6 @@ export class ForgotPassword {
                             severity: 'success',
                             summary: 'success',
                             detail: response.message
-                        });
-                        this.router.navigate(['/reset-password'], {
-                            queryParams: {
-                                email: this.forgotPasswordForm.value.email
-                            }
                         });
                     }
                 },

@@ -5,6 +5,7 @@ import { SignUp } from './features/auth/sign-up/sign-up';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { ChatLayout } from './features/chat/chat-layout/chat-layout';
+import { ResetPassword } from './features/auth/reset-password/reset-password';
 
 export const routes: Routes = [
     {
@@ -13,20 +14,24 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'sign-in',
+                redirectTo: 'sign-up',
                 pathMatch: 'full'
-            },
-            {
-                path: 'sign-in',
-                component: SignIn
             },
             {
                 path: 'sign-up',
                 component: SignUp
             },
             {
+                path: 'sign-in',
+                component: SignIn
+            },
+            {
                 path: 'forgot-password',
                 component:  ForgotPassword
+            },
+            {
+                path: 'reset-password',
+                component: ResetPassword
             }
         ]
     },
