@@ -28,7 +28,7 @@ import {
         RouterLink,
         InputOtpModule
     ],
-    providers: [MessageService],
+    // providers: [MessageService],
     templateUrl: './reset-password.html',
     styleUrl: './reset-password.scss',
 })
