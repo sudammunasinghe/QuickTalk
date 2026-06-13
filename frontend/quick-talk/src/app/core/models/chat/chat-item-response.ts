@@ -1,8 +1,9 @@
 export interface ChatItemResponse{
     userId: number,
-    name: string,
+    firstName: string,
+    lastName: string,
     lastMessage: string,
-    lastMessageTime: Date,
+    lastMessageDisplayTime: string,
     unreadCount: number,
     isOnline: boolean
 }

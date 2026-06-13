@@ -1,25 +1,28 @@
 <div class="grid">
     <div class="col-2">
         <div class="avator-container">
-            <img
+            <!-- <img
                 [src]=""
                 [alt]=""
                 class="avator"
-            >
+            > -->
+            <div class="avatar-placeholder">
+                {{ getInitials() }}
+            </div>
             <span class="online-indicator">
             </span>
         </div>
     </div>
     <div class="col-10">
         <div class="chat-header">
-            <h4>{{ chatItem?.name }}</h4>
-            <span class="time">{{ chatItem?.lastMessageTime }}</span>
+            <h4>{{ chatItem?.firstName }} {{ chatItem?.lastName }}</h4>
+            <span class="time">{{ chatItem?.lastMessageDisplayTime }}</span>
         </div>
         <div class="chat-footer">
             <p class="last-message">
                 {{ chatItem?.lastMessage }}
             </p>
-            <span class="unread-badge" *ngIf="chatItem.unreadCount">
+            <span class="unread-badge" *ngIf="chatItem.unreadCount > 0">
                 {{ chatItem?.unreadCount }}
             </span>
         </div>

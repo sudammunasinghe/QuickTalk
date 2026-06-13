@@ -1,6 +1,8 @@
-<div class="grid">
+<div class="grid chat-page">
     <div class="col-3">
-        <app-chat-item></app-chat-item>
+        <div class="chat-list">
+            <app-chat-item *ngFor="let chatItem of chatItems" [chatItem]="chatItem"></app-chat-item>
+        </div>
     </div>
     <div class="col-9">
 
