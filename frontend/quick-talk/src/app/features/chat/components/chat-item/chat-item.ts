@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ChatItemResponse } from '../../../../core/models/chat/chat-item-response';
 
 @Component({
-  selector: 'app-chat-item',
-  imports: [],
-  templateUrl: './chat-item.html',
-  styleUrl: './chat-item.scss',
+    selector: 'app-chat-item',
+    imports: [],
+    templateUrl: './chat-item.html',
+    styleUrl: './chat-item.scss',
 })
-export class ChatItem {}
+export class ChatItem {
+    @Input() chatItem!: ChatItemResponse;
+}

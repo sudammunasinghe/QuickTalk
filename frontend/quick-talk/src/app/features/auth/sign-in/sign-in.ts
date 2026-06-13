@@ -13,7 +13,7 @@ import {
     FormGroup
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth/auth-service';
-import { concatWith } from 'rxjs';
+import { TokenService } from '../../../core/services/token/token-service';
 
 @Component({
     selector: 'app-sign-in',
@@ -38,7 +38,8 @@ export class SignIn {
         private fb: FormBuilder,
         private authservice: AuthService,
         private router: Router,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private tokenService: TokenService
     ) {
         this.signInForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
@@ -56,7 +57,7 @@ export class SignIn {
                 next: (response) => {
                     this.isLoading = false;
                     if (response.isSuccess) {
-                        localStorage.setItem('token', response.data);
+                        this.tokenService.setToken(response.data);
                         this.messageService.add({
                             severity: 'success',
                             summary: 'success',
