@@ -4,7 +4,7 @@ import { SignIn } from './features/auth/sign-in/sign-in';
 import { SignUp } from './features/auth/sign-up/sign-up';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { MainLayout } from './layouts/main-layout/main-layout';
-import { ChatLayout } from './features/chat/chat-layout/chat-layout';
+import { ChatPage } from './features/chat/pages/chat-page/chat-page';
 import { ResetPassword } from './features/auth/reset-password/reset-password';
 
 export const routes: Routes = [
@@ -41,7 +41,7 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: ChatLayout
+                component: ChatPage
             }
         ]
     },
