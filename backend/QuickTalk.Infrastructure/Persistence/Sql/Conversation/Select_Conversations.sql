@@ -27,9 +27,14 @@ LastMessages AS
 
 SELECT 
 	US.[Id] [UserId],
-	CONCAT(US.[FirstName],' ',US.[LastName]) [Name],
+	US.[FirstName],
+	US.[LastName],
 	LM.[MessageText] [LastMessage],
-	LM.[CreatedDateTime] [LastMessageTime],
+	CASE	
+		WHEN CAST(LM.[CreatedDateTime] AS DATE) = CAST(GETDATE() AS DATE)
+			THEN FORMAT(LM.[CreatedDateTime],'hh:mm tt')
+		ELSE FORMAT(LM.[CreatedDateTime], 'dd/MM/yyyy')
+	END AS [LastMessageDisplayTime],
 	US.[IsOnline],
 	(
         SELECT COUNT(*)
