@@ -25,7 +25,7 @@ import {
         PasswordModule,
         ToastModule
     ],
-    providers: [MessageService],
+    // providers: [MessageService],
     templateUrl: './forgot-password.html',
     styleUrl: './forgot-password.scss',
 })

@@ -25,7 +25,7 @@ import {
         ReactiveFormsModule,
         RouterLink
     ],
-    providers: [MessageService],
+    // providers: [MessageService],
     templateUrl: './sign-up.html',
     styleUrl: './sign-up.scss',
 })
