@@ -3,12 +3,14 @@ import { ChatItem } from '../../components/chat-item/chat-item';
 import { ChatService } from '../../../../core/services/chat/chat-service';
 import { ChatItemResponse } from '../../../../core/models/chat/chat-item-response';
 import { CommonModule } from '@angular/common';
+import { SidebarHeader } from '../../components/sidebar-header/sidebar-header';
 
 @Component({
     selector: 'app-chat-page',
     imports: [
         ChatItem,
-        CommonModule
+        CommonModule,
+        SidebarHeader
     ],
     templateUrl: './chat-page.html',
     styleUrl: './chat-page.scss',
