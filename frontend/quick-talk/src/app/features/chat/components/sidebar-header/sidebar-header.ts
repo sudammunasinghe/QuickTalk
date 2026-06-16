@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-sidebar-header',
-    standalone: true,
-    imports: [
-        CommonModule
-    ],
+    imports: [],
     templateUrl: './sidebar-header.html',
     styleUrl: './sidebar-header.scss',
 })
