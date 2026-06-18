@@ -11,8 +11,6 @@ import { ChatService } from '../../../../core/services/chat/chat-service';
     styleUrl: './chat-header.scss',
 })
 export class ChatHeader {
-    @Input() firstName!: string;
-    @Input() lastName!: string;
     selectedChat!: ChatItemResponse | null;
     constructor(
         private chatService: ChatService
@@ -29,6 +27,5 @@ export class ChatHeader {
             .subscribe(chat => {
                 this.selectedChat = chat;
             })
-        console.log(this.selectedChat);
     }
 }

@@ -5,6 +5,8 @@ import { ChatItemResponse } from '../../../../core/models/chat/chat-item-respons
 import { CommonModule } from '@angular/common';
 import { SidebarHeader } from '../../components/sidebar-header/sidebar-header';
 import { ChatHeader } from '../../components/chat-header/chat-header';
+import { MessageList } from '../../components/message-list/message-list';
+import { CoversationHistory } from '../../../../core/models/chat/coversation-history';
 
 @Component({
     selector: 'app-chat-page',
@@ -12,24 +14,35 @@ import { ChatHeader } from '../../components/chat-header/chat-header';
         ChatItem,
         CommonModule,
         SidebarHeader,
-        ChatHeader
+        ChatHeader,
+        MessageList
     ],
     templateUrl: './chat-page.html',
     styleUrl: './chat-page.scss',
 })
 export class ChatPage {
     chatItems: ChatItemResponse[] = [];
-    firstName = 'Sudam';
-    lastName = 'Munasinghe';
+    selectedChatData: ChatItemResponse | null = null;
     constructor(
         private chatService: ChatService
-    ){}
+    ) { }
 
-    ngOnInit(){
+    ngOnInit() {
+        this.loadConversationsAsync();
+    }
+
+    loadConversationsAsync() {
         this.chatService.GetConversationsAsync()
             .subscribe({
                 next: (response) => {
-                    this.chatItems = response.data;
+                    if (response.data && response.isSuccess) {
+                        this.chatItems = response.data;
+
+                        //Select first chat automatically
+                        if (this.chatItems.length > 0) {
+                            this.chatService.setselectedChat(this.chatItems[0]);
+                        }
+                    }
                 }
             });
     }

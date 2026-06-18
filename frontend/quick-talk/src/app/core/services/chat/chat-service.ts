@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
 import { ChatItemResponse } from '../../models/chat/chat-item-response';
+import { CoversationHistory } from '../../models/chat/coversation-history';
 
 @Injectable({
     providedIn: 'root',
@@ -25,6 +26,12 @@ export class ChatService {
     GetConversationsAsync(): Observable<ApiResponse<ChatItemResponse[]>> {
         return this.http.get<ApiResponse<ChatItemResponse[]>>(
             `${this.apiUrl}/conversations`
+        );
+    }
+
+    GetConversationHistoryAsync(receiverId: number): Observable<ApiResponse<CoversationHistory[]>>{
+        return this.http.get<ApiResponse<CoversationHistory[]>>(
+            `${this.apiUrl}/${receiverId}/message`
         );
     }
 }
