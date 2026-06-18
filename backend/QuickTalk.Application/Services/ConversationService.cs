@@ -54,9 +54,11 @@ namespace QuickTalk.Application.Services
             return conversation
                 .Select(msg => new CoversationHistoryDto
                 {
+                    Id = msg.Id,
                     SenderId = msg.SenderId,
                     Message = msg.MessageText,
                     SendAt = msg.LastModifiedDateTime,
+                    IsMine = loggedUser == msg.SenderId
                 });
         }
 
