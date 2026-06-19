@@ -7,6 +7,7 @@ import { SidebarHeader } from '../../components/sidebar-header/sidebar-header';
 import { ChatHeader } from '../../components/chat-header/chat-header';
 import { MessageList } from '../../components/message-list/message-list';
 import { CoversationHistory } from '../../../../core/models/chat/coversation-history';
+import { MessageInput } from '../../components/message-input/message-input';
 
 @Component({
     selector: 'app-chat-page',
@@ -15,7 +16,8 @@ import { CoversationHistory } from '../../../../core/models/chat/coversation-his
         CommonModule,
         SidebarHeader,
         ChatHeader,
-        MessageList
+        MessageList,
+        MessageInput
     ],
     templateUrl: './chat-page.html',
     styleUrl: './chat-page.scss',

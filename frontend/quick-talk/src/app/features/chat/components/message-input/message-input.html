@@ -1,1 +1,32 @@
-<p>message-input works!</p>
+<div class="grid align-items-center message-input-container">
+    <div class="col-fixed">
+        <button
+            pButton
+            type="button"
+            icon="pi pi-paperclip"
+            class="p-button-text attachment-btn"
+        ></button>
+    </div>
+
+    <div class="col">
+        <input
+            pInputText
+            type="text"
+            placeholder="Type a message..."
+            [(ngModel)]="message"
+            (keydown.enter)="sendMessage()"
+            class="w-full message-input"
+        />
+    </div>
+
+    <div class="col-fixed">
+        <button
+            pButton
+            type="button"
+            icon="pi pi-send"
+            class="send-btn"
+            [disabled]="!message.trim()"
+            (click)="sendMessage()"
+        ></button>
+    </div>
+</div>

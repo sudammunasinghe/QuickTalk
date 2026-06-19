@@ -1,4 +1,4 @@
-export interface CoversationHistory{
+export interface CoversationHistory {
     id: number,
     senderId: number,
     message: string,

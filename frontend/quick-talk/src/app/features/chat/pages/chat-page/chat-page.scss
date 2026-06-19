@@ -1,8 +1,14 @@
-.chat-page{
+.chat-page {
     height: 100vh;
 }
 
-.chat-list {
-    height: calc(100vh - 70px);
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.message-list-container {
+    flex: 1;
     overflow-y: auto;
 }

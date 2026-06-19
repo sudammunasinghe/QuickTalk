@@ -1,4 +1,4 @@
-export interface ChatItemResponse{
+export interface ChatItemResponse {
     userId: number,
     firstName: string,
     lastName: string,

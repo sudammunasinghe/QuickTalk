@@ -5,16 +5,24 @@
                 <app-sidebar-header></app-sidebar-header>
             </div>
         </div>
+
         <div class="chat-list">
-            <app-chat-item *ngFor="let chatItem of chatItems" [chatItem]="chatItem"></app-chat-item>
+            <app-chat-item *ngFor="let chatItem of chatItems" [chatItem]="chatItem">
+            </app-chat-item>
         </div>
     </div>
-    <div class="col-9">
+
+    <div class="col-9 chat-container">
         <div class="p-card">
             <app-chat-header></app-chat-header>
         </div>
-        <div class="p-card">
+
+        <div class="p-card message-list-container">
             <app-message-list></app-message-list>
+        </div>
+
+        <div class="p-card">
+            <app-message-input></app-message-input>
         </div>
     </div>
 </div>
