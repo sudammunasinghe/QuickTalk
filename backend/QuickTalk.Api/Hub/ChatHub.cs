@@ -1,0 +1,6 @@
+﻿namespace QuickTalk.Api.Hub;
+using Microsoft.AspNetCore.SignalR;
+public class ChatHub : Hub
+{
+}
+

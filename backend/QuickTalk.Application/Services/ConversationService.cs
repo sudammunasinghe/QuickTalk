@@ -10,10 +10,16 @@ namespace QuickTalk.Application.Services
     {
         private readonly IConversationRepository _conversationRepository;
         private readonly ICurrentUser _currentUser;
-        public ConversationService(IConversationRepository conversationRepository, ICurrentUser currentUser)
+        private readonly IChatNotifier _chatNotifier;
+        public ConversationService(
+            IConversationRepository conversationRepository, 
+            ICurrentUser currentUser,
+            IChatNotifier chatNotifier
+            )
         {
             _conversationRepository = conversationRepository;
             _currentUser = currentUser;
+            _chatNotifier = chatNotifier;
         }
 
         public async Task SendMessageAsync(SendMessageDto dto)
@@ -37,7 +43,18 @@ namespace QuickTalk.Application.Services
                 MessageText = dto.Message,
                 IsRead = false
             };
+
+            //save to DB
             await _conversationRepository.SendMessageAsync(message);
+
+            //real time update uisng SignalR
+            var chatDetails = new ChatMessageDto
+            {
+                SenderId = loggedUser.ToString(),
+                ReceiverId = message.ReceiverId.ToString(),
+                Message = message.MessageText
+            };
+            await _chatNotifier.SendToUser(chatDetails);
         }
 
         public async Task<IEnumerable<CoversationHistoryDto>> GetConversationHistory(int receiverId)
