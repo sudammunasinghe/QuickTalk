@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import { TokenService } from '../../../core/services/token/token-service';
+import { Signalr } from '../../../core/services/signalr/signalr';
 
 @Component({
     selector: 'app-sign-in',
@@ -39,7 +40,8 @@ export class SignIn {
         private authservice: AuthService,
         private router: Router,
         private messageService: MessageService,
-        private tokenService: TokenService
+        private tokenService: TokenService,
+        private chatSignalRService: Signalr
     ) {
         this.signInForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
@@ -58,6 +60,7 @@ export class SignIn {
                     this.isLoading = false;
                     if (response.isSuccess) {
                         this.tokenService.setToken(response.data);
+                        this.chatSignalRService.startConnection(response.data);
                         this.messageService.add({
                             severity: 'success',
                             summary: 'success',
