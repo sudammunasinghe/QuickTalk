@@ -11,6 +11,7 @@ export class Signalr {
     //stream messages to components
     private messageSubject = new Subject<any>();
     public message$ = this.messageSubject.asObservable();
+    public onlineUsers = new Set<string>();
 
     startConnection(token: string) {
         this.hubConnection = new signalR.HubConnectionBuilder()
@@ -30,6 +31,21 @@ export class Signalr {
             console.log('🔥 MESSAGE RECEIVED', senderId, message);
             this.messageSubject.next({ senderId, message });
         });
+
+        this.hubConnection.on('OnlineUsers', (users: string[]) => {
+            this.onlineUsers = new Set(users);
+        });
+
+        this.hubConnection.on('UserStatusChanged', (userId: string, status: string) => {
+            if(status == 'Online'){
+                this.onlineUsers.add(userId);
+            }
+            else{
+                this.onlineUsers.delete(userId);
+            }
+        })
+
+        console.log('onlineusers',this.onlineUsers);
     }
 
     stopConnection() {

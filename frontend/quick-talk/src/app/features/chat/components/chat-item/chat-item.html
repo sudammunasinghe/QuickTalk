@@ -9,7 +9,10 @@
             <div class="avatar-placeholder">
                 {{ getInitials() }}
             </div>
-            <span class="online-indicator">
+            <span 
+                class="online-indicator"
+                [class.online]="isOnline(chatItem.userId)"
+                [class.offline]="!isOnline(chatItem.userId)">
             </span>
         </div>
     </div>
