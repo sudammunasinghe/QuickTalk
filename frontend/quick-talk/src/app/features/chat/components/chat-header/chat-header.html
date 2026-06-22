@@ -4,7 +4,10 @@
             <div class="chat-avator-placeholder">
                 {{ getInitials() }}
             </div>
-            <span class="chat-online-indicator"></span>
+            <span class="chat-online-indicator"
+                [class.online]="isOnline(selectedChat?.userId ?? 0)"
+                [class.offline]="!isOnline(selectedChat?.userId ?? 0)">
+            </span>
         </div>
     </div>
     <div class="col-11">

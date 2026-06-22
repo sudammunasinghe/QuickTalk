@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ChatItemResponse } from '../../../../core/models/chat/chat-item-response';
 import { ChatService } from '../../../../core/services/chat/chat-service';
+import { Signalr } from '../../../../core/services/signalr/signalr';
 
 @Component({
     selector: 'app-chat-header',
@@ -13,7 +14,8 @@ import { ChatService } from '../../../../core/services/chat/chat-service';
 export class ChatHeader {
     selectedChat!: ChatItemResponse | null;
     constructor(
-        private chatService: ChatService
+        private chatService: ChatService,
+        private signalRChatService: Signalr
     ) { }
 
     getInitials() {
@@ -27,5 +29,9 @@ export class ChatHeader {
             .subscribe(chat => {
                 this.selectedChat = chat;
             })
+    }
+
+    isOnline(userId: number): boolean {
+        return this.signalRChatService.onlineUsers.has(userId.toString());
     }
 }
