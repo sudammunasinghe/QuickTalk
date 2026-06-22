@@ -1,1 +1,16 @@
-<p>message-list works!</p>
+<div class="message-list">
+
+    <div *ngFor="let message of messages" class="message-container" [class.sent]="message.isMine"
+        [class.received]="!message.isMine">
+
+        <div class="message-bubble">
+            {{ message?.message }}
+        </div>
+
+        <small class="message-time">
+            {{ message?.sendAt | date:'shortTime' }}
+        </small>
+
+    </div>
+
+</div>

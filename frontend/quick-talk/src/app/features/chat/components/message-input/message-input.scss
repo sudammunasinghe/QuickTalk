@@ -1,0 +1,42 @@
+.message-input-container {
+    padding: 1rem;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+}
+
+.message-input {
+    border-radius: 9999px;
+
+    &:focus {
+        border-color: #4F46E5;
+        box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+    }
+}
+
+.attachment-btn {
+    color: #4F46E5;
+}
+
+:host ::ng-deep .attachment-btn.p-button.p-button-text {
+    color: #4F46E5;
+}
+
+:host ::ng-deep .attachment-btn.p-button.p-button-text:hover {
+    color: #4F46E5;
+    background: rgba(79, 70, 229, 0.1);
+}
+
+.send-btn {
+    background-color: #4F46E5;
+    border-color: #4F46E5;
+    border-radius: 50%;
+
+    &:enabled:hover {
+        background-color: #4338CA;
+        border-color: #4338CA;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}

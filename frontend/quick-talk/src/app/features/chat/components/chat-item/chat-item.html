@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" (click)="selectedChat()">
     <div class="col-2">
         <div class="avator-container">
             <!-- <img
@@ -9,7 +9,10 @@
             <div class="avatar-placeholder">
                 {{ getInitials() }}
             </div>
-            <span class="online-indicator">
+            <span 
+                class="online-indicator"
+                [class.online]="isOnline(chatItem.userId)"
+                [class.offline]="!isOnline(chatItem.userId)">
             </span>
         </div>
     </div>

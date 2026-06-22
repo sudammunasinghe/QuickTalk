@@ -46,8 +46,15 @@
     height: 12px;
 
     border-radius: 50%;
-    background-color: #22c55e;
     border: 2px solid #ffffff;
+}
+
+.online{
+    background-color: #22c55e;
+}
+
+.offline{
+    background-color: #64748b;
 }
 
 .chat-header {

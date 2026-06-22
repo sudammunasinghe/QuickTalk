@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
 import { ChatItemResponse } from '../../models/chat/chat-item-response';
+import { CoversationHistory } from '../../models/chat/coversation-history';
+import { SendMessage } from '../../models/chat/send-message';
 
 @Injectable({
     providedIn: 'root',
@@ -12,9 +14,32 @@ export class ChatService {
     private http = inject(HttpClient);
     private apiUrl = `${environment.apiUrl}/conversation`;
 
-    GetConversationsAsync(): Observable<ApiResponse<ChatItemResponse[]>>{
+    private selectedChatSource =
+        new BehaviorSubject<ChatItemResponse | null>(null);
+
+    selectedChat$ =
+        this.selectedChatSource.asObservable();
+
+    setselectedChat(chat: ChatItemResponse) {
+        this.selectedChatSource.next(chat);
+    }
+
+    GetConversationsAsync(): Observable<ApiResponse<ChatItemResponse[]>> {
         return this.http.get<ApiResponse<ChatItemResponse[]>>(
             `${this.apiUrl}/conversations`
+        );
+    }
+
+    GetConversationHistoryAsync(receiverId: number): Observable<ApiResponse<CoversationHistory[]>>{
+        return this.http.get<ApiResponse<CoversationHistory[]>>(
+            `${this.apiUrl}/${receiverId}/message`
+        );
+    }
+
+    SendMessageAsync(request: SendMessage): Observable<ApiResponse<string>>{
+        return this.http.post<ApiResponse<string>>(
+            `${this.apiUrl}/message`,
+            request
         );
     }
 }
