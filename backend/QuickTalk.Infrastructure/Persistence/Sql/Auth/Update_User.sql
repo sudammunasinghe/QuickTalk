@@ -3,5 +3,6 @@
       [Otp] = @Otp,
       [OtpExpiry] = @OtpExpiry,
       [LastModifiedDateTime] = @LastModifiedDateTime,
-      [IsUsed] = @IsUsed
+      [IsUsed] = @IsUsed,
+      [LastSeen] = @LastSeen
 WHERE [Id] = @Id;

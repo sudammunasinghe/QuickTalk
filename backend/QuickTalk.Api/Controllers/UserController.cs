@@ -10,9 +10,11 @@ namespace QuickTalk.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IUserPresenceService _userPresenceService;
+        public UserController(IUserService userService, IUserPresenceService userPresenceService)
         {
             _userService = userService;
+            _userPresenceService = userPresenceService;
         }
 
         [HttpGet("me")]
@@ -37,6 +39,13 @@ namespace QuickTalk.Api.Controllers
                 Data = user,
                 Message = "User details are retrived successfully."
             });
+        }
+
+        [HttpGet("{userId}/last-seen")]
+        public async Task<ActionResult<DateTime?>> GetLastSeen(string userId)
+        {
+            var result = await _userPresenceService.GetLastSeen(userId);
+            return Ok(result);
         }
     }
 }

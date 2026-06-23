@@ -54,7 +54,8 @@ namespace QuickTalk.Infrastructure.Repositories
                     Otp = updatedUser.Otp,
                     OtpExpiry = updatedUser.OtpExpiry,
                     IsUsed = updatedUser.IsUsed,
-                    LastModifiedDateTime = updatedUser.LastModifiedDateTime
+                    LastModifiedDateTime = updatedUser.LastModifiedDateTime,
+                    LastSeen = updatedUser.LastSeen
                 }
             );
         }

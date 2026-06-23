@@ -26,9 +26,10 @@ public class ChatHub : Hub
             .SendAsync("UserStatusChanged", userId, "Online");
 
         //send current online users to newly connected user
-        var onlineUsers = _userPresenceService.GetOnlineUsers();
-
-        await Clients.Caller.SendAsync("OnlineUsers", onlineUsers);
+        await Clients.Caller.SendAsync(
+            "OnlineUsers",
+            _userPresenceService.GetOnlineUsers()
+        );
 
         await base.OnConnectedAsync();
     }
@@ -44,6 +45,16 @@ public class ChatHub : Hub
             .SendAsync("UserStatusChanged", userId, "Offline");
 
         await base.OnDisconnectedAsync(exception);
+    }
+
+    public async Task UserActivity()
+    {
+        var userId = _currentUser?.UserId.ToString();
+        await _userPresenceService.UpdateActivity(userId);
+        var status = _userPresenceService.GetStatus(userId);
+
+        await Clients.AllExcept(Context.ConnectionId)
+            .SendAsync("UserStatusChanged", userId, status);
     }
 }
 
