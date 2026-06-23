@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +11,8 @@ export class Signalr {
     //stream messages to components
     private messageSubject = new Subject<any>();
     public message$ = this.messageSubject.asObservable();
-    public onlineUsers = new Set<string>();
+    public userStatuses = new Map<string, string>();
+    public userLastSeen = new Map<string, string>();
 
     startConnection(token: string) {
         this.hubConnection = new signalR.HubConnectionBuilder()
@@ -33,19 +34,29 @@ export class Signalr {
         });
 
         this.hubConnection.on('OnlineUsers', (users: string[]) => {
-            this.onlineUsers = new Set(users);
+            users.forEach(userId => {
+                this.userStatuses.set(userId, 'Online');
+            });
         });
 
         this.hubConnection.on('UserStatusChanged', (userId: string, status: string) => {
-            if(status == 'Online'){
-                this.onlineUsers.add(userId);
-            }
-            else{
-                this.onlineUsers.delete(userId);
-            }
+            this.userStatuses.set(userId, status);
         })
+        console.log('status', this.userStatuses);
+    }
 
-        console.log('onlineusers',this.onlineUsers);
+    getStatus(userId: string) {
+        return this.userStatuses.get(userId) ?? 'Offline';
+    }
+
+    setLastSeen(userId: string, lastSeen: string | null) {
+        if (lastSeen) {
+            this.userLastSeen.set(userId, lastSeen);
+        }
+    }
+
+    getLastSeen(userId: string) {
+        return this.userLastSeen.get(userId);
     }
 
     stopConnection() {

@@ -3,6 +3,7 @@ import { ChatItemResponse } from '../../../../core/models/chat/chat-item-respons
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../../../../core/services/chat/chat-service';
 import { Signalr } from '../../../../core/services/signalr/signalr';
+import { UserService } from '../../../../core/services/user/user-service';
 
 @Component({
     selector: 'app-chat-item',
@@ -15,7 +16,8 @@ export class ChatItem {
     @Input() chatItem!: ChatItemResponse;
     constructor(
         private chatService: ChatService,
-        private signalRChatService: Signalr
+        private signalRChatService: Signalr,
+        private userService: UserService
     ) { }
 
     getInitials(): string {
@@ -27,9 +29,19 @@ export class ChatItem {
 
     selectedChat() {
         this.chatService.setselectedChat(this.chatItem);
+        this.userService.getLastSeen(this.chatItem.userId)
+            .subscribe(lastSeen => {
+                this.signalRChatService.setLastSeen(
+                    this.chatItem.userId.toString(),
+                    lastSeen
+                );
+            });
     }
     
-    isOnline(userId: number): boolean{
-        return this.signalRChatService.onlineUsers.has(userId.toString());
+    getStatusText(userId: number){
+        const status = this.signalRChatService.getStatus(userId.toString());
+        if(status == 'Online') return 'Online';
+        if(status == 'Away') return 'Away';
+        return 'Offline';
     }
 }

@@ -49,11 +49,15 @@
     border: 2px solid #ffffff;
 }
 
-.online{
+.Online{
     background-color: #22c55e;
 }
 
-.offline{
+.Away {
+  background-color: #f59e0b;
+}
+
+.Offline{
     background-color: #64748b;
 }
 
