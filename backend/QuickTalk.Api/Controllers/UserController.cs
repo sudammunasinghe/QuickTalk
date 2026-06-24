@@ -47,5 +47,17 @@ namespace QuickTalk.Api.Controllers
             var result = await _userPresenceService.GetLastSeen(userId);
             return Ok(result);
         }
+
+        [HttpGet("discover")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<UserDto>>>> GetPeopleToChat()
+        {
+            var result = await _userService.GetPeopleToChat();
+            return Ok(new ApiResponse<IEnumerable<UserDto>>
+            {
+                IsSuccess = true,
+                Data = result,
+                Message = "User details are retrived successfully."
+            });
+        }
     }
 }
