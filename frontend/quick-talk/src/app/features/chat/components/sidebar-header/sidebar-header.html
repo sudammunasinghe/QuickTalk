@@ -5,6 +5,9 @@
             <div>
                 <h2>Quick Chat</h2>
             </div>
+            <span class="add-user-btn" (click)="showFindPeopleDialog()">
+                <i class="pi pi-user-plus"></i>
+            </span>
         </div>
     </div>
     <div class="search-bar">
@@ -14,3 +17,8 @@
         </span>
     </div>
 </div>
+
+<p-dialog header="Find People" [(visible)]="displayFindPeopleDialog" [modal]="true" [draggable]="false"
+    [resizable]="false" [style]="{ width: '450px' }">
+    <app-find-people-dialog></app-find-people-dialog>
+</p-dialog>
