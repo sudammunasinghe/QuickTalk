@@ -13,7 +13,11 @@
     <div class="search-bar">
         <span class="p-input-icon-left search-wrapper w-full">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" class="w-full search-input" placeholder="Search conversations..." />
+            <input 
+                pInputText type="text" 
+                class="w-full search-input" 
+                placeholder="Search conversations..." 
+                (input)="onSearch($event)"/>
         </span>
     </div>
 </div>

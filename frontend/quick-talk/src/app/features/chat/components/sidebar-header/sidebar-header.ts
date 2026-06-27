@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, output } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { FindPeopleDialog } from '../sidebar-header/find-people-dialog/find-people-dialog';
 
@@ -15,10 +15,16 @@ import { FindPeopleDialog } from '../sidebar-header/find-people-dialog/find-peop
     styleUrl: './sidebar-header.scss',
 })
 export class SidebarHeader {
+    @Output() searchChanged = new EventEmitter<string>();
     logoUrl = 'assets/images/logo.png';
     displayFindPeopleDialog = false;
 
     showFindPeopleDialog(): void {
         this.displayFindPeopleDialog = true;
+    }
+
+    onSearch(event: Event) {
+        const value = (event.target as HTMLInputElement).value;
+        this.searchChanged.emit(value);
     }
 }

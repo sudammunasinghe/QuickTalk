@@ -24,6 +24,7 @@ import { MessageInput } from '../../components/message-input/message-input';
 })
 export class ChatPage {
     chatItems: ChatItemResponse[] = [];
+    filteredChatItems: ChatItemResponse[] = [];
     selectedChatData: ChatItemResponse | null = null;
     constructor(
         private chatService: ChatService
@@ -33,13 +34,27 @@ export class ChatPage {
         this.loadConversationsAsync();
     }
 
-    loadConversationsAsync() {
+    filteredChats(searchText: string): void {
+        if (!searchText.trim()) {
+            this.filteredChatItems = [...this.chatItems];
+            return;
+        }
+
+        const search = searchText.toLowerCase();
+        this.filteredChatItems = this.chatItems.filter(chat =>
+            (`${chat.firstName} ${chat.lastName}`)
+                .toLowerCase()
+                .includes(search)
+        );
+    }
+
+    loadConversationsAsync(): void {
         this.chatService.GetConversationsAsync()
             .subscribe({
                 next: (response) => {
                     if (response.data && response.isSuccess) {
                         this.chatItems = response.data;
-
+                        this.filteredChatItems = this.chatItems;
                         //Select first chat automatically
                         if (this.chatItems.length > 0) {
                             this.chatService.setselectedChat(this.chatItems[0]);
