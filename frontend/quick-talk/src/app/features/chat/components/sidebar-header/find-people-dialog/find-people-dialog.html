@@ -18,7 +18,7 @@
                 pInputText type="text" 
                 class="w-full search-input" 
                 placeholder="Search conversations..." 
-                />
+                (input)="onSearch($event)"/>
         </span>
 </div>
 <div class="result-header">
@@ -26,5 +26,5 @@
     <span class="result-text">Tap to start a chat</span>
 </div>
 <div class="user-list">
-    <app-user-item *ngFor="let suggestedUser of discoveredPeople" [user]="suggestedUser"></app-user-item>
+    <app-user-item *ngFor="let suggestedUser of filteredPeople" [user]="suggestedUser"></app-user-item>
 </div>

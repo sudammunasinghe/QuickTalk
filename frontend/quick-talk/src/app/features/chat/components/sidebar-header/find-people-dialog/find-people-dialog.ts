@@ -18,6 +18,7 @@ import { MessageService } from 'primeng/api';
 export class FindPeopleDialog {
     @Output() close = new EventEmitter<void>();
     discoveredPeople!: UserDetails[];
+    filteredPeople!: UserDetails[];
     peopleCount = 0;
     constructor(
         private userService: UserService,
@@ -28,7 +29,7 @@ export class FindPeopleDialog {
         this.loadPeopleToChat();
     }
 
-    closeDialog(): void{
+    closeDialog(): void {
         this.close.emit();
     }
 
@@ -38,7 +39,8 @@ export class FindPeopleDialog {
                 next: (response) => {
                     if (response.isSuccess && response.data) {
                         this.discoveredPeople = response.data;
-                        this.peopleCount = this.discoveredPeople.length;
+                        this.filteredPeople = this.discoveredPeople;
+                        this.peopleCount = this.filteredPeople.length;
                     }
                 },
                 error: (response) => {
@@ -49,5 +51,25 @@ export class FindPeopleDialog {
                     });
                 }
             })
+    }
+
+    onSearch(event: Event): void {
+        const value = (event.target as HTMLInputElement).value;
+        this.filterPeople(value);
+    }
+
+    filterPeople(searchValue: string): void {
+        if (!searchValue.trim()) {
+            this.filteredPeople = [...this.discoveredPeople];
+            return;
+        }
+
+        const value = searchValue.toLowerCase();
+        this.filteredPeople = this.discoveredPeople.filter(people =>
+            (`${people.firstName} ${people.lastName}`)
+                .toLowerCase()
+                .includes(value)
+        );
+        this.peopleCount = this.filteredPeople.length;
     }
 }
