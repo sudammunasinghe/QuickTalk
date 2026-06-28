@@ -1,0 +1,147 @@
+/* ===== Host / Dialog Container ===== */
+:host {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+}
+
+/* ===== HEADER (Purple) ===== */
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px 18px; /* reduce bottom padding */
+    background: #4F46E5;
+    color: #fff;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-left i {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.dialog-header h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Close button */
+.dialog-header button {
+    color: #fff !important;
+}
+
+:host ::ng-deep .p-button .pi {
+    font-size: 1.1rem;
+    color: #ffffff; /* for purple header */
+}
+
+:host ::ng-deep .p-button-text {
+    color: #ffffff;
+}
+
+/* ===== SEARCH SECTION (Purple) ===== */
+.search-container {
+    width: 100%;
+    background-color: #4F46E5;
+
+    /* 👇 add padding so input doesn't touch edges */
+    padding: 0 24px 24px 24px;
+
+    /* 👇 helps blend with header */
+    margin-top: -1px;
+}
+
+.search-wrapper {
+    width: 100%;
+    position: relative;
+    display: block;
+}
+
+
+/* Input styling */
+.search-input {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    padding-left: 2.5rem;
+    background: #8b86ef;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.search-input {
+    margin-bottom: 0;
+}
+
+/* Focus effect */
+.search-input:focus {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.search-input::placeholder{
+    color: #c4c4c4;
+    opacity: 1;
+}
+
+/* ICON INSIDE INPUT */
+:host ::ng-deep .p-input-icon-left>i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c4c4c4;
+    pointer-events: none;
+}
+/* ===== RESULT HEADER (White area) ===== */
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 24px;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ffffff;
+
+    /* 👇 smoother transition from purple */
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+
+    border-bottom: 1px solid #f1f1f1;
+    color: #6b7280;
+}
+
+.result-count {
+    font-weight: 600;
+    color: #4F46E5;
+}
+
+.result-text {
+    font-style: italic;
+}
+
+/* ===== USER LIST (White area) ===== */
+.user-list {
+    background: #ffffff;
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+/* scrollbar */
+.user-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+    background: rgba(79, 70, 229, 0.25);
+    border-radius: 10px;
+}

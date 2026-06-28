@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserItem } from '../find-people-dialog/user-item/user-item';
 import { UserService } from '../../../../../core/services/user/user-service';
 import { UserDetails } from '../../../../../core/models/user/user-details';
@@ -16,7 +16,9 @@ import { MessageService } from 'primeng/api';
     styleUrl: './find-people-dialog.scss',
 })
 export class FindPeopleDialog {
+    @Output() close = new EventEmitter<void>();
     discoveredPeople!: UserDetails[];
+    peopleCount = 0;
     constructor(
         private userService: UserService,
         private messageService: MessageService
@@ -26,13 +28,17 @@ export class FindPeopleDialog {
         this.loadPeopleToChat();
     }
 
+    closeDialog(): void{
+        this.close.emit();
+    }
+
     loadPeopleToChat(): void {
         this.userService.getPeopleToChat()
             .subscribe({
                 next: (response) => {
                     if (response.isSuccess && response.data) {
                         this.discoveredPeople = response.data;
-                        console.log('sudam', this.discoveredPeople);
+                        this.peopleCount = this.discoveredPeople.length;
                     }
                 },
                 error: (response) => {

@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<p-dialog header="Find People" [(visible)]="displayFindPeopleDialog" [modal]="true" [draggable]="false"
+<p-dialog [(visible)]="displayFindPeopleDialog" [modal]="true" [draggable]="false" [closable]="false"
     [resizable]="false" [style]="{ width: '450px' }">
-    <app-find-people-dialog></app-find-people-dialog>
+    <app-find-people-dialog (close)="displayFindPeopleDialog = false"></app-find-people-dialog>
 </p-dialog>
