@@ -1,0 +1,157 @@
+.settings-container {
+    padding: 1.5rem;
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: #ffffff;
+}
+
+.dialog-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #4F46E5;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.dialog-header-text {
+    flex: 1;
+    margin-left: 0.75rem;
+}
+
+.dialog-header-text h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.dialog-header-description {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.dialog-close-btn button {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dialog-close-btn button::before {
+    content: "×";
+    font-size: 1.2rem;
+    color: #374151;
+}
+
+.dialog-close-btn button:hover {
+    background: #e5e7eb;
+}
+
+.settings-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.settings-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .2s ease;
+    background: #ffffff;
+}
+
+.nav-item:hover {
+    background: #eef2ff;
+    border-color: #4F46E5;
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+}
+
+.nav-header i:first-child {
+    font-size: 1rem;
+    margin-right: .75rem;
+}
+
+.nav-header span:first-of-type {
+    flex: 1;
+    font-size: .95rem;
+    font-weight: 600;
+}
+
+.nav-description {
+    margin-left: 1.75rem;
+    font-size: .8rem;
+    line-height: 1.3;
+    color: #6b7280;
+}
+
+.nav-tick {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .2);
+}
+
+.nav-tick i {
+    font-size: .75rem;
+    margin-left: 10px;
+}
+
+.nav-item.active {
+    background: #4F46E5;
+    color: #ffffff;
+    border-color: #4F46E5;
+    box-shadow: 0 8px 18px rgba(79, 70, 229, .2);
+}
+
+.nav-item.active .nav-description {
+    color: rgba(255, 255, 255, .8);
+}
+
+.nav-item.active .nav-tick {
+    display: flex;
+}
+
+.settings-content {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    min-height: 420px;
+}

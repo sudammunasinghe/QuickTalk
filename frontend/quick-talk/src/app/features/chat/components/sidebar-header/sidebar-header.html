@@ -29,7 +29,7 @@
     <app-find-people-dialog (close)="displayFindPeopleDialog = false"></app-find-people-dialog>
 </p-dialog>
 
-<p-dialog [(visible)]="displaySettingsDialog" [modal]="true" [draggable]="false" [closable]="true" [resizable]="false"
-    [style]="{ width: '450px' }">
-    <app-account-settings-dialog></app-account-settings-dialog>
+<p-dialog [(visible)]="displaySettingsDialog" [modal]="true" [draggable]="false" [closable]="false" [resizable]="false"
+    [style]="{ width: '800px' }">
+    <app-account-settings-dialog (close)="displaySettingsDialog = false"></app-account-settings-dialog>
 </p-dialog>
