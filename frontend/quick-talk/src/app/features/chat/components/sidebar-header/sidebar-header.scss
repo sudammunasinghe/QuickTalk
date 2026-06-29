@@ -29,7 +29,13 @@
     flex-shrink: 0;
 }
 
-.add-user-btn {
+.dialog-btns{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+}
+
+.add-user-btn, .settings-btn {
     margin-left: auto;
     width: 40px;
     height: 40px;
@@ -42,16 +48,16 @@
     transition: background-color 0.2s ease;
 }
 
-.add-user-btn i {
+.add-user-btn i, .settings-btn i {
     font-size: 1.2rem;
     color: #4F46E5; 
 }
 
-.add-user-btn:hover {
+.add-user-btn:hover, .settings-btn:hover {
     background-color: #EEF2FF; 
 }
 
-.add-user-btn:active {
+.add-user-btn:active, .settings-btn:active {
     transform: scale(0.95);
 }
 
