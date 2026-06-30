@@ -3,7 +3,6 @@ using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Domain.Entities;
 using QuickTalk.Infrastructure.Persistence;
 using QuickTalk.Infrastructure.Persistence.Sql.Helpers;
-using static System.Net.WebRequestMethods;
 
 namespace QuickTalk.Infrastructure.Repositories
 {

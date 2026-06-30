@@ -23,7 +23,7 @@
             DateTime? dateOfBirth
             )
         {
-            var user =  new User
+            var user = new User
             {
                 FirstName = firstName,
                 LastName = lastName,

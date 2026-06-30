@@ -1,16 +1,10 @@
 ﻿using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
 using QuickTalk.Application.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickTalk.Application.Services
 {
-    public class UserPresenceService: IUserPresenceService
+    public class UserPresenceService : IUserPresenceService
     {
         private static readonly Dictionary<string, UserPresence> _users = new();
         private readonly IAuthRepository _authRepository;
@@ -44,7 +38,7 @@ namespace QuickTalk.Application.Services
             user.Connections.Remove(connectionId);
 
             //user closed all devices
-            if(user.Connections.Count == 0)
+            if (user.Connections.Count == 0)
             {
                 if (!int.TryParse(userId, out var id))
                     return;

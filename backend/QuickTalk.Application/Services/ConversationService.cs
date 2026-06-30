@@ -12,7 +12,7 @@ namespace QuickTalk.Application.Services
         private readonly ICurrentUser _currentUser;
         private readonly IChatNotifier _chatNotifier;
         public ConversationService(
-            IConversationRepository conversationRepository, 
+            IConversationRepository conversationRepository,
             ICurrentUser currentUser,
             IChatNotifier chatNotifier
             )
