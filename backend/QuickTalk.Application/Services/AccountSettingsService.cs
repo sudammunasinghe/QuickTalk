@@ -34,7 +34,10 @@ namespace QuickTalk.Application.Services
             if (user == null)
                 throw new NotFoundException("User not found.");
 
-            if (_hashingService.VerifyPassword(dto.ConfirmedNewPassword, user.PasswordHash))
+            if (!_hashingService.VerifyPassword(dto.CurrentPassword, user.PasswordHash))
+                throw new BadRequestException("Current password is incorrect.");
+
+            if (dto.CurrentPassword == dto.NewPassword)
                 throw new BadRequestException("You cannot reuse your current password.");
 
             var newPasswordHash = _hashingService.HashPassword(dto.ConfirmedNewPassword);
