@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Persistence\Sql\AccountSettings\Select_PrivacySettings.sql" />
     <None Remove="Persistence\Sql\AccountSettings\Select_UserByUserId.sql" />
+    <None Remove="Persistence\Sql\AccountSettings\Update_PrivacySettings.sql" />
     <None Remove="Persistence\Sql\AccountSettings\Update_User.sql" />
     <None Remove="Persistence\Sql\Auth\Insert_User.sql" />
     <None Remove="Persistence\Sql\Auth\Select_UserByEmail.sql" />
@@ -22,7 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Persistence\Sql\AccountSettings\Select_PrivacySettings.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Persistence\Sql\AccountSettings\Select_UserByUserId.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Persistence\Sql\AccountSettings\Update_PrivacySettings.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Persistence\Sql\AccountSettings\Update_User.sql">

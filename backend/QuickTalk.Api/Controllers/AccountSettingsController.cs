@@ -25,5 +25,30 @@ namespace QuickTalk.Api.Controllers
                 Message = "Password changed successfully..."
             });
         }
+
+        [HttpGet("privacy-settings")]
+        public async Task<ActionResult<ApiResponse<PrivacySettingsDto>>> GetPrivacySettingsDetailsAsync()
+        {
+            var result = await _accountSettingsService.GetPrivacySettingsDetailsAsync();
+            return Ok(new ApiResponse<PrivacySettingsDto>
+            {
+                IsSuccess = true,
+                Data = result,
+                Message = "Privacy setting details retrieved successfully."
+            });
+
+        }
+
+        [HttpPut("privacy-settings")]
+        public async Task<ActionResult<ApiResponse<PrivacySettingsDto>>> UpdatePrivacySettingsAsync(UpdatePrivacySettings dto)
+        {
+            var result = await _accountSettingsService.UpdatePrivacySettingsAsync(dto);
+            return Ok(new ApiResponse<PrivacySettingsDto>
+            {
+                IsSuccess = true,
+                Data = result,
+                Message = "Privacy settings updated successfully."
+            });
+        }
     }
 }

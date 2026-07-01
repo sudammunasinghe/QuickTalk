@@ -6,5 +6,7 @@ namespace QuickTalk.Application.Interfaces.IRepositories
     {
         Task<User?> GetUserByUserIdAsync(int userId);
         Task ChangePasswordAsync(User updatedUser);
+        Task<PrivacySettings?> GetPrivacySettingsDetailsAsync(int userId);
+        Task UpdatePrivacySettingsAsync(PrivacySettings updatedPrivacySettings);
     }
 }

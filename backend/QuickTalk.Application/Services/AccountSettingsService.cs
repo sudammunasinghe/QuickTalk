@@ -46,5 +46,49 @@ namespace QuickTalk.Application.Services
 
             await _accountSettingsRepository.ChangePasswordAsync(user);
         }
+
+        public async Task<PrivacySettingsDto> GetPrivacySettingsDetailsAsync()
+        {
+            var loggedUser = _currentUser.UserId;
+            var settings = 
+                await _accountSettingsRepository.GetPrivacySettingsDetailsAsync(loggedUser);
+
+            if (settings == null)
+                throw new NotFoundException("Privacy settings not found.");
+
+            return new PrivacySettingsDto
+            {
+                Id = settings.Id,
+                ShowProfilePicture = settings.ShowProfilePicture,
+                ShowOnlineStatus = settings.ShowOnlineStatus,
+                ShowLastSeen = settings.ShowLastSeen,
+                ShowBio = settings.ShowBio
+            };
+        }
+
+        public async Task<PrivacySettingsDto> UpdatePrivacySettingsAsync(UpdatePrivacySettings dto)
+        {
+            var loggedUser = _currentUser.UserId;
+            var settings =
+                await _accountSettingsRepository.GetPrivacySettingsDetailsAsync(loggedUser);
+
+            if (settings == null)
+                throw new NotFoundException("Privacy settings not found.");
+            
+            settings.ShowProfilePicture = dto.ShowProfilePicture;
+            settings.ShowOnlineStatus = dto.ShowOnlineStatus;
+            settings.ShowLastSeen = dto.ShowLastSeen;
+            settings.ShowBio = dto.ShowBio;
+
+            await _accountSettingsRepository.UpdatePrivacySettingsAsync(settings);
+            return new PrivacySettingsDto
+            {
+                Id = settings.Id,
+                ShowProfilePicture = settings.ShowProfilePicture,
+                ShowOnlineStatus = settings.ShowOnlineStatus,
+                ShowLastSeen = settings.ShowLastSeen,
+                ShowBio = settings.ShowBio
+            };
+        }
     }
 }
