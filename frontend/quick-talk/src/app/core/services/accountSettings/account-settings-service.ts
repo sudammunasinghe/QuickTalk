@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { ChangePasswordRequest } from '../../models/account/change-password-request';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
+import { PrivacySettingsResponse } from '../../models/account/privacy-settings';
 
 @Injectable({
     providedIn: 'root',
@@ -17,5 +18,11 @@ export class AccountSettingsService {
             `${this.apiUrl}/change-password`,
             request
         );
+    }
+
+    GetPrivacySettingDetailsAsync(): Observable<ApiResponse<PrivacySettingsResponse>> {
+        return this.http.get<ApiResponse<PrivacySettingsResponse>>(
+            `${this.apiUrl}/privacy-settings`
+        )
     }
 }

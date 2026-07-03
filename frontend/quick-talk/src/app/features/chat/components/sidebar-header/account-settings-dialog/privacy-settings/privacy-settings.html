@@ -12,11 +12,11 @@
                             <i [class]="item.icon"></i>
                         </div>
                         <div class="privacy-option">
-                            <h3>{{ item.label }}</h3>
-                            <span>{{ item.description }}</span>
+                            <h3>{{ item?.label }}</h3>
+                            <span>{{ item?.description }}</span>
                         </div>
                         <div class="privacy-switch">
-                            <p-toggleswitch></p-toggleswitch>
+                            <p-toggleswitch [(ngModel)]="item.value"></p-toggleswitch>
                         </div>
                     </div>
                 </ng-container>

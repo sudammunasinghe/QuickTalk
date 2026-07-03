@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { SettingsTab } from '../../../../../core/enums/settings-tab';
 import { ProfileSettings } from './profile-settings/profile-settings';
 import { PasswordSettings } from './password-settings/password-settings';
 import { PrivacySettings } from './privacy-settings/privacy-settings';
+import { PrivacySettingsResponse } from '../../../../../core/models/account/privacy-settings';
+import { AccountSettingsService } from '../../../../../core/services/accountSettings/account-settings-service';
 
 @Component({
     selector: 'app-account-settings-dialog',
@@ -17,9 +19,15 @@ import { PrivacySettings } from './privacy-settings/privacy-settings';
     templateUrl: './account-settings-dialog.html',
     styleUrl: './account-settings-dialog.scss',
 })
-export class AccountSettingsDialog { 
+export class AccountSettingsDialog {
     @Output() close = new EventEmitter<void>();
+    privacySettings!: PrivacySettingsResponse;
     readonly SettingsTab = SettingsTab;
+
+    constructor(
+        private settingsService: AccountSettingsService
+    ) { }
+
     tabs = [
         {
             label: 'Profile',
@@ -42,7 +50,22 @@ export class AccountSettingsDialog {
     ];
     selectedTab = SettingsTab.Profile;
 
-    closeDialog(): void{
+    ngOnInit() {
+        this.loadPrivacySettingsAsync();
+    }
+
+    closeDialog(): void {
         this.close.emit();
+    }
+
+    loadPrivacySettingsAsync(): void {
+        this.settingsService.GetPrivacySettingDetailsAsync()
+            .subscribe({
+                next: (response) => {
+                    if (response.isSuccess && response.data) {
+                        this.privacySettings = response.data
+                    }
+                }
+            })
     }
 }

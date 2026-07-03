@@ -34,7 +34,7 @@
                     <div class="settings-content">
                         <app-profile-settings *ngIf="selectedTab === SettingsTab.Profile"></app-profile-settings>
                         <app-password-settings *ngIf="selectedTab === SettingsTab.Password" (close)="closeDialog()"></app-password-settings>
-                        <app-privacy-settings *ngIf="selectedTab === SettingsTab.Privacy"></app-privacy-settings>
+                        <app-privacy-settings *ngIf="selectedTab === SettingsTab.Privacy" [privacySettingData]="privacySettings"></app-privacy-settings>
                     </div>
                 </div>
             </div>
