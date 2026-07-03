@@ -1,0 +1,130 @@
+.privacy-header {
+    margin-bottom: 1.5rem;
+
+    h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    span {
+        display: block;
+        margin-top: .4rem;
+        color: #6B7280;
+        font-size: .85rem;
+    }
+}
+
+.privacy-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+:host ::ng-deep .privacy-form-container .p-card {
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.privacy-settings {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.privacy-settings:not(:last-child) {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.privacy-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+    background: #eef2ff;
+
+    i {
+        font-size: 1.3rem;
+        color: #4F46E5;
+    }
+}
+
+.privacy-option {
+    flex: 1;
+
+    h3 {
+        margin: 0;
+        font-size: .9rem;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    span {
+        display: block;
+        margin-top: .3rem;
+        font-size: .8rem;
+        color: #6b7280;
+        line-height: 1.4;
+    }
+}
+
+.privacy-switch {
+    margin-left: auto;
+}
+
+:host ::ng-deep .p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
+    background: #4F46E5 !important;
+    border-color: #4F46E5 !important;
+}
+
+:host ::ng-deep .p-toggleswitch:not(.p-disabled):has(input:hover) .p-toggleswitch-slider {
+    border-color: #4F46E5 !important;
+}
+
+:host ::ng-deep .p-toggleswitch.p-focus .p-toggleswitch-slider {
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+.info-p-card {
+    background-color: #FFFBEB;
+    border-color: #FDE68A;
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+
+    i {
+        font-size: 1.2rem;
+        color: #F59E0B;
+    }
+
+    span {
+        color: #d27408;
+        font-size: .75rem;
+        line-height: 1.5;
+    }
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+    background: #4F46E5;
+    border-color: #4F46E5;
+    border-radius: 12px;
+    font-weight: 600;
+    padding: .9rem;
+}
+
+:host ::ng-deep .p-button:hover {
+    background: #4338ca;
+    border-color: #4338ca;
+}
