@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SettingsTab } from '../../../../../core/enums/settings-tab';
 import { ProfileSettings } from './profile-settings/profile-settings';
 import { PasswordSettings } from './password-settings/password-settings';

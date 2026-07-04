@@ -49,8 +49,8 @@ export class PasswordSettings {
             .subscribe({
                 next: (response) => {
                     this.changePasswordForm.reset();
-                    this.close.emit();
                     if (response.isSuccess) {
+                        this.close.emit();
                         this.messageService.add({
                             severity: 'success',
                             summary: 'success',
