@@ -1,0 +1,33 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="privacy-header">
+            <h3>Privacy Settings</h3>
+            <span>Control what others can see about you</span>
+        </div>
+        <div class="privacy-form-container">
+            <p-card>
+                <ng-container *ngFor="let item of privacies">
+                    <div class="privacy-settings">
+                        <div class="privacy-icon">
+                            <i [class]="item.icon"></i>
+                        </div>
+                        <div class="privacy-option">
+                            <h3>{{ item?.label }}</h3>
+                            <span>{{ item?.description }}</span>
+                        </div>
+                        <div class="privacy-switch">
+                            <p-toggleswitch [(ngModel)]="item.value"></p-toggleswitch>
+                        </div>
+                    </div>
+                </ng-container>
+            </p-card>
+            <p-card class="info-p-card">
+                <div class="info-card">
+                    <i class="pi pi-users"></i>
+                    <span>Privacy changes apply immediately to all users viewing your profile.</span>
+                </div>
+            </p-card>
+            <p-button type="submit" label="Save Privacy Settings" (onClick)="savePrivacySettings()"></p-button>
+        </div>
+    </div>
+</div>

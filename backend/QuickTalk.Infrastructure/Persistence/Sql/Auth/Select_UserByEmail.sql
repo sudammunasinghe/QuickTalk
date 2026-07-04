@@ -9,6 +9,7 @@
     [Otp],
     [OtpExpiry],
     [IsUsed],
+    [LastSeen],
     [IsActive],
     [CreatedDateTime],
     [LastModifiedDateTime]

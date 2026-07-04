@@ -12,6 +12,7 @@
         public string? Otp { get; set; }
         public DateTime? OtpExpiry { get; set; }
         public bool? IsUsed { get; set; }
+        public DateTime? LastSeen { get; set; }
         private User() { }
 
         public static User Create(
@@ -22,7 +23,7 @@
             DateTime? dateOfBirth
             )
         {
-            var user =  new User
+            var user = new User
             {
                 FirstName = firstName,
                 LastName = lastName,

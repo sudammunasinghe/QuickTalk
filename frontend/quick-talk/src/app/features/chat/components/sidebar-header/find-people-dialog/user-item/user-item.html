@@ -1,0 +1,21 @@
+<div class="grid">
+    <div class="col-2">
+        <div class="user-item-avator-conatiner">
+            <div class="user-item-avator-placeholder">
+                {{ getInitials() }}
+            </div>
+            <span 
+                class="user-item-online-indicator"
+                [ngStyle]="{ backgroundColor: getStatusColor(user.id) }">  
+            </span>
+        </div>
+    </div>
+    <div class="col-10 user-text">
+        <div class="user-item-name">
+            <h4>{{ user?.firstName }} {{ user?.lastName }}</h4>
+        </div>
+        <div class="user-item-status">
+            <h5 [ngStyle]="{ color: getStatusColor(user.id) }">{{ getStatusText(user.id) }}</h5>
+        </div>
+    </div>
+</div>

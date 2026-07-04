@@ -14,8 +14,8 @@ namespace QuickTalk.Application.Services
         private readonly IOtpService _otpService;
         private readonly IEmailService _emailService;
         public AuthService(
-            IAuthRepository authRepository, 
-            IHashingService hashingService, 
+            IAuthRepository authRepository,
+            IHashingService hashingService,
             ITokenGenerateService tokenGenerateService,
             IOtpService otpService,
             IEmailService emailService

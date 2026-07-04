@@ -11,8 +11,7 @@
             </div>
             <span 
                 class="online-indicator"
-                [class.online]="isOnline(chatItem.userId)"
-                [class.offline]="!isOnline(chatItem.userId)">
+                [ngClass]="getStatusText(chatItem.userId)">
             </span>
         </div>
     </div>

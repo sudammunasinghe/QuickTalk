@@ -6,5 +6,6 @@ namespace QuickTalk.Application.Interfaces.IServices
     {
         Task<UserDto> GetCurrentUserAsync();
         Task<UserDto> GetUserDetailsByUserIdAsync(int userId);
+        Task<IEnumerable<UserDto>> GetPeopleToChat();
     }
 }

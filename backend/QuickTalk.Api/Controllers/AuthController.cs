@@ -40,7 +40,7 @@ namespace QuickTalk.Api.Controllers
         }
 
         [HttpPost("forgot-password")]
-        public  async Task<ActionResult<ApiResponse<string>>> ForgotPassword([FromBody] ForgotPasswordDto dto)
+        public async Task<ActionResult<ApiResponse<string>>> ForgotPassword([FromBody] ForgotPasswordDto dto)
         {
             var result = await _authService.ForgotPassword(dto);
             return Ok(new ApiResponse<string>

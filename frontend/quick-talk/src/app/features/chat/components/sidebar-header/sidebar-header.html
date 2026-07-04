@@ -5,12 +5,31 @@
             <div>
                 <h2>Quick Chat</h2>
             </div>
+            <div class="dialog-btns">
+                <span class="add-user-btn" (click)="showFindPeopleDialog()">
+                    <i class="pi pi-user-plus"></i>
+                </span>
+                <span class="settings-btn" (click)="showSettingsDialog()">
+                    <i class="pi pi-cog"></i>
+                </span>
+            </div>
         </div>
     </div>
     <div class="search-bar">
         <span class="p-input-icon-left search-wrapper w-full">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" class="w-full search-input" placeholder="Search conversations..." />
+            <input pInputText type="text" class="w-full search-input" placeholder="Search conversations..."
+                (input)="onSearch($event)" />
         </span>
     </div>
 </div>
+
+<p-dialog [(visible)]="displayFindPeopleDialog" [modal]="true" [draggable]="false" [closable]="false"
+    [resizable]="false" [style]="{ width: '450px' }">
+    <app-find-people-dialog (close)="displayFindPeopleDialog = false"></app-find-people-dialog>
+</p-dialog>
+
+<p-dialog [(visible)]="displaySettingsDialog" [modal]="true" [draggable]="false" [closable]="false" [resizable]="false"
+    [style]="{ width: '800px' }">
+    <app-account-settings-dialog (close)="displaySettingsDialog = false"></app-account-settings-dialog>
+</p-dialog>

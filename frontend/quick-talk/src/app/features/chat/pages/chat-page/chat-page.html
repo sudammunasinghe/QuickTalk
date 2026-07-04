@@ -2,12 +2,14 @@
     <div class="col-3">
         <div class="sidebar-header">
             <div class="p-card">
-                <app-sidebar-header></app-sidebar-header>
+                <app-sidebar-header
+                    (searchChanged)="filteredChats($event)">
+                </app-sidebar-header>
             </div>
         </div>
 
         <div class="chat-list">
-            <app-chat-item *ngFor="let chatItem of chatItems" [chatItem]="chatItem">
+            <app-chat-item *ngFor="let chatItem of filteredChatItems" [chatItem]="chatItem">
             </app-chat-item>
         </div>
     </div>

@@ -1,0 +1,86 @@
+:host {
+    display: block;
+}
+
+.grid {
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #f5f7ff;
+    }
+}
+
+.user-item-avator-conatiner {
+    position: relative;
+    width: 52px;
+    height: 52px;
+}
+
+.avator,
+.user-item-avator-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user-item-avator-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4F46E5;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.user-item-online-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+.Online {
+    background-color: #22c55e;
+    color: #22c55e;
+}
+
+.Away {
+    background-color: #f59e0b;
+    color: #f59e0b;
+}
+
+.Offline {
+    background-color: #64748b;
+    color: #64748b;
+}
+
+.user-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.user-item-name h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.user-item-status h5 {
+    margin: 0 0 0 0;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+}

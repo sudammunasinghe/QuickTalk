@@ -52,5 +52,21 @@ namespace QuickTalk.Application.Services
                 DateOfBirth = user.DateOfBirth
             };
         }
+
+        public async Task<IEnumerable<UserDto>> GetPeopleToChat()
+        {
+            var loggedUser = _currentUser.UserId;
+            var userDetails =
+                await _userRepository.GetPeopleToChat(loggedUser);
+
+            return userDetails.Select(user => new UserDto
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth
+            });
+        }
     }
 }
