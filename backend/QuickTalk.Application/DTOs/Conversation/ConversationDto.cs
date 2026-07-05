@@ -7,6 +7,10 @@
         public string LastName { get; set; }
         public string LastMessage { get; set; }
         public string LastMessageDisplayTime { get; set; }
+        public bool ShowProfilePicture { get; set; }
+        public bool ShowOnlineStatus { get; set; }
+        public bool ShowLastSeen { get; set; }
+        public bool ShowBio { get; set; }
         public int UnreadCount { get; set; }
         public bool IsOnline { get; set; }
     }

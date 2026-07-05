@@ -35,6 +35,10 @@ SELECT
 			THEN FORMAT(LM.[CreatedDateTime],'hh:mm tt')
 		ELSE FORMAT(LM.[CreatedDateTime], 'dd/MM/yyyy')
 	END AS [LastMessageDisplayTime],
+	PS.[ShowProfilePicture],
+	PS.[ShowOnlineStatus],
+	PS.[ShowLastSeen],
+	PS.[ShowBio],
 	US.[IsOnline],
 	(
         SELECT COUNT(*)
@@ -45,5 +49,6 @@ SELECT
     ) AS UnreadCount
 FROM LastMessages LM
 	INNER JOIN [dbo].[Users] US ON LM.[ConversationUserId] = US.[Id]
+	INNER JOIN [dbo].[UserPrivacySettings] PS ON US.[Id] = PS.[UserId]
 WHERE LM.[rn] = 1
 ORDER BY LM.[CreatedDateTime] DESC;
