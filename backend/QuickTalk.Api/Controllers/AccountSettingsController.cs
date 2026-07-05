@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuickTalk.Api.Models;
 using QuickTalk.Application.DTOs.AccountSettingsResponse;
 using QuickTalk.Application.DTOs.ApiResponse;
 using QuickTalk.Application.Interfaces.IServices;
@@ -48,6 +49,30 @@ namespace QuickTalk.Api.Controllers
                 IsSuccess = true,
                 Data = result,
                 Message = "Privacy settings updated successfully."
+            });
+        }
+
+        [HttpPut("profile-settings")]
+        public async Task<ActionResult<ApiResponse<UpdateProfileResponseDto>>> UpdateProfileDetailsAsync([FromForm] UpdateProfileRequest request)
+        {
+            var profileDto = new UpdateProfileDto
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Bio = request.Bio,
+                DateOfBirth = request.DateOfBirth,
+                profileImage = new FileDto
+                {
+                    FileName = request?.ProfilePicture?.FileName,
+                    FileStream = request?.ProfilePicture?.OpenReadStream()
+                }
+            };
+            var result = await _accountSettingsService.UpdateProfileDetailsAsync(profileDto);
+            return Ok(new ApiResponse<UpdateProfileResponseDto>
+            {
+                IsSuccess = true,
+                Data = result,
+                Message = "Profile updated successfully."
             });
         }
     }
