@@ -1,4 +1,6 @@
-﻿namespace QuickTalk.Domain.Entities
+﻿using QuickTalk.Domain.Exceptions;
+
+namespace QuickTalk.Domain.Entities
 {
     public class User : BaseEntity
     {
@@ -8,6 +10,8 @@
         public string Email { get; set; }
         public string PasswordHash { get; private set; }
         public DateTime? DateOfBirth { get; set; }
+        public string? Bio { get; set; }
+        public string? profileImageUrl { get; set; }
         public bool? IsOnline { get; set; }
         public string? Otp { get; set; }
         public DateTime? OtpExpiry { get; set; }
@@ -34,10 +38,27 @@
             return user;
         }
 
+        public void Update(
+            string firstName,
+            string lastName,
+            string bio,
+            DateTime? dateOfBirth
+            )
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Bio = bio;
+            DateOfBirth = dateOfBirth;
+        }
+
         public void ChangePassword(string passwordHash)
         {
             PasswordHash = passwordHash;
         }
 
+        public static void ValidateFileType(string fileType)
+        {
+
+        }
     }
 }

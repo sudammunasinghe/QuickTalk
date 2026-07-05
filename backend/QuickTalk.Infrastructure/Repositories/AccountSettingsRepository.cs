@@ -36,7 +36,7 @@ namespace QuickTalk.Infrastructure.Repositories
             );
         }
 
-        public async Task ChangePasswordAsync(User updatedUser)
+        public async Task UpdateUserDetailsAsync(User updatedUser)
         {
             using var db = _connectionFactory.CreateConnection();
             await db.ExecuteAsync(
@@ -45,6 +45,11 @@ namespace QuickTalk.Infrastructure.Repositories
                 {
                     UserId = updatedUser.Id,
                     PasswordHash = updatedUser.PasswordHash,
+                    FirstName = updatedUser.FirstName,
+                    LastName = updatedUser.LastName,
+                    Bio = updatedUser.Bio,
+                    DateOfBirth = updatedUser.DateOfBirth,
+                    ProfileImageUrl = updatedUser.profileImageUrl,
                     LastModifiedDateTime = updatedUser.LastModifiedDateTime
                 }
             );

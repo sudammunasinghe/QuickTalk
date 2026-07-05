@@ -28,6 +28,20 @@ namespace QuickTalk.Application.Services
             }
         }
 
+        public async Task DeleteFileAsync(string? relativePath)
+        {
+            if (string.IsNullOrWhiteSpace(relativePath))
+                return;
+
+            var fullPath = Path.Combine(
+                "wwwroot",
+                relativePath.Replace('/', Path.DirectorySeparatorChar)
+            );
+
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
+        }
+
         private async Task SaveFileAsync(string fullFilePath, Stream fileStream)
         {
             using var fs = new FileStream(fullFilePath, FileMode.Create);
