@@ -53,7 +53,7 @@ namespace QuickTalk.Application.Services
         public async Task<PrivacySettingsDto> GetPrivacySettingsDetailsAsync()
         {
             var loggedUser = _currentUser.UserId;
-            var settings = 
+            var settings =
                 await _accountSettingsRepository.GetPrivacySettingsDetailsAsync(loggedUser);
 
             if (settings == null)
@@ -77,7 +77,7 @@ namespace QuickTalk.Application.Services
 
             if (settings == null)
                 throw new NotFoundException("Privacy settings not found.");
-            
+
             settings.ShowProfilePicture = dto.ShowProfilePicture;
             settings.ShowOnlineStatus = dto.ShowOnlineStatus;
             settings.ShowLastSeen = dto.ShowLastSeen;
@@ -111,10 +111,10 @@ namespace QuickTalk.Application.Services
                 dto.DateOfBirth
             );
 
-            string oldProfileUrl = user.profileImageUrl;
+            string oldProfileUrl = user.ProfileImageUrl;
             if (dto.profileImage != null)
             {
-                var allowedExtensions = new []{".png", ".jpg", ".jpeg"};
+                var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
                 if (!allowedExtensions.Contains(Path.GetExtension(dto.profileImage?.FileName)))
                     throw new BadRequestException("Invalid file type.");
 
@@ -125,15 +125,15 @@ namespace QuickTalk.Application.Services
                         subFolder,
                         dto.profileImage
                     );
-                user.profileImageUrl = newProfileUrl;
-                
+                user.ProfileImageUrl = newProfileUrl;
+
             }
             else if (dto.RemoveProfileImage)
             {
-                user.profileImageUrl = null;
+                user.ProfileImageUrl = null;
             }
 
-            if(dto.profileImage != null || dto.RemoveProfileImage)
+            if (dto.profileImage != null || dto.RemoveProfileImage)
             {
                 if (!string.IsNullOrWhiteSpace(oldProfileUrl))
                 {
@@ -150,7 +150,7 @@ namespace QuickTalk.Application.Services
                 LastName = user.LastName,
                 Bio = user.Bio,
                 DateOfBirth = user.DateOfBirth,
-                ProfilePictureUrl = user.profileImageUrl
+                ProfilePictureUrl = user.ProfileImageUrl
             };
         }
     }

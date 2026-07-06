@@ -22,7 +22,7 @@ namespace QuickTalk.Application.Services
             }
             catch
             {
-                if(File.Exists(fullPath))
+                if (File.Exists(fullPath))
                     File.Delete(fullPath);
                 throw;
             }

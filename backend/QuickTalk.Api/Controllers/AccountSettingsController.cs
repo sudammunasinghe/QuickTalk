@@ -61,12 +61,13 @@ namespace QuickTalk.Api.Controllers
                 LastName = request.LastName,
                 Bio = request.Bio,
                 DateOfBirth = request.DateOfBirth,
-                profileImage = request.ProfilePicture != null 
+                RemoveProfileImage = request.RemoveProfileImage,
+                profileImage = request.ProfilePicture != null
                     ? new FileDto
                     {
                         FileName = request?.ProfilePicture?.FileName,
                         FileStream = request?.ProfilePicture?.OpenReadStream()
-                    }: null
+                    } : null
             };
             var result = await _accountSettingsService.UpdateProfileDetailsAsync(profileDto);
             return Ok(new ApiResponse<UpdateProfileResponseDto>

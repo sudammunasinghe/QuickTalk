@@ -5,6 +5,6 @@
       [LastName] = @LastName,
       [Bio] = @Bio,
       [DateOfBirth] = @DateOfBirth,
-      [ProfileImageUrl] = @profileImageUrl,
+      [ProfileImageUrl] = @ProfileImageUrl,
       [LastModifiedDateTime] = @LastModifiedDateTime
 WHERE [Id] = @UserId;

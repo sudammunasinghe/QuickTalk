@@ -49,7 +49,7 @@ namespace QuickTalk.Infrastructure.Repositories
                     LastName = updatedUser.LastName,
                     Bio = updatedUser.Bio,
                     DateOfBirth = updatedUser.DateOfBirth,
-                    ProfileImageUrl = updatedUser.profileImageUrl,
+                    ProfileImageUrl = updatedUser.ProfileImageUrl,
                     LastModifiedDateTime = updatedUser.LastModifiedDateTime
                 }
             );
