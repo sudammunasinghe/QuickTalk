@@ -5,7 +5,7 @@
             <span>Update your personal information and photo</span>
         </div>
         <div class="profile-form-container">
-            <form>
+            <form [formGroup]="profileForm">
                 <div class="profile-picture-container">
                     <div class="profile-image-wrapper">
                         <img class="profile-image" [src]="defaultImage">
@@ -22,19 +22,19 @@
                 </div>
                 <div class="profile-field">
                     <label>First Name</label>
-                    <input pInputText type="name">
+                    <input pInputText type="name" formControlName="firstName">
                 </div>
                 <div class="profile-field">
                     <label>Last Name</label>
-                    <input pInputText type="name">
+                    <input pInputText type="name" formControlName="lastName">
                 </div>
                 <div class="profile-field">
                     <label>Date of Birth</label>
-                    <input pInputText type="date">
+                    <input pInputText type="date" formControlName="dateOfBirth">
                 </div>
                 <div class="profile-field">
                     <label>Bio</label>
-                    <textarea pTextarea></textarea>
+                    <textarea pTextarea formControlName="bio"></textarea>
                 </div>
                 <p-button type="submit" label="Save Changes"></p-button>
             </form>

@@ -5,8 +5,8 @@ import { ChangePasswordRequest } from '../../models/account/change-password-requ
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
 import { PrivacySettingsResponse } from '../../models/account/privacy-settings';
-import { PrivacySettings } from '../../../features/chat/components/sidebar-header/account-settings-dialog/privacy-settings/privacy-settings';
 import { PrivacySettingsRequest } from '../../models/account/privacy-settings-request';
+import { ProfileDetailsResponse } from '../../models/account/profile-details-response';
 
 @Injectable({
     providedIn: 'root',
@@ -25,13 +25,19 @@ export class AccountSettingsService {
     GetPrivacySettingDetailsAsync(): Observable<ApiResponse<PrivacySettingsResponse>> {
         return this.http.get<ApiResponse<PrivacySettingsResponse>>(
             `${this.apiUrl}/privacy-settings`
-        )
+        );
     }
 
     UpdatePrivacySettingsAsync(request: PrivacySettingsRequest): Observable<ApiResponse<PrivacySettingsResponse>> {
         return this.http.put<ApiResponse<PrivacySettingsResponse>>(
             `${this.apiUrl}/privacy-settings`,
             request
-        )
+        );
+    }
+
+    GetProfileDetailsAsync(): Observable<ApiResponse<ProfileDetailsResponse>> {
+        return this.http.get<ApiResponse<ProfileDetailsResponse>>(
+            `${this.apiUrl}/profile-settings`
+        );
     }
 }
