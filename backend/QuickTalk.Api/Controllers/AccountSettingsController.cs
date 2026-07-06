@@ -79,7 +79,7 @@ namespace QuickTalk.Api.Controllers
             });
         }
 
-        [HttpGet]
+        [HttpGet("profile-settings")]
         public async Task<ActionResult<ApiResponse<UpdateProfileResponseDto>>> GetProfileDetailsAsync()
         {
             var result = await _accountSettingsService.GetProfileDetailsAsync();
