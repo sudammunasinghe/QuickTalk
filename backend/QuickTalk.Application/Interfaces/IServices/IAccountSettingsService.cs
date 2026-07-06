@@ -8,5 +8,6 @@ namespace QuickTalk.Application.Interfaces.IServices
         Task<PrivacySettingsDto> GetPrivacySettingsDetailsAsync();
         Task<PrivacySettingsDto> UpdatePrivacySettingsAsync(UpdatePrivacySettings dto);
         Task<UpdateProfileResponseDto> UpdateProfileDetailsAsync(UpdateProfileDto dto);
+        Task<UpdateProfileResponseDto> GetProfileDetailsAsync();
     }
 }

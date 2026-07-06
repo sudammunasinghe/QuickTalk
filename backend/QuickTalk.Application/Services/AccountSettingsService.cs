@@ -153,5 +153,24 @@ namespace QuickTalk.Application.Services
                 ProfilePictureUrl = user.ProfileImageUrl
             };
         }
+
+        public async Task<UpdateProfileResponseDto> GetProfileDetailsAsync()
+        {
+            var loggedUser = _currentUser.UserId;
+            var user =
+                await _accountSettingsRepository.GetUserByUserIdAsync(loggedUser);
+
+            if (user == null)
+                throw new NotFoundException("User not found.");
+
+            return new UpdateProfileResponseDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Bio = user.Bio,
+                DateOfBirth= user.DateOfBirth,
+                ProfilePictureUrl = user.ProfileImageUrl
+            };
+        }
     }
 }

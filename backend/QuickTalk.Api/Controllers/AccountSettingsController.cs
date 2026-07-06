@@ -3,6 +3,7 @@ using QuickTalk.Api.Models;
 using QuickTalk.Application.DTOs.AccountSettingsResponse;
 using QuickTalk.Application.DTOs.ApiResponse;
 using QuickTalk.Application.Interfaces.IServices;
+using System.Runtime.CompilerServices;
 
 namespace QuickTalk.Api.Controllers
 {
@@ -75,6 +76,18 @@ namespace QuickTalk.Api.Controllers
                 IsSuccess = true,
                 Data = result,
                 Message = "Profile updated successfully."
+            });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ApiResponse<UpdateProfileResponseDto>>> GetProfileDetailsAsync()
+        {
+            var result = await _accountSettingsService.GetProfileDetailsAsync();
+            return Ok(new ApiResponse<UpdateProfileResponseDto>
+            {
+                IsSuccess = true,
+                Data = result,
+                Message = "Profile details retrieved successfully."
             });
         }
     }

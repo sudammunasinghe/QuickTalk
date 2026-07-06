@@ -11,7 +11,7 @@ namespace QuickTalk.Application.DTOs.AccountSettingsResponse
         [Required]
         [StringLength(100)]
         public string LastName { get; set; }
-        public string Bio { get; set; }
+        public string? Bio { get; set; }
         public DateTime? DateOfBirth { get; set; }
     }
 }
