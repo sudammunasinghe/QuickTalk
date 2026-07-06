@@ -1,1 +1,43 @@
-<p>profile-settings works!</p>
+<div class="grid">
+    <div class="col-12">
+        <div class="profile-header">
+            <h3>Edit Profile</h3>
+            <span>Update your personal information and photo</span>
+        </div>
+        <div class="profile-form-container">
+            <form>
+                <div class="profile-picture-container">
+                    <div class="profile-image-wrapper">
+                        <img class="profile-image" [src]="defaultImage">
+                        <div class="camera-icon" (click)="fileUpload.choose()">
+                            <i class="pi pi-camera"></i>
+                        </div>
+                    </div>
+
+                    <p-fileUpload #fileUpload mode="basic" name="file" accept="image/*" [auto]="false"
+                        [customUpload]="true" [showUploadButton]="false" [showCancelButton]="false"
+                        chooseStyleClass="hidden-upload">
+                    </p-fileUpload>
+
+                </div>
+                <div class="profile-field">
+                    <label>First Name</label>
+                    <input pInputText type="name">
+                </div>
+                <div class="profile-field">
+                    <label>Last Name</label>
+                    <input pInputText type="name">
+                </div>
+                <div class="profile-field">
+                    <label>Date of Birth</label>
+                    <input pInputText type="date">
+                </div>
+                <div class="profile-field">
+                    <label>Bio</label>
+                    <textarea pTextarea></textarea>
+                </div>
+                <p-button type="submit" label="Save Changes"></p-button>
+            </form>
+        </div>
+    </div>
+</div>
