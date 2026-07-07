@@ -68,6 +68,41 @@ export class ProfileSettings {
             });
     }
 
+    SaveProfileSettings(): void {
+        if (this.profileForm.invalid)
+            return;
+
+        const formData = new FormData();
+        formData.append('FirstName', this.profileForm?.value?.firstName);
+        formData.append('LastName', this.profileForm?.value?.lastName);
+        formData.append('Bio', this.profileForm?.value?.bio);
+        formData.append('DateOfBirth', this.profileForm?.value?.dateOfBirth);
+        formData.append('RemoveProfileImage', 'false');
+        formData.append('ProfilePicture', 'null');
+
+        this.accountService.UpdateProfileDetailsAsync(formData)
+            .subscribe({
+                next: (resonse) => {
+                    if (resonse.isSuccess && resonse.data) {
+                        this.profileDetails = resonse.data;
+                        this.setInitialFormData();
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'success',
+                            detail: resonse.message
+                        });
+                    }
+                },
+                error: (response) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: response.error.Message
+                    });
+                }
+            });
+    }
+
     setInitialFormData(): void {
         this.profileForm.patchValue({
             firstName: this.profileDetails.firstName,

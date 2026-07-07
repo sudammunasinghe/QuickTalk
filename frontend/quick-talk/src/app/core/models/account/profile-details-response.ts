@@ -1,7 +1,5 @@
-export interface ProfileDetailsResponse{
-    firstName: string,
-    lastName: string,
-    bio: string,
-    dateOfBirth: string,
-    profilePictureUrl: string
+import { profileDetails } from "./profile-details";
+
+export interface ProfileDetailsResponse extends profileDetails {
+    profilePictureUrl: string | null
 }

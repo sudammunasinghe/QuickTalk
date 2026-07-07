@@ -5,8 +5,8 @@ import { ChangePasswordRequest } from '../../models/account/change-password-requ
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
 import { PrivacySettingsResponse } from '../../models/account/privacy-settings';
-import { PrivacySettingsRequest } from '../../models/account/privacy-settings-request';
 import { ProfileDetailsResponse } from '../../models/account/profile-details-response';
+import { PrivacySettingsRequest } from '../../models/account/privacy-settings-request';
 
 @Injectable({
     providedIn: 'root',
@@ -38,6 +38,13 @@ export class AccountSettingsService {
     GetProfileDetailsAsync(): Observable<ApiResponse<ProfileDetailsResponse>> {
         return this.http.get<ApiResponse<ProfileDetailsResponse>>(
             `${this.apiUrl}/profile-settings`
+        );
+    }
+
+    UpdateProfileDetailsAsync(request: FormData): Observable<ApiResponse<ProfileDetailsResponse>> {
+        return this.http.put<ApiResponse<ProfileDetailsResponse>>(
+            `${this.apiUrl}/profile-settings`,
+            request
         );
     }
 }
