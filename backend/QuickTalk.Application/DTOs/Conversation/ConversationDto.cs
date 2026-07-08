@@ -11,6 +11,7 @@
         public bool ShowOnlineStatus { get; set; }
         public bool ShowLastSeen { get; set; }
         public bool ShowBio { get; set; }
+        public string ProfileImageUrl { get; set; }
         public int UnreadCount { get; set; }
         public bool IsOnline { get; set; }
     }

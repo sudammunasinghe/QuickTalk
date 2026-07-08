@@ -1,4 +1,5 @@
-﻿using QuickTalk.Application.DTOs.AccountSettingsResponse;
+﻿using Microsoft.AspNetCore.Http;
+using QuickTalk.Application.DTOs.AccountSettingsResponse;
 using QuickTalk.Application.Exceptions;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
@@ -11,17 +12,20 @@ namespace QuickTalk.Application.Services
         private readonly ICurrentUser _currentUser;
         private readonly IHashingService _hashingService;
         private readonly IFileService _fileService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public AccountSettingsService(
             IAccountSettingsRepository accountSettingsRepository,
             ICurrentUser currentUser,
             IHashingService hashingService,
-            IFileService fileService
+            IFileService fileService,
+            IHttpContextAccessor httpContextAccessor
             )
         {
             _accountSettingsRepository = accountSettingsRepository;
             _currentUser = currentUser;
             _hashingService = hashingService;
             _fileService = fileService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task ChangePasswordAsync(ChangePasswordDto dto)
@@ -150,7 +154,7 @@ namespace QuickTalk.Application.Services
                 LastName = user.LastName,
                 Bio = user.Bio,
                 DateOfBirth = user.DateOfBirth,
-                ProfilePictureUrl = user.ProfileImageUrl
+                ProfilePictureUrl = GetProfileImageUrl(user.ProfileImageUrl)
             };
         }
 
@@ -169,8 +173,17 @@ namespace QuickTalk.Application.Services
                 LastName = user.LastName,
                 Bio = user.Bio,
                 DateOfBirth= user.DateOfBirth,
-                ProfilePictureUrl = user.ProfileImageUrl
+                ProfilePictureUrl = GetProfileImageUrl(user.ProfileImageUrl)
             };
+        }
+
+        private string? GetProfileImageUrl(string? relativePath)
+        {
+            if (string.IsNullOrWhiteSpace(relativePath))
+                return null;
+
+            var request = _httpContextAccessor.HttpContext!.Request;
+            return $"{request.Scheme}://{request.Host}/{relativePath}";
         }
     }
 }

@@ -39,6 +39,7 @@ SELECT
 	PS.[ShowOnlineStatus],
 	PS.[ShowLastSeen],
 	PS.[ShowBio],
+	US.[ProfileImageUrl],
 	US.[IsOnline],
 	(
         SELECT COUNT(*)
