@@ -1,17 +1,17 @@
 <div class="grid" (click)="selectedChat()">
     <div class="col-2">
         <div class="avator-container">
-            <!-- <img
-                [src]=""
-                [alt]=""
-                class="avator"
-            > -->
-            <div class="avatar-placeholder">
-                {{ getInitials() }}
-            </div>
-            <span 
-                class="online-indicator"
-                [ngClass]="getStatusText(chatItem.userId)"
+            <ng-container *ngIf="chatItem?.profileImageUrl; else initialAvator">
+                <img class="profile-image" [src]="chatItem?.profileImageUrl">
+            </ng-container>
+
+            <ng-template #initialAvator>
+                <div class="avatar-placeholder">
+                    {{ getInitials() }}
+                </div>
+            </ng-template>
+
+            <span class="online-indicator" [ngClass]="getStatusText(chatItem.userId)"
                 *ngIf="chatItem?.showOnlineStatus">
             </span>
         </div>

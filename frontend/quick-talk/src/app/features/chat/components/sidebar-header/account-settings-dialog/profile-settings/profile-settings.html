@@ -8,16 +8,34 @@
             <form [formGroup]="profileForm">
                 <div class="profile-picture-container">
                     <div class="profile-image-wrapper">
-                        <img class="profile-image" [src]="defaultImage">
-                        <div class="camera-icon" (click)="fileUpload.choose()">
-                            <i class="pi pi-camera"></i>
-                        </div>
-                    </div>
+                        <ng-container *ngIf="hasProfilePhoto; else initialsAvator">
+                            <img class="profile-image" [src]="imagePreview">
+                        </ng-container>
 
-                    <p-fileUpload #fileUpload mode="basic" name="file" accept="image/*" [auto]="false"
-                        [customUpload]="true" [showUploadButton]="false" [showCancelButton]="false"
-                        chooseStyleClass="hidden-upload">
-                    </p-fileUpload>
+                        <ng-template #initialsAvator>
+                            <div class="avatar-placeholder">
+                                {{ getInitials() }}
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="image-btns">
+                        <p-button label="Upload Photo" icon="pi pi-upload" severity="primary"
+                            (onClick)="fileInput.click()" styleClass="upload-photo-btn">
+                        </p-button>
+
+                        <ng-container *ngIf="hasProfilePhoto; else noPhoto">
+                            <p-button label="Delete Photo" icon="pi pi-trash" severity="danger" [text]="true"
+                                (onClick)="confirmDelete()" styleClass="delete-photo-btn">
+                            </p-button>
+                        </ng-container>
+
+                        <ng-template #noPhoto>
+                            <p-button label="No Photo Set" icon="pi pi-image" [disabled]="true"
+                                styleClass="no-photo-btn">
+                            </p-button>
+                        </ng-template>
+                    </div>
+                    <input #fileInput type="file" accept="image/*" hidden (change)="onImageSelect($event)">
 
                 </div>
                 <div class="profile-field">
@@ -41,3 +59,4 @@
         </div>
     </div>
 </div>
+<p-confirmdialog></p-confirmdialog>

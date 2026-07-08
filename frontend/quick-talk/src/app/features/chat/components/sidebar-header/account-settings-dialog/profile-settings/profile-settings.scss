@@ -29,8 +29,12 @@ form {
 
 .profile-picture-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 1.5rem;
+    gap: .75rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .profile-image-wrapper {
@@ -47,30 +51,89 @@ form {
     object-fit: cover;
 }
 
-.camera-icon {
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
-    width: 32px;
-    height: 32px;
-    background: #b6bfcd;
-    color: #fff;
+.avatar-placeholder {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+}
+
+.avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4F46E5;
+    color: white;
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.image-btns {
     display: flex;
     justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
-    transition: all .25s ease;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
-.camera-icon:hover {
-    background: #4F46E5;
-    transform: scale(1.1);
+:host ::ng-deep .upload-photo-btn {
+    background: #eef2ff !important;
+    border: 1px solid #eef2ff !important;
+    color: #4F46E5 !important;
+    font-size: .85rem;
 }
 
-.camera-icon i {
-    font-size: 1.2rem;
+:host ::ng-deep .upload-photo-btn .pi {
+    color: #4F46E5 !important;
+}
+
+:host ::ng-deep .upload-photo-btn:hover {
+    background: #dbe4ff !important;
+    border-color: #dbe4ff !important;
+    color: #4338CA !important;
+}
+
+:host ::ng-deep .upload-photo-btn:hover .pi {
+    color: #4338CA !important;
+}
+
+:host ::ng-deep .delete-photo-btn {
+    background: #f7e9e9 !important;
+    border: 1px solid #eef2ff !important;
+    color: #dc2626 !important;
+    transition: all .2s ease !important;
+    font-size: .85rem;
+}
+
+:host ::ng-deep .delete-photo-btn .pi {
+    color: #dc2626 !important;
+}
+
+:host ::ng-deep .delete-photo-btn:hover {
+    background: #fee2e2 !important;
+    border-color: #fee2e2 !important;
+    color: #b91c1c !important;
+}
+
+:host ::ng-deep .delete-photo-btn:hover .pi {
+    color: #b91c1c !important;
+}
+
+:host ::ng-deep .no-photo-btn {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #94a3b8 !important;
+    font-size: .85rem;
+}
+
+:host ::ng-deep .no-photo-btn .pi {
+    color: #94a3b8 !important;
 }
 
 :host ::ng-deep .hidden-upload {

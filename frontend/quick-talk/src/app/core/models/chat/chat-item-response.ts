@@ -8,6 +8,7 @@ export interface ChatItemResponse {
     showOnlineStatus: boolean,
     showLastSeen: boolean,
     showBio: boolean,
+    profileImageUrl: string | null,
     unreadCount: number,
     isOnline: boolean
 }
