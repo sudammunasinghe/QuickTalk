@@ -6,6 +6,13 @@ import { PasswordSettings } from './password-settings/password-settings';
 import { PrivacySettings } from './privacy-settings/privacy-settings';
 import { PrivacySettingsResponse } from '../../../../../core/models/account/privacy-settings';
 import { AccountSettingsService } from '../../../../../core/services/accountSettings/account-settings-service';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { Signalr } from '../../../../../core/services/signalr/signalr';
+import { TokenService } from '../../../../../core/services/token/token-service';
+import { Router, RouterLink } from '@angular/router';
+
 
 @Component({
     selector: 'app-account-settings-dialog',
@@ -14,9 +21,13 @@ import { AccountSettingsService } from '../../../../../core/services/accountSett
         CommonModule,
         ProfileSettings,
         PasswordSettings,
-        PrivacySettings
+        PrivacySettings,
+        ButtonModule,
+        ConfirmDialogModule,
+        RouterLink
     ],
     templateUrl: './account-settings-dialog.html',
+    providers: [ConfirmationService],
     styleUrl: './account-settings-dialog.scss',
 })
 export class AccountSettingsDialog {
@@ -25,7 +36,11 @@ export class AccountSettingsDialog {
     readonly SettingsTab = SettingsTab;
 
     constructor(
-        private settingsService: AccountSettingsService
+        private settingsService: AccountSettingsService,
+        private confirmationService: ConfirmationService,
+        private signalrService: Signalr,
+        private tokenService: TokenService,
+        private router: Router
     ) { }
 
     tabs = [
@@ -67,5 +82,32 @@ export class AccountSettingsDialog {
                     }
                 }
             })
+    }
+
+    confirmLogout(): void {
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to log out?',
+            header: 'Logout',
+            icon: 'pi pi-exclamation-circle',
+            rejectLabel: 'Cancel',
+            rejectButtonProps: {
+                label: 'No',
+                severity: 'secondary',
+                outlined: true
+            },
+            acceptButtonProps: {
+                label: 'Yes',
+                severity: 'danger'
+            },
+            accept: () => {
+                this.logout();
+            }
+        });
+    }
+
+    logout(): void {
+        this.signalrService.stopConnection();
+        this.tokenService.removeToken();
+        this.router.navigate(['/sign-in']);
     }
 }
