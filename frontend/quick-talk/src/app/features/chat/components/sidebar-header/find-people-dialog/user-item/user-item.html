@@ -1,12 +1,16 @@
 <div class="grid">
     <div class="col-2">
         <div class="user-item-avator-conatiner">
-            <div class="user-item-avator-placeholder">
-                {{ getInitials() }}
-            </div>
-            <span 
-                class="user-item-online-indicator"
-                [ngStyle]="{ backgroundColor: getStatusColor(user.id) }">  
+            <ng-container *ngIf="user?.profilePictureUrl; else initialAvator">
+                <img [src]="user?.profilePictureUrl" class="profile-image">
+            </ng-container>
+
+            <ng-template #initialAvator>
+                <div class="user-item-avator-placeholder">
+                    {{ getInitials() }}
+                </div>
+            </ng-template>
+            <span class="user-item-online-indicator" [ngStyle]="{ backgroundColor: getStatusColor(user.id) }">
             </span>
         </div>
     </div>

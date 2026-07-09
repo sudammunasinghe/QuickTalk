@@ -3,5 +3,6 @@ export interface UserDetails {
     firstName: string,
     lastName: string,
     email: string,
-    dateOfBirth: Date
+    dateOfBirth: Date,
+    profilePictureUrl: string
 }
