@@ -1,10 +1,16 @@
-﻿using QuickTalk.Application.DTOs.AccountSettingsResponse;
+﻿using Microsoft.AspNetCore.Http;
+using QuickTalk.Application.DTOs.AccountSettingsResponse;
 using QuickTalk.Application.Interfaces.IServices;
 
 namespace QuickTalk.Application.Services
 {
     public class FileService : IFileService
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public FileService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         public async Task<string> UploadFileAsync(int userId, string subFolder, FileDto fileDto)
         {
             string fullPath = "";
@@ -40,6 +46,15 @@ namespace QuickTalk.Application.Services
 
             if (File.Exists(fullPath))
                 File.Delete(fullPath);
+        }
+
+        public string? GetFileUrl(string? relativePath)
+        {
+            if (string.IsNullOrWhiteSpace(relativePath))
+                return null;
+
+            var request = _httpContextAccessor.HttpContext!.Request;
+            return $"{request.Scheme}://{request.Host}/{relativePath}";
         }
 
         private async Task SaveFileAsync(string fullFilePath, Stream fileStream)

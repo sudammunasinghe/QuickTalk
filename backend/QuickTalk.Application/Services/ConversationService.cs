@@ -12,18 +12,18 @@ namespace QuickTalk.Application.Services
         private readonly IConversationRepository _conversationRepository;
         private readonly ICurrentUser _currentUser;
         private readonly IChatNotifier _chatNotifier;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IFileService _fileService;
         public ConversationService(
             IConversationRepository conversationRepository,
             ICurrentUser currentUser,
             IChatNotifier chatNotifier,
-            IHttpContextAccessor httpContextAccessor
+            IFileService fileService
             )
         {
             _conversationRepository = conversationRepository;
             _currentUser = currentUser;
             _chatNotifier = chatNotifier;
-            _httpContextAccessor = httpContextAccessor;
+            _fileService = fileService;
         }
 
         public async Task SendMessageAsync(SendMessageDto dto)
@@ -91,7 +91,7 @@ namespace QuickTalk.Application.Services
 
             return conversations.Select(con =>
             {
-                con.ProfileImageUrl = GetProfileImageUrl(con.ProfileImageUrl);
+                con.ProfileImageUrl = _fileService.GetFileUrl(con.ProfileImageUrl);
                 return con;
             });
         }
@@ -111,15 +111,6 @@ namespace QuickTalk.Application.Services
                 msg.LastModifiedDateTime = DateTime.UtcNow;
             });
             await _conversationRepository.MarkAsReadAsync(UnreadMessages);
-        }
-
-        private string? GetProfileImageUrl(string? relativePath)
-        {
-            if (string.IsNullOrWhiteSpace(relativePath))
-                return null;
-
-            var request = _httpContextAccessor.HttpContext!.Request;
-            return $"{request.Scheme}://{request.Host}/{relativePath}";
         }
     }
 }

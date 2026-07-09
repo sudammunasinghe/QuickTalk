@@ -7,6 +7,7 @@
     [DateOfBirth],
     [IsOnline],
     [Otp],
+    [ProfileImageUrl],
     [OtpExpiry],
     [IsActive],
     [CreatedDateTime],

@@ -9,10 +9,12 @@ namespace QuickTalk.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ICurrentUser _currentUser;
-        public UserService(IUserRepository userRepository, ICurrentUser currentUser)
+        private readonly IFileService _fileService;
+        public UserService(IUserRepository userRepository, ICurrentUser currentUser, IFileService fileService)
         {
             _userRepository = userRepository;
             _currentUser = currentUser;
+            _fileService = fileService;
         }
 
         public async Task<UserDto> GetCurrentUserAsync()
@@ -65,7 +67,8 @@ namespace QuickTalk.Application.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                DateOfBirth = user.DateOfBirth
+                DateOfBirth = user.DateOfBirth,
+                ProfilePictureUrl = _fileService.GetFileUrl(user.ProfileImageUrl)
             });
         }
     }

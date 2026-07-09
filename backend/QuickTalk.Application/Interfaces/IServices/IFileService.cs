@@ -6,5 +6,6 @@ namespace QuickTalk.Application.Interfaces.IServices
     {
         Task<string> UploadFileAsync(int userId, string subFolder, FileDto fileDto);
         Task DeleteFileAsync(string? relativePath);
+        string? GetFileUrl(string? relativePath);
     }
 }
