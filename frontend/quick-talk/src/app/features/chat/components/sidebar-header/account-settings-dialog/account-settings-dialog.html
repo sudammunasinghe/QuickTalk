@@ -37,7 +37,8 @@
                 </div>
                 <div class="col-8">
                     <div class="settings-content">
-                        <app-profile-settings *ngIf="selectedTab === SettingsTab.Profile"></app-profile-settings>
+                        <app-profile-settings *ngIf="selectedTab === SettingsTab.Profile"
+                            [profileDetails]="profileSettingsDetails"></app-profile-settings>
                         <app-password-settings *ngIf="selectedTab === SettingsTab.Password"
                             (close)="closeDialog()"></app-password-settings>
                         <app-privacy-settings *ngIf="selectedTab === SettingsTab.Privacy"

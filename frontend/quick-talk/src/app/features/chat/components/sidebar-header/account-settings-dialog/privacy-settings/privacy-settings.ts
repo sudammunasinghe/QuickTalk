@@ -34,7 +34,7 @@ export class PrivacySettings {
         private messageService: MessageService
     ) { }
 
-    ngOnInit() {
+    ngOnChanges() {
         this.privacies = [
             {
                 key: PrivacyOptions.ShowProfile,

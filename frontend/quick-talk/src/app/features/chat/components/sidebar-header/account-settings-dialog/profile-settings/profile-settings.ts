@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -29,9 +29,9 @@ import { MessageService, ConfirmationService } from 'primeng/api';
     styleUrl: './profile-settings.scss',
 })
 export class ProfileSettings {
+    @Input() profileDetails!: ProfileDetailsResponse;
     defaultAvator = 'assets/images/profile.png';
     imagePreview = this.defaultAvator;
-    profileDetails!: ProfileDetailsResponse;
     profileForm!: FormGroup;
     selectedFile: File | null = null;
     hasProfilePhoto!: boolean;
@@ -45,9 +45,11 @@ export class ProfileSettings {
         private confirmationService: ConfirmationService
     ) { }
 
-    ngOnInit() {
-        this.loadProfileDetails();
+    ngOnChanges() {
         this.initializeForm();
+        this.imagePreview = this.profileDetails?.profilePictureUrl || this.defaultAvator;
+        this.hasProfilePhoto = this.profileDetails.profilePictureUrl ? true : false;
+        this.setInitialFormData();
     }
 
     initializeForm(): void {
@@ -57,27 +59,6 @@ export class ProfileSettings {
             bio: [''],
             dateOfBirth: ['']
         });
-    }
-
-    loadProfileDetails(): void {
-        this.accountService.GetProfileDetailsAsync()
-            .subscribe({
-                next: (response) => {
-                    if (response.isSuccess && response.data) {
-                        this.profileDetails = response.data;
-                        this.imagePreview = this.profileDetails?.profilePictureUrl || this.defaultAvator;
-                        this.hasProfilePhoto = this.profileDetails.profilePictureUrl ? true : false;
-                        this.setInitialFormData();
-                    }
-                },
-                error: (response) => {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'error',
-                        detail: response.error.Message
-                    });
-                }
-            });
     }
 
     SaveProfileSettings(): void {
@@ -110,6 +91,7 @@ export class ProfileSettings {
                     }
                 },
                 error: (response) => {
+                    console.log('error',response);
                     this.messageService.add({
                         severity: 'error',
                         summary: 'error',

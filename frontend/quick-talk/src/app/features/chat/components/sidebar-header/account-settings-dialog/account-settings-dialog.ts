@@ -7,12 +7,12 @@ import { PrivacySettings } from './privacy-settings/privacy-settings';
 import { PrivacySettingsResponse } from '../../../../../core/models/account/privacy-settings';
 import { AccountSettingsService } from '../../../../../core/services/accountSettings/account-settings-service';
 import { ButtonModule } from 'primeng/button';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Signalr } from '../../../../../core/services/signalr/signalr';
 import { TokenService } from '../../../../../core/services/token/token-service';
 import { Router, RouterLink } from '@angular/router';
-
+import { ProfileDetailsResponse } from '../../../../../core/models/account/profile-details-response';
 
 @Component({
     selector: 'app-account-settings-dialog',
@@ -33,11 +33,13 @@ import { Router, RouterLink } from '@angular/router';
 export class AccountSettingsDialog {
     @Output() close = new EventEmitter<void>();
     privacySettings!: PrivacySettingsResponse;
+    profileSettingsDetails!: ProfileDetailsResponse;
     readonly SettingsTab = SettingsTab;
 
     constructor(
         private settingsService: AccountSettingsService,
         private confirmationService: ConfirmationService,
+        private messageService: MessageService,
         private signalrService: Signalr,
         private tokenService: TokenService,
         private router: Router
@@ -67,6 +69,7 @@ export class AccountSettingsDialog {
 
     ngOnInit() {
         this.loadPrivacySettingsAsync();
+        this.loadProfileDetailsAsync();
     }
 
     closeDialog(): void {
@@ -80,8 +83,33 @@ export class AccountSettingsDialog {
                     if (response.isSuccess && response.data) {
                         this.privacySettings = response.data
                     }
+                },
+                error: (response) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: response.error.Message
+                    });
                 }
             })
+    }
+
+    loadProfileDetailsAsync():void{
+        this.settingsService.GetProfileDetailsAsync()
+            .subscribe({
+                next: (response) => {
+                    if(response.isSuccess && response.data){
+                        this.profileSettingsDetails = response.data;
+                    }
+                },
+                error: (response) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: response.error.Message
+                    });
+                }
+            });
     }
 
     confirmLogout(): void {
