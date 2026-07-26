@@ -1,6 +1,6 @@
 <div class="grid" (click)="selectedChat()">
     <div class="col-2">
-        <div class="avator-container">
+        <div class="avator-container" (click)="showChatItemProfileCard()">
             <ng-container *ngIf="chatItem?.profileImageUrl; else initialAvator">
                 <img class="profile-image" [src]="chatItem?.profileImageUrl">
             </ng-container>
@@ -31,3 +31,8 @@
         </div>
     </div>
 </div>
+
+<p-dialog [(visible)]="displayChatItemProfileCard" [modal]="true" [draggable]="false" [closable]="false"
+    [resizable]="false" [style]="{ width: '450px' }">
+    <app-chat-item-profile-card (close)="displayChatItemProfileCard = false"></app-chat-item-profile-card>
+</p-dialog>

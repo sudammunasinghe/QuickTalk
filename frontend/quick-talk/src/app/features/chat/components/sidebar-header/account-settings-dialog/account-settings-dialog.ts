@@ -68,12 +68,31 @@ export class AccountSettingsDialog {
     selectedTab = SettingsTab.Profile;
 
     ngOnInit() {
-        this.loadPrivacySettingsAsync();
-        this.loadProfileDetailsAsync();
+        // this.loadPrivacySettingsAsync();
+        // this.loadProfileDetailsAsync();
+        this.loadSelectedTabData(this.selectedTab);
     }
 
     closeDialog(): void {
         this.close.emit();
+    }
+
+    onTabChange(tab: SettingsTab): void{
+        this.selectedTab = tab;
+        this.loadSelectedTabData(tab);
+    }
+
+    loadSelectedTabData(tab: SettingsTab): void {
+        switch(tab){
+            case SettingsTab.Profile:
+                if(!this.profileSettingsDetails)
+                    this.loadProfileDetailsAsync();
+                break;
+            case SettingsTab.Privacy:
+                if(!this.privacySettings)
+                    this.loadPrivacySettingsAsync()
+                break;
+        }
     }
 
     loadPrivacySettingsAsync(): void {
@@ -94,11 +113,11 @@ export class AccountSettingsDialog {
             })
     }
 
-    loadProfileDetailsAsync():void{
+    loadProfileDetailsAsync(): void {
         this.settingsService.GetProfileDetailsAsync()
             .subscribe({
                 next: (response) => {
-                    if(response.isSuccess && response.data){
+                    if (response.isSuccess && response.data) {
                         this.profileSettingsDetails = response.data;
                     }
                 },

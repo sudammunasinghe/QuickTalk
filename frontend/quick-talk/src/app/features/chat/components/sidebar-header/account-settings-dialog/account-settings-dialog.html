@@ -17,7 +17,7 @@
                 <div class="col-4">
                     <div class="settings-sidebar">
                         <div class="nav-item" *ngFor="let tab of tabs" [class.active]="selectedTab === tab.value"
-                            (click)="selectedTab = tab.value">
+                            (click)="onTabChange(tab.value)">
 
                             <div class="nav-header">
                                 <i [class]="tab.icon"></i>
