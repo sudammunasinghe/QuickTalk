@@ -10,5 +10,7 @@ export interface ChatItemResponse {
     showBio: boolean,
     profileImageUrl: string | null,
     unreadCount: number,
-    isOnline: boolean
+    isOnline: boolean,
+    bio: string,
+    registeredDateTime: string
 }

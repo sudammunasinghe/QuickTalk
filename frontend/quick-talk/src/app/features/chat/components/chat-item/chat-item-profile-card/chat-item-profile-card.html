@@ -6,12 +6,20 @@
     <div class="profile-header">
         <div class="profile-avatar-wrapper">
             <div class="profile-avatar">
-                SA
+                <ng-container *ngIf="chatItemDetails?.profileImageUrl; else initialAvator">
+                    <img class="profile-card-image" [src]="chatItemDetails?.profileImageUrl">
+                </ng-container>
+
+                <ng-template #initialAvator>
+                    <div class="profile-card-avatar-placeholder">
+                        {{ getInitials() }}
+                    </div>
+                </ng-template>
             </div>
             <span class="online-indicator"></span>
         </div>
 
-        <h2 class="profile-name">Sarah Anderson</h2>
+        <h2 class="profile-name">{{ chatItemDetails?.firstName }} {{ chatItemDetails?.lastName }}</h2>
         <span class="profile-username">
             @sarah_a
         </span>
@@ -38,7 +46,7 @@
             <div class="info-content">
                 <span class="info-label">BIO</span>
                 <span class="info-value">
-                    Hey there! I am using Quick Chat 👋
+                    {{ chatItemDetails?.bio }}
                 </span>
             </div>
         </div>
@@ -51,7 +59,7 @@
             <div class="info-content">
                 <span class="info-label">MEMBER SINCE</span>
                 <span class="info-value">
-                    January 2024
+                    {{ chatItemDetails?.registeredDateTime | date:'MMMM yyyy' }}
                 </span>
             </div>
         </div>
@@ -64,7 +72,7 @@
             <div class="info-content">
                 <span class="info-label">LAST SEEN</span>
                 <span class="info-value">
-                    Active now
+                    {{ chatItemDetails?.lastMessageDisplayTime }}
                 </span>
             </div>
         </div>

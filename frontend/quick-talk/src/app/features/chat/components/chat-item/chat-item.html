@@ -34,5 +34,5 @@
 
 <p-dialog [(visible)]="displayChatItemProfileCard" [modal]="true" [draggable]="false" [closable]="false"
     [resizable]="false" [style]="{ width: '450px' }">
-    <app-chat-item-profile-card (close)="displayChatItemProfileCard = false"></app-chat-item-profile-card>
+    <app-chat-item-profile-card [chatItemDetails]="chatItem" (close)="displayChatItemProfileCard = false"></app-chat-item-profile-card>
 </p-dialog>
