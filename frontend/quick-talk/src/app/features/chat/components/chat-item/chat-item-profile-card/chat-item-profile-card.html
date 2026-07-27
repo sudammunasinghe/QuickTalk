@@ -4,9 +4,9 @@
     </div>
 
     <div class="profile-header">
-        <div class="profile-avatar-wrapper">
+        <div class="profile-avatar-wrapper" [ngClass]="chatItemDetails?.showOnlineStatus ? getStatus(chatItemDetails.userId) : ''">
             <div class="profile-avatar">
-                <ng-container *ngIf="chatItemDetails?.profileImageUrl; else initialAvator">
+                <ng-container *ngIf="chatItemDetails?.profileImageUrl && chatItemDetails?.showProfilePicture; else initialAvator">
                     <img class="profile-card-image" [src]="chatItemDetails?.profileImageUrl">
                 </ng-container>
 
@@ -16,7 +16,8 @@
                     </div>
                 </ng-template>
             </div>
-            <span class="online-indicator"></span>
+            <span class="online-indicator" [ngStyle]="{ backgroundColor: getStatusColor(chatItemDetails.userId) }"
+                *ngIf="chatItemDetails?.showOnlineStatus"></span>
         </div>
 
         <h2 class="profile-name">{{ chatItemDetails?.firstName }} {{ chatItemDetails?.lastName }}</h2>
@@ -24,14 +25,15 @@
             @sarah_a
         </span>
 
-        <div class="online-status">
-            <span class="status-dot"></span>
-            <span>Online</span>
+        <div class="status-text" *ngIf="chatItemDetails?.showOnlineStatus">
+            <span class="status-dot" [ngStyle]="{ backgroundColor: getStatusColor(chatItemDetails.userId) }"></span>
+            <span class="status-label" [ngStyle]="{ color: getStatusColor(chatItemDetails.userId) }">{{
+                getStatus(chatItemDetails.userId) }}</span>
         </div>
     </div>
 
     <div class="action-section">
-        <button type="button" class="send-message-btn">
+        <button type="button" class="send-message-btn" (click)="selectedChat()">
             <i class="pi pi-comment"></i>
             <span>Send Message</span>
         </button>
@@ -46,7 +48,7 @@
             <div class="info-content">
                 <span class="info-label">BIO</span>
                 <span class="info-value">
-                    {{ chatItemDetails?.bio }}
+                    {{ chatItemDetails?.bio && chatItemDetails?.bio !== 'null' ? chatItemDetails?.bio : '-'}}
                 </span>
             </div>
         </div>
@@ -72,7 +74,7 @@
             <div class="info-content">
                 <span class="info-label">LAST SEEN</span>
                 <span class="info-value">
-                    {{ chatItemDetails?.lastMessageDisplayTime }}
+                    {{ chatItemDetails?.showLastSeen ? chatItemDetails?.lastMessageDisplayTime : '-' }}
                 </span>
             </div>
         </div>

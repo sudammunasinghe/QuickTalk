@@ -1,4 +1,4 @@
-<div class="grid" (click)="selectedChat()">
+<div class="grid">
     <div class="col-2">
         <div class="avator-container" (click)="showChatItemProfileCard()">
             <ng-container *ngIf="chatItem?.profileImageUrl; else initialAvator">
@@ -16,7 +16,7 @@
             </span>
         </div>
     </div>
-    <div class="col-10">
+    <div class="col-10" (click)="selectedChat()">
         <div class="chat-header">
             <h4>{{ chatItem?.firstName }} {{ chatItem?.lastName }}</h4>
             <span class="time">{{ chatItem?.lastMessageDisplayTime }}</span>
@@ -34,5 +34,6 @@
 
 <p-dialog [(visible)]="displayChatItemProfileCard" [modal]="true" [draggable]="false" [closable]="false"
     [resizable]="false" [style]="{ width: '450px' }">
-    <app-chat-item-profile-card [chatItemDetails]="chatItem" (close)="displayChatItemProfileCard = false"></app-chat-item-profile-card>
+    <app-chat-item-profile-card [chatItemDetails]="chatItem"
+        (close)="displayChatItemProfileCard = false"></app-chat-item-profile-card>
 </p-dialog>
