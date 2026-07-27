@@ -47,7 +47,9 @@ SELECT
         WHERE CM.ConversationUserId = US.Id
           AND CM.ReceiverId = @LoggedUserId
           AND CM.IsRead = 0
-    ) AS UnreadCount
+    ) AS UnreadCount,
+	US.[Bio],
+	US.[CreatedDateTime] [RegisteredDateTime]
 FROM LastMessages LM
 	INNER JOIN [dbo].[Users] US ON LM.[ConversationUserId] = US.[Id]
 	INNER JOIN [dbo].[UserPrivacySettings] PS ON US.[Id] = PS.[UserId]

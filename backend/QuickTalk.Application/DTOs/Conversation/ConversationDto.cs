@@ -14,5 +14,7 @@
         public string ProfileImageUrl { get; set; }
         public int UnreadCount { get; set; }
         public bool IsOnline { get; set; }
+        public string? Bio { get; set; }
+        public DateTime RegisteredDateTime { get; set; }
     }
 }
