@@ -1,8 +1,8 @@
-<div class="grid">
+<div class="grid" (click)="selectedChat()">
     <div class="col-2">
         <div class="user-item-avator-conatiner">
-            <ng-container *ngIf="user?.profilePictureUrl; else initialAvator">
-                <img [src]="user?.profilePictureUrl" class="profile-image">
+            <ng-container *ngIf="chatItem?.profileImageUrl; else initialAvator">
+                <img [src]="chatItem?.profileImageUrl" class="profile-image">
             </ng-container>
 
             <ng-template #initialAvator>
@@ -10,16 +10,16 @@
                     {{ getInitials() }}
                 </div>
             </ng-template>
-            <span class="user-item-online-indicator" [ngStyle]="{ backgroundColor: getStatusColor(user.id) }">
+            <span class="user-item-online-indicator" [ngStyle]="{ backgroundColor: getStatusColor(chatItem.userId) }">
             </span>
         </div>
     </div>
     <div class="col-10 user-text">
         <div class="user-item-name">
-            <h4>{{ user?.firstName }} {{ user?.lastName }}</h4>
+            <h4>{{ chatItem?.firstName }} {{ chatItem?.lastName }}</h4>
         </div>
         <div class="user-item-status">
-            <h5 [ngStyle]="{ color: getStatusColor(user.id) }">{{ getStatusText(user.id) }}</h5>
+            <h5 [ngStyle]="{ color: getStatusColor(chatItem.userId) }">{{ getStatusText(chatItem.userId) }}</h5>
         </div>
     </div>
 </div>

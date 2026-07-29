@@ -3,28 +3,19 @@
         <i class="pi pi-users"></i>
         <h2>Find People</h2>
     </div>
-    <button
-        pButton
-        type="button"
-        icon="pi pi-times"
-        class="p-button-text"
-        (click)="closeDialog()"
-    ></button>
+    <button pButton type="button" icon="pi pi-times" class="p-button-text" (click)="closeDialog()"></button>
 </div>
 <div class="search-container">
     <span class="p-input-icon-left search-wrapper w-full">
-            <i class="pi pi-search"></i>
-            <input 
-                pInputText type="text" 
-                class="w-full search-input" 
-                placeholder="Search conversations..." 
-                (input)="onSearch($event)"/>
-        </span>
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" class="w-full search-input" placeholder="Search conversations..."
+            (input)="onSearch($event)" />
+    </span>
 </div>
 <div class="result-header">
     <span class="result-count">{{ peopleCount }} USERS FOUND</span>
     <span class="result-text">Tap to start a chat</span>
 </div>
 <div class="user-list">
-    <app-user-item *ngFor="let suggestedUser of filteredPeople" [user]="suggestedUser"></app-user-item>
+    <app-user-item *ngFor="let suggestedUser of filteredPeople" [chatItem]="suggestedUser"></app-user-item>
 </div>
