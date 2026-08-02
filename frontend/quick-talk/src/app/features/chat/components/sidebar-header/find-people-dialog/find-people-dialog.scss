@@ -1,4 +1,3 @@
-/* ===== Host / Dialog Container ===== */
 :host {
     display: block;
     border-radius: 16px;
@@ -6,12 +5,11 @@
     font-family: system-ui, sans-serif;
 }
 
-/* ===== HEADER (Purple) ===== */
 .dialog-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 24px 18px; /* reduce bottom padding */
+    padding: 18px 24px 18px;
     background: #4F46E5;
     color: #fff;
 }
@@ -33,29 +31,33 @@
     font-weight: 600;
 }
 
-/* Close button */
-.dialog-header button {
-    color: #fff !important;
+.find-people-close-btn button {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: #4F46E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-:host ::ng-deep .p-button .pi {
-    font-size: 1.1rem;
-    color: #ffffff; /* for purple header */
-}
-
-:host ::ng-deep .p-button-text {
+.find-people-close-btn button::before {
+    content: "×";
+    font-size: 1.2rem;
     color: #ffffff;
 }
 
-/* ===== SEARCH SECTION (Purple) ===== */
+.find-people-close-btn button:hover {
+    background: #8883ee;
+}
+
 .search-container {
     width: 100%;
     background-color: #4F46E5;
-
-    /* 👇 add padding so input doesn't touch edges */
     padding: 0 24px 24px 24px;
-
-    /* 👇 helps blend with header */
     margin-top: -1px;
 }
 
@@ -65,8 +67,6 @@
     display: block;
 }
 
-
-/* Input styling */
 .search-input {
     width: 100%;
     height: 44px;
@@ -81,7 +81,6 @@
     margin-bottom: 0;
 }
 
-/* Focus effect */
 .search-input:focus {
     border-color: #4F46E5;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
@@ -92,7 +91,6 @@
     opacity: 1;
 }
 
-/* ICON INSIDE INPUT */
 :host ::ng-deep .p-input-icon-left>i {
     position: absolute;
     left: 0.75rem;
@@ -101,7 +99,7 @@
     color: #c4c4c4;
     pointer-events: none;
 }
-/* ===== RESULT HEADER (White area) ===== */
+
 .result-header {
     display: flex;
     justify-content: space-between;
@@ -110,11 +108,8 @@
     letter-spacing: 0.5px;
     text-transform: uppercase;
     background: #ffffff;
-
-    /* 👇 smoother transition from purple */
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
-
     border-bottom: 1px solid #f1f1f1;
     color: #6b7280;
 }
@@ -128,7 +123,6 @@
     font-style: italic;
 }
 
-/* ===== USER LIST (White area) ===== */
 .user-list {
     background: #ffffff;
     max-height: 420px;
@@ -136,7 +130,6 @@
     padding: 8px 0;
 }
 
-/* scrollbar */
 .user-list::-webkit-scrollbar {
     width: 6px;
 }
