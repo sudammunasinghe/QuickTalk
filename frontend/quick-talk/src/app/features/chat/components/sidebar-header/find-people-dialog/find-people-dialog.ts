@@ -33,6 +33,11 @@ export class FindPeopleDialog {
         this.close.emit();
     }
 
+    onNewChatSelected(isSelected: boolean) {
+        if (isSelected)
+            this.closeDialog();
+    }
+
     loadPeopleToChat(): void {
         this.userService.getPeopleToChat()
             .subscribe({

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Signalr } from '../../../../../../core/services/signalr/signalr';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../../../../../../core/services/chat/chat-service';
@@ -15,6 +15,7 @@ import { ChatItemResponse } from '../../../../../../core/models/chat/chat-item-r
 })
 export class UserItem {
     @Input() chatItem!: ChatItemResponse;
+    @Output() newChatSelected = new EventEmitter<boolean>();
     constructor(
         private realTimeService: Signalr,
         private chatService: ChatService,
@@ -49,5 +50,6 @@ export class UserItem {
                     lastSeen
                 );
             });
+        this.newChatSelected.emit(true);
     }
 }
