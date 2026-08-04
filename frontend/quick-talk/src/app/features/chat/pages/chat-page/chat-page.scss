@@ -1,5 +1,22 @@
 .chat-page {
     height: 100vh;
+    overflow: hidden;
+}
+
+.col-3 {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar-header {
+    flex-shrink: 0;
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .chat-container {
