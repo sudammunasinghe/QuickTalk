@@ -17,4 +17,8 @@
     <ProjectReference Include="..\QuickTalk.Infrastructure\QuickTalk.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

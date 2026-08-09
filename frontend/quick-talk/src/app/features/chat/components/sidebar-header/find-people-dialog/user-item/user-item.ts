@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Signalr } from '../../../../../../core/services/signalr/signalr';
 import { CommonModule } from '@angular/common';
-import { UserDetails } from '../../../../../../core/models/user/user-details';
+import { ChatService } from '../../../../../../core/services/chat/chat-service';
+import { UserService } from '../../../../../../core/services/user/user-service';
+import { ChatItemResponse } from '../../../../../../core/models/chat/chat-item-response';
 
 @Component({
     selector: 'app-user-item',
@@ -12,15 +14,18 @@ import { UserDetails } from '../../../../../../core/models/user/user-details';
     styleUrl: './user-item.scss',
 })
 export class UserItem {
-    @Input() user!: UserDetails;
+    @Input() chatItem!: ChatItemResponse;
+    @Output() newChatSelected = new EventEmitter<boolean>();
     constructor(
-        private realTimeService: Signalr
+        private realTimeService: Signalr,
+        private chatService: ChatService,
+        private userService: UserService
     ) { }
 
     getInitials(): string {
         return (
-            (this.user?.firstName?.charAt(0) ?? '') +
-            (this.user?.lastName.charAt(0) ?? '')
+            (this.chatItem?.firstName?.charAt(0) ?? '') +
+            (this.chatItem?.lastName.charAt(0) ?? '')
         ).toUpperCase();
     }
 
@@ -34,5 +39,17 @@ export class UserItem {
     getStatusText(userId: number): string {
         const status = this.realTimeService.getStatus(userId.toString());
         return status;
+    }
+
+    selectedChat() {
+        this.chatService.setselectedChat(this.chatItem);
+        this.userService.getLastSeen(this.chatItem.userId)
+            .subscribe(lastSeen => {
+                this.realTimeService.setLastSeen(
+                    this.chatItem.userId.toString(),
+                    lastSeen
+                );
+            });
+        this.newChatSelected.emit(true);
     }
 }

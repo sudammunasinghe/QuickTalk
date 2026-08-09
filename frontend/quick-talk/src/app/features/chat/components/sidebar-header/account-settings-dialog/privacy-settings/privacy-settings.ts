@@ -6,9 +6,9 @@ import { PrivacySettingsResponse } from '../../../../../../core/models/account/p
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AccountSettingsService } from '../../../../../../core/services/accountSettings/account-settings-service';
-import { PrivacySettingsRequest } from '../../../../../../core/models/account/privacy-settings-request';
 import { PrivacyOptions } from '../../../../../../core/enums/privacy-options';
 import { MessageService } from 'primeng/api';
+import { PrivacySettingsRequest } from '../../../../../../core/models/account/privacy-settings-request';
 
 @Component({
     selector: 'app-privacy-settings',
@@ -34,7 +34,7 @@ export class PrivacySettings {
         private messageService: MessageService
     ) { }
 
-    ngOnInit() {
+    ngOnChanges() {
         this.privacies = [
             {
                 key: PrivacyOptions.ShowProfile,

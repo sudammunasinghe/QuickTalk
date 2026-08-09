@@ -1,1 +1,62 @@
-<p>profile-settings works!</p>
+<div class="grid">
+    <div class="col-12">
+        <div class="profile-header">
+            <h3>Edit Profile</h3>
+            <span>Update your personal information and photo</span>
+        </div>
+        <div class="profile-form-container">
+            <form [formGroup]="profileForm">
+                <div class="profile-picture-container">
+                    <div class="profile-image-wrapper">
+                        <ng-container *ngIf="hasProfilePhoto; else initialsAvator">
+                            <img class="profile-image" [src]="imagePreview">
+                        </ng-container>
+
+                        <ng-template #initialsAvator>
+                            <div class="avatar-placeholder">
+                                {{ getInitials() }}
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="image-btns">
+                        <p-button label="Upload Photo" icon="pi pi-upload" severity="primary"
+                            (onClick)="fileInput.click()" styleClass="upload-photo-btn">
+                        </p-button>
+
+                        <ng-container *ngIf="hasProfilePhoto; else noPhoto">
+                            <p-button label="Delete Photo" icon="pi pi-trash" severity="danger" [text]="true"
+                                (onClick)="confirmDelete()" styleClass="delete-photo-btn">
+                            </p-button>
+                        </ng-container>
+
+                        <ng-template #noPhoto>
+                            <p-button label="No Photo Set" icon="pi pi-image" [disabled]="true"
+                                styleClass="no-photo-btn">
+                            </p-button>
+                        </ng-template>
+                    </div>
+                    <input #fileInput type="file" accept="image/*" hidden (change)="onImageSelect($event)">
+
+                </div>
+                <div class="profile-field">
+                    <label>First Name</label>
+                    <input pInputText type="name" formControlName="firstName">
+                </div>
+                <div class="profile-field">
+                    <label>Last Name</label>
+                    <input pInputText type="name" formControlName="lastName">
+                </div>
+                <div class="profile-field">
+                    <label>Date of Birth</label>
+                    <input pInputText type="date" formControlName="dateOfBirth">
+                </div>
+                <div class="profile-field">
+                    <label>Bio</label>
+                    <textarea pTextarea formControlName="bio"></textarea>
+                </div>
+                <p-button type="submit" label="Save Changes" (onClick)="SaveProfileSettings()"></p-button>
+            </form>
+        </div>
+    </div>
+</div>
+<p-confirmdialog></p-confirmdialog>

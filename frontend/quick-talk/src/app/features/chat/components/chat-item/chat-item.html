@@ -1,21 +1,22 @@
-<div class="grid" (click)="selectedChat()">
+<div class="grid">
     <div class="col-2">
-        <div class="avator-container">
-            <!-- <img
-                [src]=""
-                [alt]=""
-                class="avator"
-            > -->
-            <div class="avatar-placeholder">
-                {{ getInitials() }}
-            </div>
-            <span 
-                class="online-indicator"
-                [ngClass]="getStatusText(chatItem.userId)">
+        <div class="avator-container" (click)="showChatItemProfileCard()">
+            <ng-container *ngIf="chatItem?.profileImageUrl; else initialAvator">
+                <img class="profile-image" [src]="chatItem?.profileImageUrl">
+            </ng-container>
+
+            <ng-template #initialAvator>
+                <div class="avatar-placeholder">
+                    {{ getInitials() }}
+                </div>
+            </ng-template>
+
+            <span class="online-indicator" [ngClass]="getStatusText(chatItem.userId)"
+                *ngIf="chatItem?.showOnlineStatus">
             </span>
         </div>
     </div>
-    <div class="col-10">
+    <div class="col-10" (click)="selectedChat()">
         <div class="chat-header">
             <h4>{{ chatItem?.firstName }} {{ chatItem?.lastName }}</h4>
             <span class="time">{{ chatItem?.lastMessageDisplayTime }}</span>
@@ -30,3 +31,9 @@
         </div>
     </div>
 </div>
+
+<p-dialog [(visible)]="displayChatItemProfileCard" [modal]="true" [draggable]="false" [closable]="false"
+    [resizable]="false" [style]="{ width: '450px' }">
+    <app-chat-item-profile-card [chatItemDetails]="chatItem"
+        (close)="displayChatItemProfileCard = false"></app-chat-item-profile-card>
+</p-dialog>

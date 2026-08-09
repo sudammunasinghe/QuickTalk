@@ -1,4 +1,5 @@
-﻿using QuickTalk.Application.DTOs.User;
+﻿using QuickTalk.Application.DTOs.Conversation;
+using QuickTalk.Application.DTOs.User;
 using QuickTalk.Application.Exceptions;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
@@ -9,10 +10,12 @@ namespace QuickTalk.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ICurrentUser _currentUser;
-        public UserService(IUserRepository userRepository, ICurrentUser currentUser)
+        private readonly IFileService _fileService;
+        public UserService(IUserRepository userRepository, ICurrentUser currentUser, IFileService fileService)
         {
             _userRepository = userRepository;
             _currentUser = currentUser;
+            _fileService = fileService;
         }
 
         public async Task<UserDto> GetCurrentUserAsync()
@@ -53,19 +56,16 @@ namespace QuickTalk.Application.Services
             };
         }
 
-        public async Task<IEnumerable<UserDto>> GetPeopleToChat()
+        public async Task<IEnumerable<ConversationDto>> GetPeopleToChat()
         {
             var loggedUser = _currentUser.UserId;
             var userDetails =
                 await _userRepository.GetPeopleToChat(loggedUser);
 
-            return userDetails.Select(user => new UserDto
+            return userDetails.Select(con =>
             {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                DateOfBirth = user.DateOfBirth
+                con.ProfileImageUrl = _fileService.GetFileUrl(con.ProfileImageUrl);
+                return con;
             });
         }
     }

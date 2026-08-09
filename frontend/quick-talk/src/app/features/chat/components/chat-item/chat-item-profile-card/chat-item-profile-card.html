@@ -1,0 +1,108 @@
+<div class="profile-dialog">
+    <div class="profile-card-close-btn">
+        <button (click)="closeProfileCard()"></button>
+    </div>
+
+    <div class="profile-header">
+        <div class="profile-avatar-wrapper" [ngClass]="chatItemDetails?.showOnlineStatus ? getStatus(chatItemDetails.userId) : ''">
+            <div class="profile-avatar">
+                <ng-container *ngIf="chatItemDetails?.profileImageUrl && chatItemDetails?.showProfilePicture; else initialAvator">
+                    <img class="profile-card-image" [src]="chatItemDetails?.profileImageUrl">
+                </ng-container>
+
+                <ng-template #initialAvator>
+                    <div class="profile-card-avatar-placeholder">
+                        {{ getInitials() }}
+                    </div>
+                </ng-template>
+            </div>
+            <span class="online-indicator" [ngStyle]="{ backgroundColor: getStatusColor(chatItemDetails.userId) }"
+                *ngIf="chatItemDetails?.showOnlineStatus"></span>
+        </div>
+
+        <h2 class="profile-name">{{ chatItemDetails?.firstName }} {{ chatItemDetails?.lastName }}</h2>
+        <span class="profile-username">
+            @sarah_a
+        </span>
+
+        <div class="status-text" *ngIf="chatItemDetails?.showOnlineStatus">
+            <span class="status-dot" [ngStyle]="{ backgroundColor: getStatusColor(chatItemDetails.userId) }"></span>
+            <span class="status-label" [ngStyle]="{ color: getStatusColor(chatItemDetails.userId) }">{{
+                getStatus(chatItemDetails.userId) }}</span>
+        </div>
+    </div>
+
+    <div class="action-section">
+        <button type="button" class="send-message-btn" (click)="selectedChat()">
+            <i class="pi pi-comment"></i>
+            <span>Send Message</span>
+        </button>
+    </div>
+
+    <div class="profile-info">
+        <div class="info-item">
+            <div class="info-icon bio-icon">
+                <i class="pi pi-book"></i>
+            </div>
+
+            <div class="info-content">
+                <span class="info-label">BIO</span>
+                <span class="info-value">
+                    {{ chatItemDetails?.bio && chatItemDetails?.bio !== 'null' ? chatItemDetails?.bio : '-'}}
+                </span>
+            </div>
+        </div>
+
+        <div class="info-item">
+            <div class="info-icon member-icon">
+                <i class="pi pi-calendar"></i>
+            </div>
+
+            <div class="info-content">
+                <span class="info-label">MEMBER SINCE</span>
+                <span class="info-value">
+                    {{ chatItemDetails?.registeredDateTime | date:'MMMM yyyy' }}
+                </span>
+            </div>
+        </div>
+
+        <div class="info-item">
+            <div class="info-icon last-seen-icon">
+                <i class="pi pi-clock"></i>
+            </div>
+
+            <div class="info-content">
+                <span class="info-label">LAST SEEN</span>
+                <span class="info-value">
+                    {{ chatItemDetails?.showLastSeen ? chatItemDetails?.lastMessageDisplayTime : '-' }}
+                </span>
+            </div>
+        </div>
+
+        <div class="info-item shared-media-item">
+            <div class="info-icon media-icon">
+                <i class="pi pi-image"></i>
+            </div>
+
+            <div class="info-content">
+                <span class="info-label">SHARED MEDIA</span>
+                <span class="info-value">
+                    24 photos & files
+                </span>
+            </div>
+            <i class="pi pi-angle-right media-arrow"></i>
+        </div>
+    </div>
+
+    <div class="secondary-actions">
+        <button type="button" class="secondary-action mute-action">
+            <i class="pi pi-bell"></i>
+            <span>Mute Notifications</span>
+        </button>
+
+        <button type="button" class="secondary-action block-action">
+            <i class="pi pi-ban"></i>
+            <span>Block User</span>
+        </button>
+    </div>
+</div>

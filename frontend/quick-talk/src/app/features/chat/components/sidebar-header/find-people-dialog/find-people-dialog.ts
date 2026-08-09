@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UserItem } from '../find-people-dialog/user-item/user-item';
 import { UserService } from '../../../../../core/services/user/user-service';
-import { UserDetails } from '../../../../../core/models/user/user-details';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'primeng/api';
+import { ChatItemResponse } from '../../../../../core/models/chat/chat-item-response';
 
 @Component({
     selector: 'app-find-people-dialog',
@@ -17,8 +17,8 @@ import { MessageService } from 'primeng/api';
 })
 export class FindPeopleDialog {
     @Output() close = new EventEmitter<void>();
-    discoveredPeople!: UserDetails[];
-    filteredPeople!: UserDetails[];
+    discoveredPeople!: ChatItemResponse[];
+    filteredPeople!: ChatItemResponse[];
     peopleCount = 0;
     constructor(
         private userService: UserService,
@@ -31,6 +31,11 @@ export class FindPeopleDialog {
 
     closeDialog(): void {
         this.close.emit();
+    }
+
+    onNewChatSelected(isSelected: boolean) {
+        if (isSelected)
+            this.closeDialog();
     }
 
     loadPeopleToChat(): void {

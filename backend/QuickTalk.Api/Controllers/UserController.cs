@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickTalk.Application.DTOs.ApiResponse;
+using QuickTalk.Application.DTOs.Conversation;
 using QuickTalk.Application.DTOs.User;
 using QuickTalk.Application.Interfaces.IServices;
 
@@ -49,10 +50,10 @@ namespace QuickTalk.Api.Controllers
         }
 
         [HttpGet("discover")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<UserDto>>>> GetPeopleToChat()
+        public async Task<ActionResult<ApiResponse<IEnumerable<ConversationDto>>>> GetPeopleToChat()
         {
             var result = await _userService.GetPeopleToChat();
-            return Ok(new ApiResponse<IEnumerable<UserDto>>
+            return Ok(new ApiResponse<IEnumerable<ConversationDto>>
             {
                 IsSuccess = true,
                 Data = result,

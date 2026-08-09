@@ -1,4 +1,5 @@
-﻿using QuickTalk.Application.DTOs.Conversation;
+﻿using Microsoft.AspNetCore.Http;
+using QuickTalk.Application.DTOs.Conversation;
 using QuickTalk.Application.Exceptions;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Application.Interfaces.IServices;
@@ -11,15 +12,18 @@ namespace QuickTalk.Application.Services
         private readonly IConversationRepository _conversationRepository;
         private readonly ICurrentUser _currentUser;
         private readonly IChatNotifier _chatNotifier;
+        private readonly IFileService _fileService;
         public ConversationService(
             IConversationRepository conversationRepository,
             ICurrentUser currentUser,
-            IChatNotifier chatNotifier
+            IChatNotifier chatNotifier,
+            IFileService fileService
             )
         {
             _conversationRepository = conversationRepository;
             _currentUser = currentUser;
             _chatNotifier = chatNotifier;
+            _fileService = fileService;
         }
 
         public async Task SendMessageAsync(SendMessageDto dto)
@@ -82,7 +86,14 @@ namespace QuickTalk.Application.Services
         public async Task<IEnumerable<ConversationDto>> GetConversationsAsync()
         {
             var loggedUser = _currentUser.UserId;
-            return await _conversationRepository.GetConversationsAsync(loggedUser);
+            var conversations = 
+                await _conversationRepository.GetConversationsAsync(loggedUser);
+
+            return conversations.Select(con =>
+            {
+                con.ProfileImageUrl = _fileService.GetFileUrl(con.ProfileImageUrl);
+                return con;
+            });
         }
 
         public async Task MarkAsReadAsync(int senderId)

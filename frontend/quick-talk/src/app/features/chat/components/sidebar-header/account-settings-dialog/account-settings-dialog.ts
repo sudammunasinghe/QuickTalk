@@ -6,6 +6,13 @@ import { PasswordSettings } from './password-settings/password-settings';
 import { PrivacySettings } from './privacy-settings/privacy-settings';
 import { PrivacySettingsResponse } from '../../../../../core/models/account/privacy-settings';
 import { AccountSettingsService } from '../../../../../core/services/accountSettings/account-settings-service';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { Signalr } from '../../../../../core/services/signalr/signalr';
+import { TokenService } from '../../../../../core/services/token/token-service';
+import { Router, RouterLink } from '@angular/router';
+import { ProfileDetailsResponse } from '../../../../../core/models/account/profile-details-response';
 
 @Component({
     selector: 'app-account-settings-dialog',
@@ -14,18 +21,28 @@ import { AccountSettingsService } from '../../../../../core/services/accountSett
         CommonModule,
         ProfileSettings,
         PasswordSettings,
-        PrivacySettings
+        PrivacySettings,
+        ButtonModule,
+        ConfirmDialogModule,
+        RouterLink
     ],
     templateUrl: './account-settings-dialog.html',
+    providers: [ConfirmationService],
     styleUrl: './account-settings-dialog.scss',
 })
 export class AccountSettingsDialog {
     @Output() close = new EventEmitter<void>();
     privacySettings!: PrivacySettingsResponse;
+    profileSettingsDetails!: ProfileDetailsResponse;
     readonly SettingsTab = SettingsTab;
 
     constructor(
-        private settingsService: AccountSettingsService
+        private settingsService: AccountSettingsService,
+        private confirmationService: ConfirmationService,
+        private messageService: MessageService,
+        private signalrService: Signalr,
+        private tokenService: TokenService,
+        private router: Router
     ) { }
 
     tabs = [
@@ -51,11 +68,31 @@ export class AccountSettingsDialog {
     selectedTab = SettingsTab.Profile;
 
     ngOnInit() {
-        this.loadPrivacySettingsAsync();
+        // this.loadPrivacySettingsAsync();
+        // this.loadProfileDetailsAsync();
+        this.loadSelectedTabData(this.selectedTab);
     }
 
     closeDialog(): void {
         this.close.emit();
+    }
+
+    onTabChange(tab: SettingsTab): void{
+        this.selectedTab = tab;
+        this.loadSelectedTabData(tab);
+    }
+
+    loadSelectedTabData(tab: SettingsTab): void {
+        switch(tab){
+            case SettingsTab.Profile:
+                if(!this.profileSettingsDetails)
+                    this.loadProfileDetailsAsync();
+                break;
+            case SettingsTab.Privacy:
+                if(!this.privacySettings)
+                    this.loadPrivacySettingsAsync()
+                break;
+        }
     }
 
     loadPrivacySettingsAsync(): void {
@@ -65,7 +102,59 @@ export class AccountSettingsDialog {
                     if (response.isSuccess && response.data) {
                         this.privacySettings = response.data
                     }
+                },
+                error: (response) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: response.error.Message
+                    });
                 }
             })
+    }
+
+    loadProfileDetailsAsync(): void {
+        this.settingsService.GetProfileDetailsAsync()
+            .subscribe({
+                next: (response) => {
+                    if (response.isSuccess && response.data) {
+                        this.profileSettingsDetails = response.data;
+                    }
+                },
+                error: (response) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'error',
+                        detail: response.error.Message
+                    });
+                }
+            });
+    }
+
+    confirmLogout(): void {
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to log out?',
+            header: 'Logout',
+            icon: 'pi pi-exclamation-circle',
+            rejectLabel: 'Cancel',
+            rejectButtonProps: {
+                label: 'No',
+                severity: 'secondary',
+                outlined: true
+            },
+            acceptButtonProps: {
+                label: 'Yes',
+                severity: 'danger'
+            },
+            accept: () => {
+                this.logout();
+            }
+        });
+    }
+
+    logout(): void {
+        this.signalrService.stopConnection();
+        this.tokenService.removeToken();
+        this.router.navigate(['/sign-in']);
     }
 }

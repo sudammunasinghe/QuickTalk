@@ -5,6 +5,8 @@
     [Email],
     [PasswordHash],
     [DateOfBirth],
+    [Bio],
+    [ProfileImageUrl],
     [IsOnline],
     [Otp],
     [OtpExpiry],

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../models/apiResponse/api-response';
-import { UserDetails } from '../../models/user/user-details';
+import { ChatItemResponse } from '../../models/chat/chat-item-response';
 
 @Injectable({
     providedIn: 'root',
@@ -18,8 +18,8 @@ export class UserService {
         );
     }
 
-    getPeopleToChat(): Observable<ApiResponse<UserDetails[]>> {
-        return this.http.get<ApiResponse<UserDetails[]>>(
+    getPeopleToChat(): Observable<ApiResponse<ChatItemResponse[]>> {
+        return this.http.get<ApiResponse<ChatItemResponse[]>>(
             `${this.apiUrl}/discover`
         );
     }

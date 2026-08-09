@@ -17,7 +17,7 @@
                 <div class="col-4">
                     <div class="settings-sidebar">
                         <div class="nav-item" *ngFor="let tab of tabs" [class.active]="selectedTab === tab.value"
-                            (click)="selectedTab = tab.value">
+                            (click)="onTabChange(tab.value)">
 
                             <div class="nav-header">
                                 <i [class]="tab.icon"></i>
@@ -28,16 +28,25 @@
                             </div>
                             <span class="nav-description">{{ tab.description }}</span>
                         </div>
+                        <div class="logout-section">
+                            <p-button label="Logout" icon="pi pi-sign-out" styleClass="logout-btn" [outlined]="true"
+                                (onClick)="confirmLogout()">
+                            </p-button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="settings-content">
-                        <app-profile-settings *ngIf="selectedTab === SettingsTab.Profile"></app-profile-settings>
-                        <app-password-settings *ngIf="selectedTab === SettingsTab.Password" (close)="closeDialog()"></app-password-settings>
-                        <app-privacy-settings *ngIf="selectedTab === SettingsTab.Privacy" [privacySettingData]="privacySettings" (close)="closeDialog()"></app-privacy-settings>
+                        <app-profile-settings *ngIf="selectedTab === SettingsTab.Profile"
+                            [profileDetails]="profileSettingsDetails"></app-profile-settings>
+                        <app-password-settings *ngIf="selectedTab === SettingsTab.Password"
+                            (close)="closeDialog()"></app-password-settings>
+                        <app-privacy-settings *ngIf="selectedTab === SettingsTab.Privacy"
+                            [privacySettingData]="privacySettings" (close)="closeDialog()"></app-privacy-settings>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<p-confirmdialog></p-confirmdialog>

@@ -76,6 +76,7 @@
     display: flex;
     flex-direction: column;
     gap: .75rem;
+    height: 100%;
 }
 
 .nav-item {
@@ -146,6 +147,27 @@
 
 .nav-item.active .nav-tick {
     display: flex;
+}
+
+.logout-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+:host ::ng-deep .logout-btn {
+    background: #eef2ff !important;
+    border: 1px solid #eef2ff !important;
+    color: #4F46E5 !important;
+    font-size: .85rem;
+}
+
+:host ::ng-deep .logout-btn:hover {
+    background: #dbe4ff !important;
+    border-color: #dbe4ff !important;
+    color: #4338CA !important;
 }
 
 .settings-content {

@@ -14,6 +14,7 @@ namespace QuickTalk.Infrastructure.Repositories
         private readonly string _Select_UserByEmail;
         private readonly string _Insert_User;
         private readonly string _Update_User;
+        private readonly string _Insert_PrivacySettings;
         public AuthRepository(IDbConnectionFactory connectionFactory, ISqlQueryLoader queryLoader)
         {
             _connectionFactory = connectionFactory;
@@ -21,6 +22,7 @@ namespace QuickTalk.Infrastructure.Repositories
             _Select_UserByEmail = _queryLoader.Load("Auth", "Select_UserByEmail.sql");
             _Insert_User = _queryLoader.Load("Auth", "Insert_User.sql");
             _Update_User = _queryLoader.Load("Auth", "Update_User.sql");
+            _Insert_PrivacySettings = _queryLoader.Load("AccountSettings", "Insert_PrivacySettings.sql");
         }
 
         public async Task<User?> GetUserByEmailAsync(string email)
@@ -35,10 +37,32 @@ namespace QuickTalk.Infrastructure.Repositories
         public async Task<int> RegisterUserAsync(User newUser)
         {
             using var db = _connectionFactory.CreateConnection();
-            return await db.ExecuteScalarAsync<int>(
-                _Insert_User,
-                newUser
-            );
+            db.Open();
+            using var transaction = db.BeginTransaction();
+            try
+            {
+                var userId = await db.ExecuteScalarAsync<int>(
+                    _Insert_User,
+                    newUser,
+                    transaction
+                );
+
+                await db.ExecuteAsync(
+                    _Insert_PrivacySettings,
+                    new
+                    {
+                        UserId = userId
+                    },
+                    transaction
+                );
+                transaction.Commit();
+                return userId;
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public async Task UpdateUserAsync(User updatedUser)

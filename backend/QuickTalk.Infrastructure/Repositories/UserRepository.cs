@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using QuickTalk.Application.DTOs.Conversation;
 using QuickTalk.Application.Interfaces.IRepositories;
 using QuickTalk.Domain.Entities;
 using QuickTalk.Infrastructure.Persistence;
@@ -31,10 +32,10 @@ namespace QuickTalk.Infrastructure.Repositories
             );
         }
 
-        public async Task<IEnumerable<User>> GetPeopleToChat(int userId)
+        public async Task<IEnumerable<ConversationDto>> GetPeopleToChat(int userId)
         {
             using var db = _connectionFactory.CreateConnection();
-            return await db.QueryAsync<User>(
+            return await db.QueryAsync<ConversationDto>(
                 _Select_UsersToChat,
                 new { UserId = userId }
             );

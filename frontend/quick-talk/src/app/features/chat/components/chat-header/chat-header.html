@@ -1,17 +1,25 @@
 <div class="grid">
     <div class="col-1">
         <div class="chat-avator-conatiner">
-            <div class="chat-avator-placeholder">
-                {{ getInitials() }}
-            </div>
-            <span class="chat-online-indicator" [ngClass]="getStatusText(selectedChat?.userId)">
+            <ng-container *ngIf="selectedChat?.profileImageUrl; else initialAvator">
+                <img [src]="selectedChat?.profileImageUrl" class="profile-image">
+            </ng-container>
+
+            <ng-template #initialAvator>
+                <div class="chat-avator-placeholder">
+                    {{ getInitials() }}
+                </div>
+            </ng-template>
+            <span class="chat-online-indicator" [ngClass]="getStatusText(selectedChat?.userId)"
+                *ngIf="selectedChat?.showOnlineStatus">
             </span>
         </div>
     </div>
     <div class="col-11">
         <div class="main-chat-header">
             <h4>{{selectedChat?.firstName}} {{selectedChat?.lastName}}</h4>
-            <span class="last-seen">{{ getStatusText(selectedChat?.userId) === 'Offline' ?
+            <span class="last-seen" *ngIf="selectedChat?.showLastSeen">{{ getStatusText(selectedChat?.userId) ===
+                'Offline' ?
                 getLastSeenText(selectedChat?.userId) : getStatusText(selectedChat?.userId) }}</span>
         </div>
     </div>
